@@ -3,6 +3,7 @@ const router = express.Router() // creates new "user" router object
 const {Users} = require("../models")
 const bcrypt = require("bcrypt")
 const {sign} = require("jsonwebtoken") // destructure and extract sign method from jwt
+const {validateAccessToken} = require("../middleware/authorization")
 
 // registration route and handler
 router.post("/register", async (req, res) => {
@@ -41,6 +42,10 @@ router.post("/login", async (req, res) => {
     }
 })
 
+// token authorization route and handler 
+router.get("/auth", validateAccessToken, (req, res) => {
+    res.json(req.user)
+})
 
 
 module.exports = router
