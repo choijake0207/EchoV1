@@ -13,7 +13,8 @@ router.post("/register", async (req, res) => {
             username: username,
             password: hash
         })
-        res.json("Success")
+        const accessToken = sign({username: newUser.username, id: newUser.id}, "supersecretkey")
+        res.json(accessToken)
     } catch (error) {
         res.status(500).json({error: "registration failed"})
     }
