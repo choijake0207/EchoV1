@@ -17,3 +17,5 @@ const validateAccessToken = (req, res, next) => {
 }
 
 // middleware authorize used to verify that all requests are coming from logged in user
+
+module.exports = {validateAccessToken}
