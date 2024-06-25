@@ -18,6 +18,7 @@ export default function Register() {
   const onSubmit = async (data) => {
     try {
       const response = await axios.post("http://localhost:3001/user/register", data)
+      localStorage.setItem("accessToken", response.data)
       console.log(response.data)
     } catch (error) {
       alert(error)
