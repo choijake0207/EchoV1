@@ -32,6 +32,7 @@ router.post("/login", async (req, res) => {
         }
         res.json("you logged in!")
     } catch (error) {
+        res.status(500).json({error: "An Error Occured Processing Your Request"})
 
     }
 })
