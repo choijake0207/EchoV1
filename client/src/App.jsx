@@ -1,4 +1,6 @@
+import {useState, useEffect} from "react"
 import './App.css'
+import axios from "axios"
 import {Route, createBrowserRouter, createRoutesFromElements, RouterProvider} from "react-router-dom"
 // page imports
 import RootLayout from './Layouts/RootLayout'
@@ -23,6 +25,23 @@ const router = createBrowserRouter(
 function App() {
 
   const [authorizeState, setAuthorizeState] = useState({username: "", id: 0, authStatus: false})
+
+  useEffect(() => {
+    const authorizeUser = async () => {
+      try {
+        const response = await axios.get("http://localhost:3001/user/auth", {
+          headers: {
+            accessToken: localStorage.getItem("accessToken")
+          }
+        })
+        setAuthorizeState({username: response.data.username, id: response.data.id, authStatus: true})
+      } catch (error) {
+        console.log(error)
+        setAuthorizeState({...authorizeState, status: false})
+      }
+    }
+    authorizeUser()
+  }, [])
 
   return (
     <authorizeContext.Provider value={{authorizeState, setAuthorizeState}}>
