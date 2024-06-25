@@ -1,13 +1,30 @@
 import React, {useState} from 'react'
+import axios from 'axios'
+import { NavLink } from 'react-router-dom'
 
 export default function Login() {
 
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
 
+  const onSubmit = async (e) => {
+    e.preventDefault()
+    try {
+      const userInfo = {username: username, password: password}
+      const response = await axios.post("http://localhost:3001/user/login", userInfo)
+      setUsername("")
+      setPassword("")
+    } catch (error) {
+      alert(error)
+    }
+
+
+  }
+
   return (
     <div className="login-page">
-      <form className="login-form">
+      <h3>Log In</h3>
+      <form className="login-form" onSubmit={onSubmit}>
         <input
           type="text"
           placeholder="Enter Username"
@@ -22,7 +39,7 @@ export default function Login() {
         />
         <button>Log In</button>
       </form>
-      <p>Don't Have An Account? Sign Up!</p>
+      <p>Don't Have An Account? Sign Up <NavLink to="/register">Here!</NavLink></p>
 
     </div>
   )
