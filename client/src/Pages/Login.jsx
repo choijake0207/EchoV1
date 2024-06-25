@@ -24,7 +24,7 @@ export default function Login() {
   return (
     <div className="login-page">
       <h3>Log In</h3>
-      <form className="login-form" onSubmit={onSubmit}>
+      <form className="login-form" id="user-form" onSubmit={onSubmit}>
         <input
           type="text"
           placeholder="Enter Username"
