@@ -2,6 +2,7 @@ const express = require("express") // imports express module
 const router = express.Router() // creates new "user" router object
 const {Users} = require("../models")
 const bcrypt = require("bcrypt")
+const {sign} = require("jsonwebtoken") // destructure and extract sign method from jwt
 
 // registration route and handler
 router.post("/register", async (req, res) => {
@@ -31,7 +32,8 @@ router.post("/login", async (req, res) => {
         if (!match) {
             return res.status(401).json({error: "Incorrect Username and Password Combination"})
         }
-        res.json("you logged in!")
+        const accessToken = sign({username: user.username, id: user.id}, "supersecretkey")
+        res.json(accessToken)
     } catch (error) {
         res.status(500).json({error: "An Error Occured Processing Your Request"})
 
