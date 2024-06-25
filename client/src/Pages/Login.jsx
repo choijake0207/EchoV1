@@ -14,6 +14,7 @@ export default function Login() {
       const response = await axios.post("http://localhost:3001/user/login", userInfo)
       setUsername("")
       setPassword("")
+      localStorage.setItem("accessToken")
     } catch (error) {
       alert(error)
     }
