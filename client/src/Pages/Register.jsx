@@ -20,7 +20,7 @@ export default function Register() {
       const response = await axios.post("http://localhost:3001/user/register", data)
       console.log(response.data)
     } catch (error) {
-      console.log(error)
+      alert(error)
     }
   }
   
