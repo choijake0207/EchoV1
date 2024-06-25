@@ -26,7 +26,7 @@ export default function Register() {
   
   return (
     <div className="register-page">
-      <Formik initialValues={initialValues} validationSchema={validationSchema}>
+      <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
         <Form className="register-form">
           <label>Create a Username:</label>
           <ErrorMessage name="username" component="span"/>
