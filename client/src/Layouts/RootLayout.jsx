@@ -16,11 +16,11 @@ export default function RootLayout() {
   return (
     <div className="root-layout">
       <header>
-        <div className="header-left">
+        <div className="nav-bar-left">
           <h1 className="logo">Echo</h1>
           {authorizeState.authStatus ? (<><p>Welcome {authorizeState.username}</p></>) : ( <></>)}
         </div>
-        <nav className="nav-bar">
+        <nav className="nav-bar-right">
           <NavLink to="/">Home</NavLink>
           <NavLink to="/login">Login</NavLink>
           <NavLink to="/register">Sign Up</NavLink>
