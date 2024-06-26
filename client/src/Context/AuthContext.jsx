@@ -3,7 +3,7 @@ import axios from "axios";
 
 const authorizeContext = createContext("")
 
-export const authContextProvider = ({children}) => {
+export const AuthContextProvider = ({children}) => {
     const [authorizeState, setAuthorizeState] = useState({username: "", id: 0, authStatus: false})
     
     // auth check
