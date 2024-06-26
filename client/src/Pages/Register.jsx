@@ -2,14 +2,16 @@ import React from 'react'
 import {Formik, Form, Field, ErrorMessage} from "formik"
 import * as Yup from "Yup"
 import axios from "axios"
+import { useAuthorize } from '../Context/AuthContext'
 
 export default function Register() {
-
+  const {register} = useAuthorize()
+  
   const initialValues = {
     username: "",
     password: ""
   }
-
+ 
   const validationSchema = Yup.object().shape({
     username: Yup.string().min(7).max(15).required(),
     password: Yup.string().min(8).max(20).required()
@@ -17,9 +19,7 @@ export default function Register() {
   
   const onSubmit = async (data) => {
     try {
-      const response = await axios.post("http://localhost:3001/user/register", data)
-      localStorage.setItem("accessToken", response.data)
-      console.log(response.data)
+      await register(data.username, data.password)
     } catch (error) {
       alert(error)
     }
