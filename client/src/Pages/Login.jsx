@@ -2,7 +2,7 @@ import React, {useState, useContext} from 'react'
 import "../Styles/alert.css"
 import axios from 'axios'
 import { NavLink } from 'react-router-dom'
-import { authorizeContext } from '../Context/AuthContext'
+import { useAuthorize } from '../Context/AuthContext'
 import Alert from '../Components/Alert'
 
 export default function Login() {
@@ -11,18 +11,14 @@ export default function Login() {
   const [password, setPassword] = useState("")
   const [isAlertVisible, setIsAlertVisible] = useState(false)
   const [alertMessage, setAlertMessage] = useState("")
-  const {authorizeState, setAuthorizeState}= useContext(authorizeContext)
-
+  const {login} = useAuthorize()
 
   const onSubmit = async (e) => {
     e.preventDefault()
     try {
-      const userInfo = {username: username, password: password}
-      const response = await axios.post("http://localhost:3001/user/login", userInfo)
+      await login(username, password)
       setUsername("")
       setPassword("")
-      localStorage.setItem("accessToken", response.data)
-      setAuthorizeState({username: userInfo.username, id: response.data.id, authStatus: true}) // optimistic state update for now => pessimistically render later + loading screen
     } catch (error) {
       setIsAlertVisible(true)
       setAlertMessage(error.message)
