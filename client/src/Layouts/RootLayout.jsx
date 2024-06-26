@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import {NavLink, Outlet} from "react-router-dom"
 import { authorizeContext } from '../Context/AuthContext'
+import "../Styles/root.css"
 
 export default function RootLayout() {
 
