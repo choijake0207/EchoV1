@@ -1,18 +1,15 @@
 import React, { useContext } from 'react'
 import {NavLink, Outlet} from "react-router-dom"
-import { authorizeContext } from '../Context/AuthContext'
+import { useAuthorize } from '../Context/AuthContext'
 import "../Styles/root.css"
 
-export default function RootLayout() {
+export default function RootLayout() { 
 
 
-  const {authorizeState, setAuthorizeState}= useContext(authorizeContext)
+  const {authorizeState, logOut}= useAuthorize()
 
-  const logOut = () => {
-    localStorage.removeItem("accessToken")
-    setAuthorizeState({username: "", id: 0, authStatus: false})
-  }
-
+  
+  console.log(authorizeState)
   return (
     <div className="root-layout">
       <header>
