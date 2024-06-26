@@ -16,9 +16,10 @@ export default function RootLayout() {
   return (
     <div className="root-layout">
       <header>
-        <h1 className="logo">Echo</h1>
-        {authorizeState.authStatus ? (<><p>Welcome {authorizeState.username}</p></>) : ( <></>)}
-        
+        <div className="header-left">
+          <h1 className="logo">Echo</h1>
+          {authorizeState.authStatus ? (<><p>Welcome {authorizeState.username}</p></>) : ( <></>)}
+        </div>
         <nav className="nav-bar">
           <NavLink to="/">Home</NavLink>
           <NavLink to="/login">Login</NavLink>
