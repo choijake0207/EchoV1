@@ -1,11 +1,14 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import axios from 'axios'
 import { NavLink } from 'react-router-dom'
+import { authorizeContext } from '../Context/AuthContext'
 
 export default function Login() {
 
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
+  const {authorizeState, setAuthorizeState}= useContext(authorizeContext)
+
 
   const onSubmit = async (e) => {
     e.preventDefault()
@@ -15,6 +18,7 @@ export default function Login() {
       setUsername("")
       setPassword("")
       localStorage.setItem("accessToken", response.data)
+      setAuthorizeState({username: userInfo.username, id: response.data.id, authStatus: true})
     } catch (error) {
       alert(error)
     }
