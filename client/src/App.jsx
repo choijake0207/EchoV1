@@ -26,7 +26,7 @@ function App() {
 
   const [authorizeState, setAuthorizeState] = useState({username: "", id: 0, authStatus: false})
 
-  useEffect(() => {
+  useEffect(() => { // add either interval check or localStorage event listener to detect token tampering
     const authorizeUser = async () => {
       try {
         const response = await axios.get("http://localhost:3001/user/auth", {
@@ -43,6 +43,7 @@ function App() {
     authorizeUser()
   }, [])
 
+  console.log(authorizeState)
   return (
     <authorizeContext.Provider value={{authorizeState, setAuthorizeState}}>
       <RouterProvider router={router}/>
