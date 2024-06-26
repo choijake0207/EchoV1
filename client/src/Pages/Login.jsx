@@ -1,4 +1,5 @@
 import React, {useState, useContext} from 'react'
+import "../Styles/alert.css"
 import axios from 'axios'
 import { NavLink } from 'react-router-dom'
 import { authorizeContext } from '../Context/AuthContext'
