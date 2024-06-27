@@ -9,7 +9,9 @@ const {validateAccessToken} = require("../middleware/authorization")
 router.post("/register", async (req, res) => {
     const {username, password} = req.body
     try {
-        const existingUsername = await Users.findOne({where: {username: username}})
+        const existingUsername = await Users.findOne({
+            where: {username: username}
+        })
         if (existingUsername) {
             return res.status(400).json({error: "Username Already Exists"})
         }
@@ -18,7 +20,9 @@ router.post("/register", async (req, res) => {
             username: username,
             password: hash
         })
-        const accessToken = sign({username: newUser.username, id: newUser.id}, "supersecretkey")
+        const accessToken = sign({
+            username: newUser.username, id: newUser.id
+        }, "supersecretkey")
         res.json(accessToken)
     } catch (error) {
         res.status(500).json({error: "registration failed"})
@@ -30,7 +34,9 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
     try {
         const {username, password} = req.body
-        const user = await Users.findOne({where: {username: username}})
+        const user = await Users.findOne({
+            where: {username: username}
+        })
         if (!user) {
             return res.status(404).json({error: "User Not Found"})
         }
@@ -38,7 +44,9 @@ router.post("/login", async (req, res) => {
         if (!match) {
             return res.status(401).json({error: "Incorrect Username and Password Combination"})
         }
-        const accessToken = sign({username: user.username, id: user.id}, "supersecretkey")
+        const accessToken = sign({
+            username: user.username, id: user.id
+        }, "supersecretkey")
         res.json(accessToken)
     } catch (error) {
         res.status(500).json({error: "An Error Occured Processing Your Request"})
@@ -67,5 +75,34 @@ router.get("/profile/:username", async (req, res) => {
         res.status(500).json({error: "Failed To Fetch User Information"})
     }
 })
+
+// update profile information
+router.put("/profile/:username", validateAccessToken, async (req, res) => {
+    const {username} = req.params
+    const {newUsername, newBiography} = req.body
+    try {
+        const user = await Users.findOne({
+            where: {username: username}
+        })
+        if (!user) {
+            return res.status(404).json({error: "User Not Found"})
+        }
+        if (newUsername !== username) {
+            const existingUsername = await Users.findOne({
+                where: {username: newUsername}
+            })
+            if (existingUsername) {
+                return res.status(400).json({error: "Username Already Taken"})
+            }
+        }
+        user.username = newUsername
+        user.biography = newBiography
+        await user.save()
+        res.json(user)
+    } catch (error) {
+        res.status(500).json({error: "Failed To Update Information"})
+    }
+})
+
 
 module.exports = router
