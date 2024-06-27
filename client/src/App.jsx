@@ -7,6 +7,7 @@ import RootLayout from './Layouts/RootLayout'
 import Home from './Pages/Home'
 import Login from './Pages/Login'
 import Register from './Pages/Register'
+import Profile from "./Pages/Profile"
 // context
 import { AuthContextProvider } from './Context/AuthContext'
 
@@ -18,6 +19,7 @@ const router = createBrowserRouter(
       <Route index element={<Home/>}/>
       <Route path="/login" element={<Login/>}/>
       <Route path="/register" element={<Register/>}/>
+      <Route path="/profile" element={<Profile/>}/>
     </Route>
   )
 )
