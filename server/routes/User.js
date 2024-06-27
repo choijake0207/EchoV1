@@ -55,7 +55,7 @@ router.get("/auth", validateAccessToken, (req, res) => {
 router.get("/profile/:username", async (req, res) => {
     const {username} = req.params
     try {
-        const user = await findOne({
+        const user = await Users.findOne({
             where : {username: username},
             attributes: ["username, biography"]
         })
