@@ -59,6 +59,7 @@ router.get("/profile/:username", async (req, res) => {
             where : {username: username},
             attributes: ["username, biography"]
         })
+        res.json(user)
     } catch (error) {
         res.status(500).json({error: "Failed To Fetch User Information"})
     }
