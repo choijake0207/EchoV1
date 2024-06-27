@@ -31,7 +31,7 @@ export default function RootLayout() {
             <div className="profile-menu" onClick={toggleProfileMenu}>
               {authorizeState.authStatus ? (
                 <>
-                  <NavLink to="/profile">View Profile</NavLink>
+                  <NavLink to={`/profile/${authorizeState.username}`}>View Profile</NavLink>
                   <button onClick={logOut}>Log Out</button>
                 </>
               ) : (
