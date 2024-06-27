@@ -29,7 +29,12 @@ export default function Profile() {
             <section className="profile-info">
                 <div className="profile-details">
                     <h1 className="profile-username">{userProfile.username}</h1>
-                    <p className="profile-bio">{userProfile.biography}</p>
+                    {userProfile.biography ? (
+                        <p className="profile-bio">{userProfile.biography}</p>
+                    ) : (
+                        <p className="profile-bio">No Bio</p>
+                    )}
+                    
                     <p className="profile-date">Joined: date</p>
                 </div>
                 {isMyProfile && <button className="profile-edit-btn">Edit Profile</button>}
