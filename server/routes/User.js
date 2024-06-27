@@ -59,6 +59,9 @@ router.get("/profile/:username", async (req, res) => {
             where : {username: username},
             attributes: ["username", "biography"]
         })
+        if (!user) {
+            return res.status(404).json({error: "User Not Found"})
+        }
         res.json(user)
     } catch (error) {
         res.status(500).json({error: "Failed To Fetch User Information"})
