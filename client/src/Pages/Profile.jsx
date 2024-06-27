@@ -6,14 +6,14 @@ import { getUserProfile } from '../Api/GET'
 export default function Profile() {
     const {authorizeState} = useAuthorize()
     const { username } = useParams()
+    const [userProfile, setUserProfile] = useState(null)
     const isMyProfile = authorizeState.username === username
 
     useEffect(() => {
         const userProfileRequest = async () => {
             try {
                 const data = await getUserProfile(username)
-                console.log(data)
-
+                setUserProfile(data)
             } catch (error) {
                 console.log(error.response.data.error)
             }
@@ -21,19 +21,21 @@ export default function Profile() {
         userProfileRequest()
     }, [username])
 
-    console.log(isMyProfile)
-
+    
+    
   return (
     <div className="profile-page">
-        <section className="profile-info">
-            <div className="profile-details">
-                <h1 className="profile-username">{username}</h1>
-                <p className="profile-bio">No bio</p>
-                <p className="profile-date">Joined: date</p>
-            </div>
-            {isMyProfile && <button className="profile-edit-btn">Edit Profile</button>}
-            
-        </section>
+        {userProfile && 
+            <section className="profile-info">
+                <div className="profile-details">
+                    <h1 className="profile-username">{userProfile.username}</h1>
+                    <p className="profile-bio">{userProfile.biography}</p>
+                    <p className="profile-date">Joined: date</p>
+                </div>
+                {isMyProfile && <button className="profile-edit-btn">Edit Profile</button>}
+                
+            </section>
+        }   
         <section className="profile-feed"> 
             
 
