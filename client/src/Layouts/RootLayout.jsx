@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect, useRef } from 'react'
 import {NavLink, Outlet} from "react-router-dom"
 import { useAuthorize } from '../Context/AuthContext'
 import "../Styles/root.css"
@@ -8,11 +8,22 @@ export default function RootLayout() {
 
   const {authorizeState, logOut}= useAuthorize()
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false)
+  const menuRef = useRef(null)
 
   const toggleProfileMenu = () => {
     setIsProfileMenuOpen(!isProfileMenuOpen)
   }
-  
+  const handleOutsideClick = (e) => {
+    if (menuRef.current && !menuRef.current.contains(e.target)) {
+      setIsProfileMenuOpen(false)
+    }
+  }
+  useEffect(() => {
+    document.addEventListener("mousedown", handleOutsideClick)
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick)
+    }
+  }, [])
   console.log(authorizeState)
   return (
     <div className="root-layout">
@@ -26,7 +37,7 @@ export default function RootLayout() {
           
           <button onClick={toggleProfileMenu}>Profile</button>
           {isProfileMenuOpen && (
-            <div className="profile-menu">
+            <div className="profile-menu" ref={menuRef} onClick={toggleProfileMenu}>
               {authorizeState.authStatus ? (
                 <>
                   <NavLink to="/profile">View Profile</NavLink>
