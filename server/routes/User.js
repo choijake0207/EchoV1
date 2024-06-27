@@ -57,7 +57,7 @@ router.get("/profile/:username", async (req, res) => {
     try {
         const user = await Users.findOne({
             where : {username: username},
-            attributes: ["username, biography"]
+            attributes: ["username", "biography"]
         })
         res.json(user)
     } catch (error) {
