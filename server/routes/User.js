@@ -51,5 +51,17 @@ router.get("/auth", validateAccessToken, (req, res) => {
     res.json(req.user)
 })
 
+// fetch user profile info by username
+router.get("/profile/:username", async (req, res) => {
+    const {username} = req.params
+    try {
+        const user = await findOne({
+            where : {username: username},
+            attributes: ["username, biography"]
+        })
+    } catch (error) {
+        res.status(500).json({error: "Failed To Fetch User Information"})
+    }
+})
 
 module.exports = router
