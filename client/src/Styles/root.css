@@ -1,29 +1,32 @@
 * {
     margin: 0;
 }
-
 .root-layout {
     border: 1px solid red;
 }
-
 header {
     display: flex;
+    position: relative;
     align-items: center;
     border: 1px solid blue;
     justify-content: space-between;
     padding: 10px;
 }
-
 .nav-bar-left {
     margin-left: 130px;
-
 }
-
 .nav-bar-right {
     margin-right: 130px;
     display: flex;
     gap: 20px;
 }
+.profile-menu {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+}
+
 
 
 main {
