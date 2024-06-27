@@ -21,7 +21,7 @@ export default function Login() {
       setPassword("")
     } catch (error) {
       setIsAlertVisible(true)
-      setAlertMessage(error.message)
+      setAlertMessage(error.response.data.error)
     }
   }
 
