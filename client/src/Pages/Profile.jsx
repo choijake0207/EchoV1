@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { useParams } from 'react-router-dom'
 import { useAuthorize } from '../Context/AuthContext'
 import { getUserProfile } from '../Api/GET'
+import { formatDate } from '../Utility/FormatDate'
 
 export default function Profile() {
     const {authorizeState} = useAuthorize()
@@ -34,8 +35,7 @@ export default function Profile() {
                     ) : (
                         <p className="profile-bio">No Bio</p>
                     )}
-                    
-                    <p className="profile-date">Joined: date</p>
+                    <p className="profile-date">Joined {formatDate(userProfile.createdAt)}</p>
                 </div>
                 {isMyProfile && <button className="profile-edit-btn">Edit Profile</button>}
                 
