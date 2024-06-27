@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import {NavLink, Outlet} from "react-router-dom"
 import { useAuthorize } from '../Context/AuthContext'
 import "../Styles/root.css"
@@ -7,7 +7,11 @@ export default function RootLayout() {
 
 
   const {authorizeState, logOut}= useAuthorize()
+  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false)
 
+  const toggleProfileMenu = () => {
+    setIsProfileMenuOpen(!isProfileMenuOpen)
+  }
   
   console.log(authorizeState)
   return (
@@ -15,13 +19,29 @@ export default function RootLayout() {
       <header>
         <div className="nav-bar-left">
           <h1 className="logo">Echo</h1>
-          {authorizeState.authStatus ? (<><p>Welcome {authorizeState.username}</p></>) : ( <></>)}
+          {authorizeState.authStatus ? (<><p>Welcome {authorizeState.username}</p></>) : (null)}
         </div>
         <nav className="nav-bar-right">
           <NavLink to="/">Home</NavLink>
-          <NavLink to="/login">Login</NavLink>
-          <NavLink to="/register">Sign Up</NavLink>
-          <button onClick={logOut}>Log Out</button>
+          
+          <button onClick={toggleProfileMenu}>Profile</button>
+          {isProfileMenuOpen && (
+            <div className="profile-menu">
+              {authorizeState.authStatus ? (
+                <>
+                  <NavLink to="/profile">View Profile</NavLink>
+                  <button onClick={logOut}>Log Out</button>
+                </>
+              ) : (
+                <>
+                  <NavLink to="/register">Sign Up</NavLink>
+                  <NavLink to="/login">Login</NavLink>
+                </>
+              )}
+            </div>
+          )}
+          
+          
         </nav>
       </header>
       <main><Outlet/></main>
