@@ -9,6 +9,10 @@ const {validateAccessToken} = require("../middleware/authorization")
 router.post("/register", async (req, res) => {
     const {username, password} = req.body
     try {
+        const existingUsername = await Users.findOne({where: {username: username}})
+        if (existingUsername) {
+            return res.status(400).json({error: "Username Already Exists"})
+        }
         const hash = await bcrypt.hash(password, 10)
         const newUser = await Users.create({
             username: username,
