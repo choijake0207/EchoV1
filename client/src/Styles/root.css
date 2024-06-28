@@ -1,10 +1,12 @@
+/* GLOBAL STYLES */
+
 * {
     margin: 0;
 }
 .root-layout {
     border: 1px solid red;
 }
-header {
+.root-header {
     display: flex;
     position: relative;
     align-items: center;
@@ -34,4 +36,31 @@ main {
     margin-left: 130px;
     margin-right: 130px;
     border: 1px solid green;
+    position: relative;
+}
+
+/* page styles */
+
+.page-header {
+    display: flex;
+    gap: 10px;
+}
+
+/* form styles */
+.form-page {
+    z-index: 50;
+    border: 2px solid red;
+    position: fixed;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.user-form {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
