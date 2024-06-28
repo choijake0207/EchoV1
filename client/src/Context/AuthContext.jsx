@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect, useContext } from "react";
-import axios from "axios";
+import { authorizeUser as authorizeUserAPI, login as loginAPI, register as registerAPI } from "../Api/AUTH";
+
 
 const authorizeContext = createContext("")
 
@@ -10,12 +11,8 @@ export const AuthContextProvider = ({children}) => {
     useEffect(() => { // add either interval check or localStorage event listener to detect token tampering
         const authorizeUser = async () => {
           try {
-            const response = await axios.get("http://localhost:3001/user/auth", {
-              headers: {
-                accessToken: localStorage.getItem("accessToken")
-              }
-            })
-            setAuthorizeState({username: response.data.username, id: response.data.id, authStatus: true})
+            const response = await authorizeUserAPI()
+            setAuthorizeState({username: response.username, id: response.id, authStatus: true})
           } catch (error) {
             console.log(error)
             setAuthorizeState({...authorizeState, status: false})
@@ -27,9 +24,9 @@ export const AuthContextProvider = ({children}) => {
     const login = async (username, password) => {
         try {
             const userInfo = {username: username, password: password}
-            const response = await axios.post("http://localhost:3001/user/login", userInfo)
-            localStorage.setItem("accessToken", response.data)
-            setAuthorizeState({username: userInfo.username, id: response.data.id, authStatus: true}) // optimistic state update for now => pessimistically render later + loading screen
+            const response = await loginAPI(userInfo)
+            localStorage.setItem("accessToken", response)
+            setAuthorizeState({username: userInfo.username, id: response.id, authStatus: true}) // optimistic state update for now => pessimistically render later + loading screen
         } catch (error) {
             throw error;
         }
@@ -37,9 +34,9 @@ export const AuthContextProvider = ({children}) => {
     // register authorize
     const register = async (username, password) => {
         try {
-            const response = await axios.post("http://localhost:3001/user/register", {username, password})
-            localStorage.setItem("accessToken", response.data)
-            setAuthorizeState({username, id: response.data.id, authStatus: true })
+            const response = await registerAPI(username, password)
+            localStorage.setItem("accessToken", response)
+            setAuthorizeState({username, id: response.id, authStatus: true })
         } catch (error) {
             throw error;
         }
@@ -50,7 +47,7 @@ export const AuthContextProvider = ({children}) => {
         setAuthorizeState({username: "", id: 0, authStatus: false})
     }
 
-    // updated profile state
+    // updated profile state: needs to update username stored in authorizeState
     const updateUserProfileState = (newUsername) => {
         setAuthorizeState(prevState => ({
             ...prevState,
