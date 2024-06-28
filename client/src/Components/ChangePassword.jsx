@@ -11,12 +11,11 @@ export default function ChangePassword({onClose, onSave}) {
     }
 
   return (
-    <div className="change-password-page">
-        <header>
-            
+    <div className="form-page" id="change-password-page">
+        <header className="form-header">
             <h4>Change Password</h4>
         </header>
-        <form className="change-password-form" id="user-form" onSubmit={handleSubmit}>
+        <form className="change-password-form" onSubmit={handleSubmit}>
             <label>Current Password</label>
             <input type="password" onChange={(e)=> setCurrentPassword(e.target.value)} value={currentPassword}/>
             <label>New Password</label>
