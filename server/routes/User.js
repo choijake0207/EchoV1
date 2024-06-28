@@ -55,8 +55,17 @@ router.post("/login", async (req, res) => {
 })
 
 // token authorization route and handler 
-router.get("/auth", validateAccessToken, (req, res) => {
-    res.json(req.user)
+router.get("/auth", validateAccessToken, async (req, res) => { // change to async to detectchanges between token issuance and validation
+    try {
+        const user = await Users.findOne({
+            where: {username: req.user.username},
+            attributes: ["username"]
+        })
+        res.json(user)
+    } catch (error) {
+        res.status(500).json({error: "Failed To Authorize User"})
+    }
+    
 })
 
 // fetch user profile info by username
@@ -98,7 +107,7 @@ router.put("/profile/:username", validateAccessToken, async (req, res) => {
         user.username = newUsername
         user.biography = newBiography
         await user.save()
-        res.json(user)
+        res.json({username: user.username, biography: user.biography, createdAt: user.createdAt}) // deconstruct user object to avoid sending entire instance
     } catch (error) {
         res.status(500).json({error: "Failed To Update Information"})
     }
