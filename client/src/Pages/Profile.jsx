@@ -38,6 +38,9 @@ export default function Profile() {
         }
     }
 
+    const toggleEditForm = () => {
+        setEditing(true)
+    }
     
     
   return (
@@ -60,7 +63,7 @@ export default function Profile() {
                     )}
                     <p className="profile-date">Joined {formatDate(userProfile.createdAt)}</p>
                 </div>
-                {isMyProfile && <button className="profile-edit-btn">Edit Profile</button>}
+                {isMyProfile && <button className="profile-edit-btn" onClick={toggleEditForm}>Edit Profile</button>}
                 
             </section>
         }   
