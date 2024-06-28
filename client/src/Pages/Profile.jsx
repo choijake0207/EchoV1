@@ -3,11 +3,14 @@ import { useParams } from 'react-router-dom'
 import { useAuthorize } from '../Context/AuthContext'
 import { getUserProfile } from '../Api/GET'
 import { formatDate } from '../Utility/FormatDate'
+import { updateUserProfile } from '../Api/PUT'
+import EditProfile from '../Components/EditProfile'
 
 export default function Profile() {
-    const {authorizeState} = useAuthorize()
+    const {authorizeState, updateUserProfileState} = useAuthorize()
     const { username } = useParams()
     const [userProfile, setUserProfile] = useState(null)
+    const [editing, setEditing] = useState(false)
     const isMyProfile = authorizeState.username === username
 
     useEffect(() => {
@@ -22,10 +25,30 @@ export default function Profile() {
         userProfileRequest()
     }, [username])
 
+    const handleProfileUpdate = async (newUsername, newBiography) => {
+        try {
+            const updatedProfile = await updateUserProfile(username, newUsername, newBiography)
+            setUserProfile(updatedProfile)
+            if (newUsername !== username) {
+                updateUserProfileState(newUsername)
+            }
+            setEditing(false)
+        } catch (error) {
+            console.log(error.response.data.error)
+        }
+    }
+
     
     
   return (
     <div className="profile-page">
+        {editing && <EditProfile
+            username={userProfile.username}
+            bio={(userProfile.biography)}
+            onClose={() => setEditing(false)}
+            onSave={handleProfileUpdate}
+        
+        />}
         {userProfile && 
             <section className="profile-info">
                 <div className="profile-details">
