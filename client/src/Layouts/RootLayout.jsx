@@ -32,6 +32,7 @@ export default function RootLayout() {
               {authorizeState.authStatus ? (
                 <>
                   <NavLink to={`/profile/${authorizeState.username}`}>View Profile</NavLink>
+                  <NavLink to="/settings">Settings</NavLink>
                   <button onClick={logOut}>Log Out</button>
                 </>
               ) : (
