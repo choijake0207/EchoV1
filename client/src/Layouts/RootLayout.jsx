@@ -1,17 +1,22 @@
 import React, { useContext, useState, useEffect, useRef } from 'react'
-import {NavLink, Outlet} from "react-router-dom"
+import {NavLink, Outlet, useNavigate} from "react-router-dom"
 import { useAuthorize } from '../Context/AuthContext'
 import "../Styles/root.css"
 
 export default function RootLayout() { 
 
-
+  const navigate = useNavigate()
   const {authorizeState, logOut}= useAuthorize()
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false)
 
 
   const toggleProfileMenu = () => {
     setIsProfileMenuOpen(!isProfileMenuOpen)
+  }
+  const handleLogOut = () => {
+    logOut()
+    navigate("/")
+
   }
  
  
@@ -33,7 +38,7 @@ export default function RootLayout() {
                 <>
                   <NavLink to={`/profile/${authorizeState.username}`}>View Profile</NavLink>
                   <NavLink to="/settings">Settings</NavLink>
-                  <button onClick={logOut}>Log Out</button>
+                  <button onClick={handleLogOut}>Log Out</button>
                 </>
               ) : (
                 <>
