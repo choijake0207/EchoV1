@@ -58,8 +58,8 @@ router.post("/login", async (req, res) => {
 router.get("/auth", validateAccessToken, async (req, res) => { // change to async to detectchanges between token issuance and validation
     try {
         const user = await Users.findOne({
-            where: {username: req.user.username},
-            attributes: ["username"]
+            where: {id: req.user.id},
+            attributes: ["username", "id"]
         })
         res.json(user)
     } catch (error) {
