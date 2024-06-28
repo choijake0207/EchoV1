@@ -1,11 +1,22 @@
 import React, {useState} from 'react'
 import ChangePassword from '../Components/ChangePassword'
+import { updateUserPassword } from '../Api/PUT'
 
 export default function Settings() {
 
     const [passwordForm, setPasswordForm] = useState(false)
     const togglePasswordForm = () => {
         setPasswordForm(true)
+    }
+    
+    const handlePasswordUpdate = async (currentPassword, newPassword) => {
+        try {
+            const response = await updateUserPassword(currentPassword, newPassword)
+            setPasswordForm(false)
+            console.log(response)
+        } catch (error) {
+            console.log(error.response.data.error)
+        }
     }
 
   return (
@@ -14,7 +25,11 @@ export default function Settings() {
             <button type="button">Exit</button>
             <h4>Settings</h4>
         </header>
-        {passwordForm && <ChangePassword/>}
+        {passwordForm && <ChangePassword
+            onClose={() => setPasswordForm(false)}
+            onSave={handlePasswordUpdate}
+        
+        />}
         <section className="account-settings">
             <h3>Account</h3>
             <ul>
