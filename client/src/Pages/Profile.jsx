@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { useAuthorize } from '../Context/AuthContext'
 import { getUserProfile } from '../Api/GET'
 import { formatDate } from '../Utility/FormatDate'
@@ -9,6 +9,7 @@ import EditProfile from '../Components/EditProfile'
 export default function Profile() {
     const {authorizeState, updateUserProfileState} = useAuthorize()
     const { username } = useParams()
+    const navigate = useNavigate()
     const [userProfile, setUserProfile] = useState(null)
     const [editing, setEditing] = useState(false)
     const isMyProfile = authorizeState.username === username
@@ -31,6 +32,7 @@ export default function Profile() {
             setUserProfile(updatedProfile)
             if (newUsername !== username) {
                 updateUserProfileState(newUsername)
+                navigate(`/profile/${newUsername}`)
             }
             setEditing(false)
         } catch (error) {
