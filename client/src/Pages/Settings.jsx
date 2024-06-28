@@ -1,9 +1,10 @@
 import React, {useState} from 'react'
 import ChangePassword from '../Components/ChangePassword'
 import { updateUserPassword } from '../Api/PUT'
+import {useDarkMode} from '../Context/DarkContext'
 
 export default function Settings() {
-
+    const {isDarkMode, toggleDarkMode} = useDarkMode()
     const [passwordForm, setPasswordForm] = useState(false)
     const togglePasswordForm = () => {
         setPasswordForm(true)
@@ -40,6 +41,19 @@ export default function Settings() {
         </section>
         <section className="general-settings">
             <h3>General</h3>
+            <ul>
+                <li>
+                    Dark Mode
+                    <label className="switch">
+                        <input 
+                            type="checkbox"
+                            checked={isDarkMode}
+                            onChange={toggleDarkMode}
+                        />
+                        <span className="slider-round"></span>
+                    </label>
+                </li>
+            </ul>
         </section>
     </div>
   )
