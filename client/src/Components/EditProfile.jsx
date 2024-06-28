@@ -14,7 +14,7 @@ export default function EditProfile({username, bio, onClose, onSave}) {
 
   return (
     <div className="edit-profile-page">
-        <form className="edit-profile-form" id="user-form">
+        <form className="edit-profile-form" id="user-form" onSubmit={handleSubmit}>
             <label>Username</label>
             <input type="text" value={newUsername} onChange={(e) => setNewUsername(e.target.value)}/>
             <label>Bio</label>
