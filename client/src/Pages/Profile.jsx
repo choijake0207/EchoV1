@@ -47,6 +47,10 @@ export default function Profile() {
     
   return (
     <div className="profile-page">
+        <header>
+            <button type="button">Exit</button>
+            <h4>Profile</h4>
+        </header>
         {editing && <EditProfile
             username={userProfile.username}
             bio={(userProfile.biography)}
