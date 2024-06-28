@@ -47,7 +47,7 @@ export default function Profile() {
     
   return (
     <div className="profile-page">
-        <header>
+        <header className="page-header">
             <button type="button">Exit</button>
             <h4>Profile</h4>
         </header>

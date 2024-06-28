@@ -21,7 +21,7 @@ export default function Settings() {
 
   return (
     <div className="settings-page">
-        <header>
+        <header className="page-header">
             <button type="button">Exit</button>
             <h4>Settings</h4>
         </header>
