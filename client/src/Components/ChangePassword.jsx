@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 
-export default function ChangePassword(onClose, onSave) {
+export default function ChangePassword({onClose, onSave}) {
 
     const [currentPassword, setCurrentPassword] = useState("")
     const [newPassword, setNewPassword] = useState("")
