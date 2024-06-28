@@ -1,9 +1,11 @@
 import React, {useState, useContext} from 'react'
 import "../Styles/alert.css"
 import axios from 'axios'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { useAuthorize } from '../Context/AuthContext'
 import Alert from '../Components/Alert'
+
+
 
 export default function Login() {
 
@@ -12,6 +14,8 @@ export default function Login() {
   const [isAlertVisible, setIsAlertVisible] = useState(false)
   const [alertMessage, setAlertMessage] = useState("")
   const {login} = useAuthorize()
+  const navigate = useNavigate()
+
 
   const onSubmit = async (e) => {
     e.preventDefault()
@@ -19,6 +23,8 @@ export default function Login() {
       await login(username, password)
       setUsername("")
       setPassword("")
+      navigate("/")
+
     } catch (error) {
       setIsAlertVisible(true)
       setAlertMessage(error.response.data.error)
