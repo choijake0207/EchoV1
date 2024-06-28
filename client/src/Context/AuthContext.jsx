@@ -50,8 +50,16 @@ export const AuthContextProvider = ({children}) => {
         setAuthorizeState({username: "", id: 0, authStatus: false})
     }
 
+    // updated profile state
+    const updateUserProfileState = (newUsername) => {
+        setAuthorizeState(prevState => ({
+            ...prevState,
+            username: newUsername
+        }))
+    }
+
     return (
-        <authorizeContext.Provider value={{authorizeState, login, register, logOut}}>
+        <authorizeContext.Provider value={{authorizeState, login, register, logOut, updateUserProfileState}}>
             {children}
         </authorizeContext.Provider>
     )
