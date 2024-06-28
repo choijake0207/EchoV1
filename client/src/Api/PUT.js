@@ -17,10 +17,10 @@ export const updateUserProfile = async (currentUsername, newUsername, newBiograp
     }
 }
 
-export const updateUserPassword = async (oldPassword, newPassword) => {
+export const updateUserPassword = async (currentPassword, newPassword) => {
     try {
         const response = await axios.put("http://localhost:3001/user/changepassword", {
-            oldPassword: oldPassword,
+            currentPassword: currentPassword,
             newPassword: newPassword,
         }, {
             headers: {
