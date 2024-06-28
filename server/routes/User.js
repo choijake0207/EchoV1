@@ -133,7 +133,7 @@ router.put("/changepassword", validateAccessToken, async (req, res) => {
         }, {
             where: {username: req.user.username}
         })
-        res.status(200).json({error: "Password Changed Successfully"})
+        res.status(200).json("Password Changed Succesfully")
     } catch (error) {
         res.status(500).json({error: "Failed To Change Password"})
     }
