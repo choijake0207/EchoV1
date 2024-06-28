@@ -3,9 +3,11 @@ import {Formik, Form, Field, ErrorMessage} from "formik"
 import * as Yup from "Yup"
 import axios from "axios"
 import { useAuthorize } from '../Context/AuthContext'
+import {useNavigate} from "react-router-dom"
 
 export default function Register() {
   const {register} = useAuthorize()
+  const navigate = useNavigate()
   
   const initialValues = {
     username: "",
@@ -20,6 +22,7 @@ export default function Register() {
   const onSubmit = async (data) => {
     try {
       await register(data.username, data.password)
+      navigate("/")
     } catch (error) {
       alert(error)
     }
