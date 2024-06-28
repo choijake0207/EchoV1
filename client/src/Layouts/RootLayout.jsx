@@ -18,7 +18,7 @@ export default function RootLayout() {
   console.log(authorizeState)
   return (
     <div className="root-layout">
-      <header>
+      <header className="root-header">
         <div className="nav-bar-left">
           <h1 className="logo">Echo</h1>
           {authorizeState.authStatus ? (<><p>Welcome {authorizeState.username}</p></>) : (null)}
