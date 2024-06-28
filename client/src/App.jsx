@@ -11,6 +11,7 @@ import Profile from "./Pages/Profile"
 import Settings from "./Pages/Settings"
 // context
 import { AuthContextProvider } from './Context/AuthContext'
+import { DarkContextProvider } from "./Context/DarkContext"
 
  
 
@@ -33,10 +34,11 @@ function App() {
 
   
   return (
-    <AuthContextProvider>
-      <RouterProvider router={router}/>
-    </AuthContextProvider>
-    
+    <DarkContextProvider>
+      <AuthContextProvider>
+        <RouterProvider router={router}/>
+      </AuthContextProvider>
+    </DarkContextProvider>
   )
  
 }
