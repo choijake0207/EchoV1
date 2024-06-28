@@ -5,6 +5,11 @@ export default function ChangePassword(onClose, onSave) {
     const [currentPassword, setCurrentPassword] = useState("")
     const [newPassword, setNewPassword] = useState("")
 
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        onSave(currentPassword, newPassword)
+    }
+
   return (
     <div className="change-password-page">
         <header>
