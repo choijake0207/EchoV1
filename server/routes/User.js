@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt")
 const {sign} = require("jsonwebtoken") // destructure and extract sign method from jwt
 const {validateAccessToken} = require("../middleware/authorization")
 
-// registration route and handler
+// registration route and handler (maybe add password salting)
 router.post("/register", async (req, res) => {
     const {username, password} = req.body
     try {
@@ -110,6 +110,32 @@ router.put("/profile/:username", validateAccessToken, async (req, res) => {
         res.json({username: user.username, biography: user.biography, createdAt: user.createdAt}) // deconstruct user object to avoid sending entire instance
     } catch (error) {
         res.status(500).json({error: "Failed To Update Information"})
+    }
+})
+
+// update password (add salting later)
+router.put("/changepassword", validateAccessToken, async (req, res) => {
+    const {currentPassword, newPassword} = req.body;
+    try {
+        const user = await Users.findOne({
+            where: {username: req.user.username}
+        })
+        if (!user) {
+            return res.status(404).json({error: "User Not Found"})
+        }
+        const passwordMatch = await bcrypt.compare(currentPassword, user.password)
+        if (!passwordMatch) {
+            return res.status(400).json({error: "Current Password Is Incorrect"})
+        }
+        const hash  = await bcrypt.hash(newPassword, 10)
+        await Users.update({
+            password: hash
+        }, {
+            where: {username: req.user.username}
+        })
+        res.status(200).json({error: "Password Changed Successfully"})
+    } catch (error) {
+        res.status(500).json({error: "Failed To Change Password"})
     }
 })
 
