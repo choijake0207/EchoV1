@@ -15,7 +15,7 @@ export default function ChangePassword({onClose, onSave}) {
         <header className="form-header">
             <h4>Change Password</h4>
         </header>
-        <form className="change-password-form" onSubmit={handleSubmit}>
+        <form className="user-form" id="change-password-form" onSubmit={handleSubmit}>
             <label>Current Password</label>
             <input type="password" onChange={(e)=> setCurrentPassword(e.target.value)} value={currentPassword}/>
             <label>New Password</label>
