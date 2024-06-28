@@ -13,7 +13,7 @@ export default function EditProfile({username, bio, onClose, onSave}) {
 
 
   return (
-    <div className="edit-profile-page" id="form-page">
+    <div className="form-page" id="edit-profile-page">
         <header className="form-header">
           <h4>Edit Profile</h4>
         </header>
