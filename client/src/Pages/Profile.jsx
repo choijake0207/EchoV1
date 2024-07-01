@@ -62,6 +62,7 @@ export default function Profile() {
             <section className="profile-info">
                 <div className="profile-details">
                     <h1 className="profile-username">{userProfile.username}</h1>
+                    <button>Follow</button>
                     {userProfile.biography ? (
                         <p className="profile-bio">{userProfile.biography}</p>
                     ) : (
