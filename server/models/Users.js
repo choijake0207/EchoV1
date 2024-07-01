@@ -1,3 +1,5 @@
+const Follows = require("./Follows")
+
 module.exports = (sequelize, DataTypes) => {
     const Users = sequelize.define("Users", {
 
@@ -22,5 +24,19 @@ module.exports = (sequelize, DataTypes) => {
 
 
     })
+
+    Users.associate = (models) => {
+        Users.belongToMany(models.Users, {
+            through: Follows,
+            as: "followers",
+            foreignKey: "followerId",
+        })
+        Users.belongToMany(models.Users, {
+            through: Follows,
+            as: "following",
+            foreignKey: "followingId"
+        })
+    }
+
     return Users
 }
