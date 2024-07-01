@@ -13,6 +13,7 @@ export default function Profile() {
     const navigate = useNavigate()
     const [userProfile, setUserProfile] = useState(null)
     const [editing, setEditing] = useState(false)
+    const [isFollowing, setIsFollowing] = useState(false)
     const isMyProfile = authorizeState.username === username
 
     useEffect(() => {
@@ -20,6 +21,8 @@ export default function Profile() {
             try {
                 const data = await getUserProfile(username)
                 setUserProfile(data)
+                // checks to see if logged in user is already following current profile user
+                setIsFollowing(data.follower.some(follower => follower.id === authorizeState.id)) 
             } catch (error) {
                 console.log(error.response.data.error)
             }
@@ -46,10 +49,13 @@ export default function Profile() {
     }
     
     const handleFollow = async () => {
+        const originalFollow = isFollowing // captures initial follow state
+        setIsFollowing(!isFollowing)
         try {
             const response = await followUser(userProfile.id)
             console.log(response)
         } catch (error) {
+            setIsFollowing(originalFollow) // reverts back to initial follow state 
             console.log(error.response.data.error)
         }
     }
@@ -73,7 +79,7 @@ export default function Profile() {
                     <h1 className="profile-username">{userProfile.username}</h1>
                     {isMyProfile ? 
                         (<button className="profile-edit-btn" onClick={toggleEditForm}>Edit Profile</button>) 
-                        : (<button onClick={handleFollow}>Follow</button>)
+                        : (<button onClick={handleFollow} className={isFollowing ? "unfollow" : "follow"}>{isFollowing ? "Following" : "Follow"}</button>)
                     }
                     
                     {userProfile.biography ? (
