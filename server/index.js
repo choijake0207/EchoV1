@@ -9,6 +9,8 @@ app.use(cors())
 // route mounting 
 const userRouter = require("./routes/User")
 app.use("/user", userRouter)
+const followRouter = require("./routes/Follow")
+app.use("/follow", followRouter)
 
 
 db.sequelize.sync().then(()=> {
