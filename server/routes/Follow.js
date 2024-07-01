@@ -24,4 +24,4 @@ router.post("/:id", validateAccessToken, async (req, res) => {
     }
 } )
 
-
+module.exports = router
