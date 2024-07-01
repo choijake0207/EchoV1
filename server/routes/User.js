@@ -74,7 +74,7 @@ router.get("/profile/:username", async (req, res) => {
     try {
         const user = await Users.findOne({
             where : {username: username},
-            attributes: ["username", "biography", "createdAt"],
+            attributes: ["id", "username", "biography", "createdAt"],
             include: [
                 {
                     model: Users,
