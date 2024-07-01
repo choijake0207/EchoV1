@@ -1,11 +1,11 @@
-const User = require("./Users")
+const Users = require("./Users")
 module.exports = (sequelize, DataTypes) => {
     const Follows = sequelize.define("Follows", {
         followerId:  {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: User,
+                model: Users,
                 key: "id"
             },
             onDelete: "CASCADE"
@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: User,
+                model: Users,
                 key: "id"
             },
             onDelete: "CASCADE"
@@ -22,12 +22,12 @@ module.exports = (sequelize, DataTypes) => {
     })
 
     Follows.associate = (models) => {
-        Follows.belongsTo(models.User, {
+        Follows.belongsTo(models.Users, {
             as: "follower",
             foreignKey: "followerId",
             onDelete: "CASCADE"
         })
-        Follows.belongsTo(models.User, {
+        Follows.belongsTo(models.Users, {
             as: "following",
             foreignKey: "followingId",
             onDelete: "CASCADE"
