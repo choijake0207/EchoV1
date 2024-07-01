@@ -6,6 +6,7 @@ import { formatDate } from '../Utility/FormatDate'
 import { updateUserProfile } from '../Api/PUT'
 import { followUser } from '../Api/POST'
 import EditProfile from '../Components/EditProfile'
+import "../Styles/profile.css"
 
 export default function Profile() {
     const {authorizeState, updateUserProfileState} = useAuthorize()
@@ -25,6 +26,7 @@ export default function Profile() {
                     // checks to see if logged in user is already following current profile user
                     setIsFollowing(data.follower?.some(follower => follower.id === authorizeState.id)) 
                     console.log(authorizeState)
+                   
                 
                 } catch (error) {
                     console.log(error.response.data.error)
