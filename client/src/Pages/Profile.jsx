@@ -4,11 +4,12 @@ import { useAuthorize } from '../Context/AuthContext'
 import { getUserProfile } from '../Api/GET'
 import { formatDate } from '../Utility/FormatDate'
 import { updateUserProfile } from '../Api/PUT'
+import { followUser } from '../Api/POST'
 import EditProfile from '../Components/EditProfile'
 
 export default function Profile() {
     const {authorizeState, updateUserProfileState} = useAuthorize()
-    const { username } = useParams()
+    const { username} = useParams()
     const navigate = useNavigate()
     const [userProfile, setUserProfile] = useState(null)
     const [editing, setEditing] = useState(false)
@@ -44,6 +45,14 @@ export default function Profile() {
         setEditing(true)
     }
     
+    const handleFollow = async () => {
+        try {
+            const response = await followUser(userProfile.id)
+            console.log(response)
+        } catch (error) {
+            console.log(error.response.data.error)
+        }
+    }
     
   return (
     <div className="profile-page">
@@ -62,7 +71,10 @@ export default function Profile() {
             <section className="profile-info">
                 <div className="profile-details">
                     <h1 className="profile-username">{userProfile.username}</h1>
-                    {isMyProfile ? (<button className="profile-edit-btn" onClick={toggleEditForm}>Edit Profile</button>) : (<button>Follow</button>)}
+                    {isMyProfile ? 
+                        (<button className="profile-edit-btn" onClick={toggleEditForm}>Edit Profile</button>) 
+                        : (<button onClick={handleFollow}>Follow</button>)
+                    }
                     
                     {userProfile.biography ? (
                         <p className="profile-bio">{userProfile.biography}</p>
