@@ -23,7 +23,11 @@ router.post("/register", async (req, res) => {
         const accessToken = sign({
             username: newUser.username, id: newUser.id
         }, "supersecretkey")
-        res.json(accessToken)
+        res.json({
+            token: accessToken,
+            username: newUser.username,
+            id: newUser.id
+        })
     } catch (error) {
         res.status(500).json({error: "registration failed"})
     }
@@ -47,7 +51,11 @@ router.post("/login", async (req, res) => {
         const accessToken = sign({
             username: user.username, id: user.id
         }, "supersecretkey")
-        res.json(accessToken)
+        res.json({
+            token: accessToken,
+            id: user.id,
+            username: user.username
+        })
     } catch (error) {
         res.status(500).json({error: "An Error Occured Processing Your Request"})
 
