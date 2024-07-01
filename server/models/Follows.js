@@ -1,11 +1,10 @@
-const Users = require("./Users")
 module.exports = (sequelize, DataTypes) => {
     const Follows = sequelize.define("Follows", {
         followerId:  {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: Users,
+                model: "Users",
                 key: "id"
             },
             onDelete: "CASCADE"
@@ -14,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: Users,
+                model: "Users",
                 key: "id"
             },
             onDelete: "CASCADE"

@@ -1,5 +1,3 @@
-const Follows = require("./Follows")
-
 module.exports = (sequelize, DataTypes) => {
     const Users = sequelize.define("Users", {
 
@@ -27,12 +25,12 @@ module.exports = (sequelize, DataTypes) => {
 
     Users.associate = (models) => {
         Users.belongsToMany(models.Users, {
-            through: Follows,
-            as: "followers",
+            through: models.Follows,
+            as: "follower",
             foreignKey: "followerId",
         })
         Users.belongsToMany(models.Users, {
-            through: Follows,
+            through: models.Follows,
             as: "following",
             foreignKey: "followingId"
         })
