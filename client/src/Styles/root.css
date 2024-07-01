@@ -1,24 +1,39 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 
 
 * {
     margin: 0;
 }
+body {
+    background: rgb(242, 244, 250);
+}
 .root-layout {
     border: 1px solid red;
-    font-family: nunito;
+
 }
 .root-header {
     display: flex;
-    position: relative;
+    position: sticky;
+    top:0;
     align-items: center;
     border: 1px solid blue;
+    background: white;
     justify-content: space-between;
     padding: 10px;
+    margin-bottom: 15px;
+    z-index: 10;
 }
 .nav-bar-left {
     margin-left: 130px;
+    color: rgb(0, 34, 255);
+}
+.nav-bar-left h1 {
+    font-weight: bolder;
+    font-family: poppins;
+
 }
 .nav-bar-right {
     margin-right: 130px;
@@ -29,29 +44,43 @@
     display: flex;
     flex-direction: column;
     position: absolute;
-    top: 100%;
-    z-index: 100;
+    top: 75%;
+    z-index: 1000;
+    background: rgb(255, 255, 255);
+    border: 1px dashed black;
+ 
+}
+.profile-menu * {
+    border: 1px solid black;
+    color: black;
+    padding: 5px;
+    text-align: center;
 }
 main {
     margin-left: 20%;
     margin-right: 20%;
     border: 1px solid green;
     position: relative;
+    background: white;
+    border-radius: 5px;
+    padding: 15px;
+    z-index: 1;
 }
 
 
 /* global components */
 a {
-    color: black;
+    color: rgba(0, 0, 0, 0.515);
     text-decoration: none;
     cursor: pointer;
 }
 button {
     border: none;
     background: none;
-    color: black;
+    color: rgba(0, 0, 0, 0.506);
     border: 1px solid rgb(0, 0, 0);
     border-radius: 5px;
+    cursor: pointer;
 }
 
 
@@ -78,7 +107,7 @@ button {
 .page-header {
     display: flex;
     gap: 10px;
-    padding: 15px;
+    margin-bottom: 15px;
 }
 
 /* form styles */
