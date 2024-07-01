@@ -26,12 +26,12 @@ module.exports = (sequelize, DataTypes) => {
     })
 
     Users.associate = (models) => {
-        Users.belongToMany(models.Users, {
+        Users.belongsToMany(models.Users, {
             through: Follows,
             as: "followers",
             foreignKey: "followerId",
         })
-        Users.belongToMany(models.Users, {
+        Users.belongsToMany(models.Users, {
             through: Follows,
             as: "following",
             foreignKey: "followingId"
