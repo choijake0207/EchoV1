@@ -15,7 +15,7 @@ export const AuthContextProvider = ({children}) => {
             setAuthorizeState({username: response.username, id: response.id, authStatus: true})
           } catch (error) {
             console.log(error)
-            setAuthorizeState({...authorizeState, status: false})
+            setAuthorizeState({...authorizeState, authStatus: false})
           }
         }
         authorizeUser()
@@ -23,10 +23,10 @@ export const AuthContextProvider = ({children}) => {
     // login authorize
     const login = async (username, password) => {
         try {
-            const userInfo = {username: username, password: password}
-            const response = await loginAPI(userInfo)
-            localStorage.setItem("accessToken", response)
-            setAuthorizeState({username: userInfo.username, id: response.id, authStatus: true}) // optimistic state update for now => pessimistically render later + loading screen
+            const response = await loginAPI(username, password)
+            localStorage.setItem("accessToken", response.token)
+            setAuthorizeState({username: username, id: response.id, authStatus: true}) // optimistic state update for now => pessimistically render later + loading screen
+            
         } catch (error) {
             throw error;
         }
@@ -35,7 +35,7 @@ export const AuthContextProvider = ({children}) => {
     const register = async (username, password) => {
         try {
             const response = await registerAPI(username, password)
-            localStorage.setItem("accessToken", response)
+            localStorage.setItem("accessToken", response.token)
             setAuthorizeState({username, id: response.id, authStatus: true })
         } catch (error) {
             throw error;
