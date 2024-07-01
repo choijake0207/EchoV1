@@ -70,6 +70,11 @@ export default function Profile() {
                         <p className="profile-bio">No Bio</p>
                     )}
                     <p className="profile-date">Joined {formatDate(userProfile.createdAt)}</p>
+                    <div className="follow-display">
+                        <p className="followers">{userProfile.follower.length} followers</p>
+                        <p className="following">{userProfile.following.length} following</p>
+                    </div>
+                
                 </div>
                 
                 
