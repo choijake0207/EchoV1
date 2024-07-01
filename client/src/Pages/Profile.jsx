@@ -17,18 +17,22 @@ export default function Profile() {
     const isMyProfile = authorizeState.username === username
 
     useEffect(() => {
-        const userProfileRequest = async () => {
-            try {
-                const data = await getUserProfile(username)
-                setUserProfile(data)
-                // checks to see if logged in user is already following current profile user
-                setIsFollowing(data.follower.some(follower => follower.id === authorizeState.id)) 
-            } catch (error) {
-                console.log(error.response.data.error)
-            }
-        } 
-        userProfileRequest()
-    }, [username])
+        if (authorizeState.authStatus !== undefined) {
+            const userProfileRequest = async () => {
+                try {
+                    const data = await getUserProfile(username)
+                    setUserProfile(data)
+                    // checks to see if logged in user is already following current profile user
+                    setIsFollowing(data.follower?.some(follower => follower.id === authorizeState.id)) 
+                    console.log(authorizeState)
+                
+                } catch (error) {
+                    console.log(error.response.data.error)
+                }
+            } 
+            userProfileRequest()
+        }
+    }, [username, authorizeState]) // need dependency 
 
     const handleProfileUpdate = async (newUsername, newBiography) => {
         try {
