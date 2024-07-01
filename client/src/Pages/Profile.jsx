@@ -33,7 +33,12 @@ export default function Profile() {
     const handleProfileUpdate = async (newUsername, newBiography) => {
         try {
             const updatedProfile = await updateUserProfile(username, newUsername, newBiography)
-            setUserProfile(updatedProfile)
+            setUserProfile(prevProfile => ({
+                ...prevProfile,
+                username: updatedProfile.username,
+                biography: updatedProfile.biography
+                // need to keep prev state for follower/following arrays
+            }))
             if (newUsername !== username) {
                 updateUserProfileState(newUsername)
                 navigate(`/profile/${newUsername}`)
