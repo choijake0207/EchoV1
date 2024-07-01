@@ -62,7 +62,8 @@ export default function Profile() {
             <section className="profile-info">
                 <div className="profile-details">
                     <h1 className="profile-username">{userProfile.username}</h1>
-                    <button>Follow</button>
+                    {isMyProfile ? (<button className="profile-edit-btn" onClick={toggleEditForm}>Edit Profile</button>) : (<button>Follow</button>)}
+                    
                     {userProfile.biography ? (
                         <p className="profile-bio">{userProfile.biography}</p>
                     ) : (
@@ -70,7 +71,7 @@ export default function Profile() {
                     )}
                     <p className="profile-date">Joined {formatDate(userProfile.createdAt)}</p>
                 </div>
-                {isMyProfile && <button className="profile-edit-btn" onClick={toggleEditForm}>Edit Profile</button>}
+                
                 
             </section>
         }   
