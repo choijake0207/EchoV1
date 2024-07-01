@@ -74,7 +74,21 @@ router.get("/profile/:username", async (req, res) => {
     try {
         const user = await Users.findOne({
             where : {username: username},
-            attributes: ["username", "biography", "createdAt"]
+            attributes: ["username", "biography", "createdAt"],
+            include: [
+                {
+                    model: Users,
+                    as: "follower", // fetch followers
+                    attributes: ["id", "username", "profilePictureUrl"],
+                    through: {attributes: []} // ignore other attributes from follow table
+                },
+                {
+                    model: Users,
+                    as: "following", // fetch following
+                    attributes: ["id", "username", "profilePictureUrl"],
+                    through: {attributes: []} // ignore other attributes from follow table
+                }
+            ]
         })
         if (!user) {
             return res.status(404).json({error: "User Not Found"})
