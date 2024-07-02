@@ -11,16 +11,16 @@ module.exports = (sequelize, DataTypes) => {
     })
 
     Posts.associate = (models) => {
-        Posts.belongsTo(models.Users), {
+        Posts.belongsTo(models.Users, {
             foreignKey: "userId",
             onDelete: "CASCADE"
-        },
-        Posts.hasMany(models.Comments), {
+        })
+        Posts.hasMany(models.Comments, {
             foreignKey: "postId"
-        },
-        Posts.hasMany(models.Likes), {
+        })
+        Posts.hasMany(models.Likes, {
             foreignKey: "postId"
-        }
+        })
     }
     return Posts
 }

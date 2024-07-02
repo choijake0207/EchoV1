@@ -36,12 +36,12 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey: "followerId",
             otherKey: "followingId"
         })
-        Users.hasMany(models.Posts), {
+        Users.hasMany(models.Posts, {
             foreignKey: "userId",
-        }
-        Users.hasMany(models.Likes), {
+        })
+        Users.hasMany(models.Likes, {
             foreignKey: "userId"
-        }
+        })
     }
 
     return Users
