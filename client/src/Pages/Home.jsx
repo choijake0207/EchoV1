@@ -1,11 +1,13 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { useAuthorize } from '../Context/AuthContext'
 import { NavLink } from 'react-router-dom'
 import { createPost } from '../Api/POST'
+import { fetchPosts } from '../Api/GET'
 
 export default function Home() {
   const {authorizeState} = useAuthorize()
   const [postText, setPostText] = useState("")
+  const [postFeed, setPostFeed] = useState([])
 
   const handlePostSubmit = async (e) => {
     e.preventDefault()
@@ -17,6 +19,19 @@ export default function Home() {
       console.log(error.response.data.error)
     }
   }
+
+  useEffect(() => {
+    const handleFetchPosts = async () => {
+      try {
+        const response = await fetchPosts()
+        setPostFeed(response)
+        console.log(response)
+      } catch (error) {
+        console.log(error.response.data.error)
+      }
+    }
+    handleFetchPosts()
+  }, [])
   
 
   return (
@@ -45,7 +60,14 @@ export default function Home() {
         </div>
        
       )}
-      <div className="home-feed"></div>
+      <ul className="home-feed">
+        {postFeed.map(post => (
+          <li key={post.id}>
+            <p>{post.text}</p>
+            <p>{post.username}</p>
+          </li>
+        ))}
+      </ul>
       
     </div>
   )
