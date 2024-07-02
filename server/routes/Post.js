@@ -5,21 +5,21 @@ const {validateAccessToken} = require("../middleware/authorization")
 
 // create post
 router.post("/", validateAccessToken, async (req, res) => {
-    const text = req.body
+    const {text} = req.body
     const username = req.user.username
     try {
         const response = await Posts.create({
             text: text,
             username: username
         })
-        res.json(response)
+        res.json("Post Created Succesfully")
     } catch (error) {
         res.status(500).json({error: "Failed To Create Post"})
     }
 })
 
 // fetch all posts for home feed
-router.post("/", async (req, res) => {
+router.get("/", async (req, res) => {
     try {
         const response = await Posts.findAll({order: [["createdAt", "DESC"]]})
         res.json(response)
