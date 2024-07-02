@@ -9,6 +9,7 @@ import Login from './Pages/Login'
 import Register from './Pages/Register'
 import Profile from "./Pages/Profile"
 import Settings from "./Pages/Settings"
+import Search from "./Pages/Search"
 // context
 import { AuthContextProvider } from './Context/AuthContext'
 import { DarkContextProvider } from "./Context/DarkContext"
@@ -23,6 +24,7 @@ const router = createBrowserRouter(
       <Route path="/register" element={<Register/>}/>
       <Route path="/profile/:username" element={<Profile/>}/>
       <Route path="/settings" element={<Settings/>}/>
+      <Route path="/search" element={<Search/>}/>
     </Route>
   )
 )
