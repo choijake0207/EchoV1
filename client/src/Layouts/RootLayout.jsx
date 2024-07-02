@@ -25,11 +25,15 @@ export default function RootLayout() {
     <div className="root-layout">
       <header className="root-header">
         <div className="nav-bar-left">
-          <h1 className="logo">Echo</h1>
+          <h1 className="logo">echo</h1>
           {authorizeState.authStatus ? (<><p>Welcome {authorizeState.username}</p></>) : (null)}
         </div>
         <nav className="nav-bar-right">
           <NavLink to="/">Home</NavLink>
+          {authorizeState.authStatus && 
+            <NavLink to="/search">Search</NavLink>
+          }
+
           
           <button onClick={toggleProfileMenu} >Profile</button>
           {isProfileMenuOpen && (
