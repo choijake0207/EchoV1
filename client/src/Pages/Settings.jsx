@@ -1,11 +1,14 @@
 import React, {useState} from 'react'
+import { useNavigate } from 'react-router-dom'
 import ChangePassword from '../Components/ChangePassword'
 import { updateUserPassword } from '../Api/PUT'
 import {useDarkMode} from '../Context/DarkContext'
+import "../Styles/settings.css"
 
 export default function Settings() {
     const {isDarkMode, toggleDarkMode} = useDarkMode()
     const [passwordForm, setPasswordForm] = useState(false)
+    const navigate = useNavigate()
     const togglePasswordForm = () => {
         setPasswordForm(true)
     }
@@ -21,9 +24,9 @@ export default function Settings() {
     }
 
   return (
-    <div className="settings-page">
+    <div className="page" id="settings-page">
         <header className="page-header">
-            <button type="button">Exit</button>
+            <button type="button" onClick={()=>navigate(-1)}>Exit</button>
             <h4>Settings</h4>
         </header>
         {passwordForm && <ChangePassword
@@ -50,7 +53,7 @@ export default function Settings() {
                             checked={isDarkMode}
                             onChange={toggleDarkMode}
                         />
-                        <span className="slider-round"></span>
+                        <span className="slider"></span>
                     </label>
                 </li>
             </ul>
