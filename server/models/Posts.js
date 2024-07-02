@@ -16,8 +16,7 @@ module.exports = (sequelize, DataTypes) => {
             onDelete: "CASCADE"
         },
         Posts.hasMany(models.Comments), {
-            foreignKey: "postId",
-            onDelete: "CASCADE"
+            foreignKey: "postId"
         },
         Posts.hasMany(models.Likes), {
             foreignKey: "postId"
