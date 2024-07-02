@@ -3,6 +3,8 @@ import { useAuthorize } from '../Context/AuthContext'
 import { NavLink } from 'react-router-dom'
 import { createPost } from '../Api/POST'
 import { fetchPosts } from '../Api/GET'
+import Post from '../Components/Post'
+
 
 export default function Home() {
   const {authorizeState} = useAuthorize()
@@ -62,10 +64,12 @@ export default function Home() {
       )}
       <ul className="home-feed">
         {postFeed.map(post => (
-          <li key={post.id}>
-            <p>{post.text}</p>
-            <p>{post.username}</p>
-          </li>
+          <Post
+            key={post.id}
+            username={post.username}
+            text={post.text}
+            createdAt={post.createdAt}
+          />
         ))}
       </ul>
       
