@@ -75,7 +75,7 @@ export default function Profile() {
   return (
     <div className="page" id="profile-page">
         <header className="page-header">
-            <button type="button">Exit</button>
+            <button type="button" onClick={() => navigate(-1)}>Exit</button>
             <h4>Profile</h4>
         </header>
         {editing && <EditProfile
