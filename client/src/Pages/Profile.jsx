@@ -6,6 +6,7 @@ import { formatDate } from '../Utility/FormatDate'
 import { updateUserProfile } from '../Api/PUT'
 import { followUser } from '../Api/POST'
 import EditProfile from '../Components/EditProfile'
+import FollowList from '../Components/FollowList'
 import "../Styles/profile.css"
 
 export default function Profile() {
@@ -15,6 +16,7 @@ export default function Profile() {
     const [userProfile, setUserProfile] = useState(null)
     const [editing, setEditing] = useState(false)
     const [isFollowing, setIsFollowing] = useState(false)
+    const [followListType, setFollowListType] = useState("")
     const isMyProfile = authorizeState.username === username
 
     useEffect(() => {
@@ -54,10 +56,6 @@ export default function Profile() {
             console.log(error.response.data.error)
         }
     }
-
-    const toggleEditForm = () => {
-        setEditing(true)
-    }
     
     const handleFollow = async () => {
         const originalFollow = isFollowing // captures initial follow state
@@ -70,9 +68,12 @@ export default function Profile() {
             console.log(error.response.data.error)
         }
     }
-    
+
+  
+ 
+      
   return (
-    <div className="profile-page">
+    <div className="page" id="profile-page">
         <header className="page-header">
             <button type="button">Exit</button>
             <h4>Profile</h4>
@@ -84,24 +85,35 @@ export default function Profile() {
             onSave={handleProfileUpdate}
         
         />}
+        {followListType && (
+            <FollowList
+                list={followListType === "followers" ? userProfile.follower : userProfile.following}
+                type={followListType}
+                onClose={()=>setFollowListType("")}
+            />
+        )}
         {userProfile && 
             <section className="profile-info">
                 <div className="profile-details">
                     <h1 className="profile-username">{userProfile.username}</h1>
                     {isMyProfile ? 
-                        (<button className="profile-edit-btn" onClick={toggleEditForm}>Edit Profile</button>) 
+                        (<button className="profile-edit-btn" onClick={()=>setEditing(true)}>Edit Profile</button>) 
                         : (<button onClick={handleFollow} className={isFollowing ? "unfollow" : "follow"}>{isFollowing ? "Following" : "Follow"}</button>)
                     }
                     
                     {userProfile.biography ? (
                         <p className="profile-bio">{userProfile.biography}</p>
                     ) : (
-                        <p className="profile-bio">No Bio</p>
+                        <p className="profile-no-bio">No Bio</p>
                     )}
                     <p className="profile-date">Joined {formatDate(userProfile.createdAt)}</p>
                     <div className="follow-display">
-                        <p className="followers">{userProfile.follower.length} followers</p>
-                        <p className="following">{userProfile.following.length} following</p>
+                        <p className="followers"
+                          onClick={() => setFollowListType("followers")}
+                        >{userProfile.follower.length} followers</p>
+                        <p className="following"
+                            onClick={() => setFollowListType("following")}
+                        >{userProfile.following.length} following</p>
                     </div>
                 
                 </div>
