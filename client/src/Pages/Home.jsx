@@ -62,10 +62,11 @@ export default function Home() {
         </div>
        
       )}
-      <ul className="home-feed">
+      <ul className="post-feed">
         {postFeed.map(post => (
           <Post
             key={post.id}
+            id={post.id}
             username={post.username}
             text={post.text}
             createdAt={post.createdAt}
