@@ -37,6 +37,10 @@ export default function Home() {
     }
     handleFetchPosts()
   }, [])
+
+  const handleDeletedPost = (id) => {
+    setPostFeed(postFeed.filter(post => post.id !== id))
+  }
   
 
   return (
@@ -74,6 +78,7 @@ export default function Home() {
             text={post.text}
             createdAt={post.createdAt}
             userId={post.userId}
+            onDelete={handleDeletedPost}
           />
         ))}
       </ul>
