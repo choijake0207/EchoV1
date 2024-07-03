@@ -3,11 +3,13 @@ import { useNavigate } from 'react-router-dom'
 import ChangePassword from '../Components/ChangePassword'
 import { updateUserPassword } from '../Api/PUT'
 import {useDarkMode} from '../Context/DarkContext'
+import { useAuthorize } from '../Context/AuthContext'
 import "../Styles/settings.css"
 
 export default function Settings() {
     const {isDarkMode, toggleDarkMode} = useDarkMode()
     const [passwordForm, setPasswordForm] = useState(false)
+    const {authorizeState} = useAuthorize()
     const navigate = useNavigate()
     const togglePasswordForm = () => {
         setPasswordForm(true)
@@ -34,14 +36,16 @@ export default function Settings() {
             onSave={handlePasswordUpdate}
         
         />}
-        <section className="account-settings">
-            <h3>Account</h3>
-            <ul>
-                <li>
-                    <button type="button" onClick={togglePasswordForm}>Change Password</button>
-                </li>
-            </ul>
-        </section>
+        {authorizeState.authStatus && (
+            <section className="account-settings">
+                <h3>Account</h3>
+                <ul>
+                    <li>
+                        <button type="button" onClick={togglePasswordForm}>Change Password</button>
+                    </li>
+                </ul>
+            </section>
+        )}
         <section className="general-settings">
             <h3>General</h3>
             <ul>
