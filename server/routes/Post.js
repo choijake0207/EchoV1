@@ -7,10 +7,12 @@ const {validateAccessToken} = require("../middleware/authorization")
 router.post("/", validateAccessToken, async (req, res) => {
     const {text} = req.body
     const username = req.user.username
+    const id = req.user.id
     try {
         const response = await Posts.create({
             text: text,
-            username: username
+            username: username,
+            userId: id
         })
         res.json("Post Created Succesfully")
     } catch (error) {
