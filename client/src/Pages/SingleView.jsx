@@ -32,6 +32,7 @@ export default function SingleView() {
          username = {singlePost.username}
          text = {singlePost.text}
          createdAt={singlePost.createdAt}
+         userId = {singlePost.userId}
         />
       )}
      
