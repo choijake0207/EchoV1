@@ -12,6 +12,10 @@ export default function Post({id, username, text, createdAt, userId, onDelete}) 
   const handleDelete = async () => {
     try {
       await deletePost(id)
+      if (onDelete) {
+        onDelete(id)
+      }
+      navigate("/")
     } catch (error) {
       console.log(error.response.data.error)
     }
