@@ -14,7 +14,7 @@ router.post("/", validateAccessToken, async (req, res) => {
             username: username,
             userId: id
         })
-        res.json("Post Created Succesfully")
+        res.json({message:"Post Created Succesfully", postId: response.id})
     } catch (error) {
         res.status(500).json({error: "Failed To Create Post"})
     }
@@ -33,10 +33,10 @@ router.get("/", async (req, res) => {
 
 // fetch post by id for single view
 router.get("/:id", async (req, res) => {
-    const postId = req.params.id
+    const id = req.params.id
     try {
         const response = await Posts.findOne({where: {
-            id: postId
+            id: id
         }})
         res.json(response)
     } catch (error) {
