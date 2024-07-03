@@ -11,6 +11,7 @@ export default function SingleView() {
       try {
         const response = await fetchSinglePost(id)
         setSinglePost(response)
+        console.log(singlePost)
       } catch (error) {
         console.log(error.response.data.error)
       }
@@ -22,12 +23,15 @@ export default function SingleView() {
 
   return (
     <div className="page" id="single-post-page">
-      <Post
-        id = {singlePost.id}
-        username = {singlePost.username}
-        text = {singlePost.text}
-        createdAt={singlePost.createdAt}
-      />
+      {singlePost && (
+        <Post
+         id = {singlePost.id}
+         username = {singlePost.username}
+         text = {singlePost.text}
+         createdAt={singlePost.createdAt}
+        />
+      )}
+     
 
     </div>
   )
