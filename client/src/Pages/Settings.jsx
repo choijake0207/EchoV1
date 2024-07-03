@@ -4,6 +4,7 @@ import ChangePassword from '../Components/ChangePassword'
 import { updateUserPassword } from '../Api/PUT'
 import {useDarkMode} from '../Context/DarkContext'
 import { useAuthorize } from '../Context/AuthContext'
+import {ArrowCircleLeft } from 'phosphor-react'
 import "../Styles/settings.css"
 
 export default function Settings() {
@@ -28,7 +29,7 @@ export default function Settings() {
   return (
     <div className="page" id="settings-page">
         <header className="page-header">
-            <button type="button" onClick={()=>navigate(-1)}>Exit</button>
+            <button type="button" onClick={()=>navigate(-1)}><ArrowCircleLeft/></button>
             <h4>Settings</h4>
         </header>
         {passwordForm && <ChangePassword
