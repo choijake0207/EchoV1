@@ -48,11 +48,11 @@ export default function Home() {
       {authorizeState.authStatus ? (
         
         <form className="create-post-form" onSubmit={handlePostSubmit}>
-          <input 
+          <textarea 
             type="text" 
             value={postText}
             onChange={(e) => setPostText(e.target.value)}
-          ></input>
+          ></textarea>
           <button type="submit">Post</button>
         </form>
           
