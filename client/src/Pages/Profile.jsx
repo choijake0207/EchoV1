@@ -7,6 +7,7 @@ import { updateUserProfile } from '../Api/PUT'
 import { followUser } from '../Api/POST'
 import EditProfile from '../Components/EditProfile'
 import FollowList from '../Components/FollowList'
+import { ArrowCircleLeft } from 'phosphor-react'
 import "../Styles/profile.css"
 
 export default function Profile() {
@@ -75,7 +76,7 @@ export default function Profile() {
   return (
     <div className="page" id="profile-page">
         <header className="page-header">
-            <button type="button" onClick={() => navigate(-1)}>Exit</button>
+            <button type="button" onClick={() => navigate(-1)}><ArrowCircleLeft/></button>
             <h4>Profile</h4>
         </header>
         {editing && <EditProfile
