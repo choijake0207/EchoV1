@@ -33,7 +33,9 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
     const postId = req.params.id
     try {
-        const response = await Posts.findByPK(postId)
+        const response = await Posts.findOne({where: {
+            id: postId
+        }})
         res.json(response)
     } catch (error) {
         res.status(500).json({error: "Failed To Fetch Post"})
