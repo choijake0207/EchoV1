@@ -73,6 +73,7 @@ export default function Home() {
             username={post.username}
             text={post.text}
             createdAt={post.createdAt}
+            userId={post.userId}
           />
         ))}
       </ul>
