@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect, useRef } from 'react'
 import {NavLink, Outlet, useNavigate} from "react-router-dom"
 import { useAuthorize } from '../Context/AuthContext'
 import "../Styles/root.css"
-import {House, MagnifyingGlass, User, SignOut, Gear, Bell, ChatCircle, UserCircle  } from "phosphor-react"
+import {House, MagnifyingGlass, User, SignOut, Gear, Bell, ChatCircle, UserCircle, BookmarkSimple  } from "phosphor-react"
 
 export default function RootLayout() { 
 
@@ -36,6 +36,7 @@ export default function RootLayout() {
               <NavLink><Bell/>Notifications</NavLink>
               <NavLink><ChatCircle/>Chat</NavLink>
               <NavLink to={`/profile/${authorizeState.username}`}><User/>Profile</NavLink>
+              <NavLink><BookmarkSimple/>Saved</NavLink>
             </>
           )}
           <NavLink to="/settings"><Gear/>Settings</NavLink>
