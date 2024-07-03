@@ -21,3 +21,12 @@ export const fetchPosts = async () => {
     }
 
 }
+
+export const fetchSinglePost = async (postId) => {
+    try {
+        const response = await axios.get(`http://localhost:3001/post/${postId}`)
+        return response.data
+    } catch (error) {
+        throw error
+    }
+}
