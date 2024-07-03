@@ -6,39 +6,42 @@
 
 * {
     margin: 0;
+    border-radius: 2px;
 }
 body {
     background: rgb(242, 244, 250);
 }
+
+/* ===== ROOT LAYOUT ===== */
 .root-layout {
     border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
 
 }
 .root-header {
     display: flex;
     position: sticky;
-    top:0;
-    align-items: center;
-    border: 1px solid blue;
     background: white;
-    justify-content: space-between;
-    padding: 10px;
-    margin-bottom: 15px;
+    justify-content: center;
     z-index: 10;
+    width: 100%;
+}
+.nav-wrapper {
+    min-width: 900px;
+    max-width: 1100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 .nav-bar-left {
-    margin-left: 130px;
     color: rgb(0, 34, 255);
 }
-.nav-bar-left h1 {
-    font-weight: bolder;
-    font-family: poppins;
-
-}
 .nav-bar-right {
-    margin-right: 130px;
     display: flex;
-    gap: 20px;
+    gap: 10px;
 }
 .profile-menu {
     display: flex;
@@ -48,69 +51,49 @@ body {
     z-index: 1000;
     background: rgb(255, 255, 255);
     border: 1px dashed black;
- 
 }
 .profile-menu * {
-    border: 1px solid black;
     color: black;
     padding: 5px;
     text-align: center;
 }
 main {
-    margin-left: 20%;
-    margin-right: 20%;
-    border: 1px solid green;
+    min-width: 900px;
+    max-width: 1100px;
     position: relative;
-    background: white;
-    border-radius: 5px;
-    padding: 15px;
-    z-index: 1;
+    z-index: 1;  
 }
 
-
-/* global components */
+/* ===== GLOBAL COMPONENTS ===== */
 a {
-    color: rgba(0, 0, 0, 0.515);
+    
     text-decoration: none;
     cursor: pointer;
 }
 button {
     border: none;
     background: none;
-    color: rgba(0, 0, 0, 0.506);
     border: 1px solid rgb(0, 0, 0);
-    border-radius: 5px;
     cursor: pointer;
+    color: black;
+}
+ul {
+    padding: 0;
+}
+li {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
 }
 
-
-
-
-/* Dark Mode */
-.dark-mode {
-    background: rgb(17, 17, 19);
-    color: white;
-}
-.dark-mode .root-header {
-    background: rgb(31, 30, 33);
-}
-.dark-mode a {
-    color: white;
-}
-.dark-mode button {
-    border: 1px solid rgb(255, 255, 255);
-    color: white;
-}
-
-/* page styles */
-
+/* ===== GLOBAL PAGE STYLES ===== */
 .page-header {
     display: flex;
     gap: 10px;
     margin-bottom: 15px;
 }
 
-/* form styles */
+/* ===== GLOBAL FORM STYLES ===== */
 .form-page {
     z-index: 50;
     border: 2px solid red;
@@ -122,9 +105,44 @@ button {
     left: 50%;
     transform: translate(-50%, -50%);
 }
-
 .user-form {
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
+
+/* ===== DARK MODE ===== */
+.dark-mode {
+    color: white;
+    background: rgb(11, 12, 19); 
+}
+.dark-mode a {
+    color: white;
+}
+.dark-mode button {
+    color: white;
+}
+.dark-mode .root-header {
+    background: rgb(22, 24, 36);
+}
+.dark-mode .nav-bar-left {
+    color: white;
+}
+.dark-mode .nav-bar-right a button {
+    color: white;
+}
+.dark-mode button {
+    border: 1px solid white;
+}
+.dark-mode .page > * {
+    background: rgb(22, 24, 36);
+}
+.dark-mode .post-feed {
+    background: rgb(11, 12, 19);
+}
+.dark-mode .post {
+    background: rgb(22, 24, 36);
+    color: white;
+}
+
+
