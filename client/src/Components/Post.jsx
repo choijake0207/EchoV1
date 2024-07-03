@@ -5,7 +5,7 @@ import { useAuthorize } from '../Context/AuthContext'
 import { deletePost } from '../Api/DELETE'
 
 
-export default function Post({id, username, text, createdAt, userId}) {
+export default function Post({id, username, text, createdAt, userId, onDelete}) {
   const navigate = useNavigate()
   const {authorizeState} = useAuthorize()
 
