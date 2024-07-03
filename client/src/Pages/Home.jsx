@@ -1,15 +1,17 @@
 import React, {useState, useEffect} from 'react'
 import { useAuthorize } from '../Context/AuthContext'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { createPost } from '../Api/POST'
 import { fetchPosts } from '../Api/GET'
 import Post from '../Components/Post'
+import "../Styles/home.css"
 
 
 export default function Home() {
   const {authorizeState} = useAuthorize()
   const [postText, setPostText] = useState("")
   const [postFeed, setPostFeed] = useState([])
+  const navigate = useNavigate()
 
   const handlePostSubmit = async (e) => {
     e.preventDefault()
@@ -17,6 +19,7 @@ export default function Home() {
       const response = await createPost(postText)
       console.log(response)
       setPostText("")
+      navigate(`/post/${response.postId}`)
     } catch (error) {
       console.log(error.response.data.error)
     }
