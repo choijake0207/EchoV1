@@ -46,14 +46,29 @@ export default function Home() {
   return (
     <div className="page" id="home-page">
       {authorizeState.authStatus ? (
-        <form className="create-post-form" onSubmit={handlePostSubmit}>
-          <input 
-           type="text" 
-           value={postText}
-           onChange={(e) => setPostText(e.target.value)}
-          ></input>
-         <button type="submit">Post</button>
-        </form>
+        <>
+          <form className="create-post-form" onSubmit={handlePostSubmit}>
+            <input 
+            type="text" 
+            value={postText}
+            onChange={(e) => setPostText(e.target.value)}
+            ></input>
+          <button type="submit">Post</button>
+          </form>
+          <ul className="post-feed">
+          {postFeed.map(post => (
+            <Post
+              key={post.id}
+              id={post.id}
+              username={post.username}
+              text={post.text}
+              createdAt={post.createdAt}
+              userId={post.userId}
+              onDelete={handleDeletedPost}
+            />
+          ))}
+          </ul>
+        </>
        
       ) : (
         <div className="greeting">
@@ -69,19 +84,7 @@ export default function Home() {
         </div>
        
       )}
-      <ul className="post-feed">
-        {postFeed.map(post => (
-          <Post
-            key={post.id}
-            id={post.id}
-            username={post.username}
-            text={post.text}
-            createdAt={post.createdAt}
-            userId={post.userId}
-            onDelete={handleDeletedPost}
-          />
-        ))}
-      </ul>
+     
       
     </div>
   )
