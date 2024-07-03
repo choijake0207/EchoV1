@@ -46,16 +46,35 @@ export default function Home() {
   return (
     <div className="page" id="home-page">
       {authorizeState.authStatus ? (
-        <>
-          <form className="create-post-form" onSubmit={handlePostSubmit}>
-            <input 
+        
+        <form className="create-post-form" onSubmit={handlePostSubmit}>
+          <input 
             type="text" 
             value={postText}
             onChange={(e) => setPostText(e.target.value)}
-            ></input>
+          ></input>
           <button type="submit">Post</button>
-          </form>
-          <ul className="post-feed">
+        </form>
+          
+      
+       
+      ) : (
+        <div className="greeting">
+          <h1>Welcome To Echo</h1>
+          <div className="links-container">
+            <NavLink
+             to="/login"
+             id="login-a"
+            >Login</NavLink>
+            <NavLink
+              to="/register"
+              id="register-a"
+            >Register</NavLink>
+          </div>
+        </div>
+       
+      )}
+      <ul className="post-feed">
           {postFeed.map(post => (
             <Post
               key={post.id}
@@ -67,23 +86,7 @@ export default function Home() {
               onDelete={handleDeletedPost}
             />
           ))}
-          </ul>
-        </>
-       
-      ) : (
-        <div className="greeting">
-          <h1>Welcome To Echo</h1>
-          <div className="links-container">
-            <NavLink
-             to="/login"
-            >Login</NavLink>
-            <NavLink
-              to="/register"
-            >Register</NavLink>
-          </div>
-        </div>
-       
-      )}
+      </ul>
      
       
     </div>
