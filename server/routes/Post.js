@@ -29,6 +29,16 @@ router.get("/", async (req, res) => {
 
 })
 
+// fetch post by id for single view
+router.get("/:id", async (req, res) => {
+    const postId = req.params.id
+    try {
+        const response = await Posts.findByPK(postId)
+        res.json(response)
+    } catch (error) {
+        res.status(500).json({error: "Failed To Fetch Post"})
+    }
+})
 
 
 module.exports = router
