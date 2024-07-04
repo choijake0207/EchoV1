@@ -3,6 +3,7 @@ import { fetchSinglePost } from '../Api/GET'
 import { useParams, useNavigate } from 'react-router-dom'
 import Post from '../Components/Post'
 import { ArrowCircleLeft } from 'phosphor-react'
+import { useAuthorize } from '../Context/AuthContext'
 import "../Styles/singleView.css"
 
 export default function SingleView() {
@@ -10,6 +11,7 @@ export default function SingleView() {
   const [singlePost, setSinglePost] = useState(null)
   const navigate = useNavigate()
   const [newComment, setNewComment] = useState("")
+  const {authorizeState} = useAuthorize()
   useEffect(() => {
     const fetchPost = async () => {
       try {
@@ -42,14 +44,16 @@ export default function SingleView() {
         />
       )}
       <section className="comments-section">
-        <form className="create-comment-form">
-          <textarea
-            placeholder="Add a Comment"
-            onChange={() => setNewComment(e.target.value)}
-            value={newComment}
-          />
-          <button type="submit">Post</button>
-        </form>
+        {authorizeState.authStatus && (
+          <form className="create-comment-form">
+            <textarea
+              placeholder="Add a Comment"
+              onChange={(e) => setNewComment(e.target.value)}
+              value={newComment}
+            />
+            <button type="submit">Post</button>
+          </form>
+        )}
         {singlePost && (
           <ul className="comment-feed">
             {singlePost.Comments.length > 0 ? (
