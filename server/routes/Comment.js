@@ -21,15 +21,15 @@ router.post("/", validateAccessToken, async (req, res) => {
 })
 
 // fetch comments by postId
-router.get("/:id", async (req, res) => {
-    const postId = req.params.id
-    try {
-        const response = await Comments.findAll({where: {postId: postId}}, {order: [["createdAt", "DESC"]]})
-        res.json(response)
-    } catch (error) {
-        res.status(500).json({error: "Failed To Fetch Comments"})
-    }
-})
+// router.get("/:id", async (req, res) => {
+//     const postId = req.params.id
+//     try {
+//         const response = await Comments.findAll({where: {postId: postId}}, {order: [["createdAt", "DESC"]]})
+//         res.json(response)
+//     } catch (error) {
+//         res.status(500).json({error: "Failed To Fetch Comments"})
+//     }
+// })
 
 
 
