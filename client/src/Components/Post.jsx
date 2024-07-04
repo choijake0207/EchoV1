@@ -3,7 +3,7 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import "../Styles/post.css"
 import { useAuthorize } from '../Context/AuthContext'
 import { deletePost } from '../Api/DELETE'
-
+import {HeartStraight, BookmarkSimple, ChatCircle} from "phosphor-react"
 
 export default function Post({id, username, text, createdAt, userId, onDelete, comments, isSingleView}) {
   const navigate = useNavigate()
@@ -39,6 +39,20 @@ export default function Post({id, username, text, createdAt, userId, onDelete, c
           </p>
           <p className="date">{new Date(createdAt).toLocaleString()}</p>
         </div>
+        <div className="post-details">
+            <div className="post-likes">
+              <button type="button"><HeartStraight/></button>
+            </div>
+            <div className="post-comments">
+              <button type="button"><ChatCircle/></button>
+
+            </div>
+            <div className="post-save">
+              <button type="button"><BookmarkSimple/></button>
+            </div>
+            
+        </div>
+
     </li>
   )
 }
