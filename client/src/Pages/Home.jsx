@@ -86,6 +86,7 @@ export default function Home() {
               userId={post.userId}
               onDelete={handleDeletedPost}
               comments={post.Comments}
+              isHomeView={true}
             />
           ))}
       </ul>
