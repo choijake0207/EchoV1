@@ -51,6 +51,7 @@ export default function Home() {
           <textarea 
             type="text" 
             value={postText}
+            placeholder={`What's On Your Mind ${authorizeState.username}?`}
             onChange={(e) => setPostText(e.target.value)}
           ></textarea>
           <button type="submit">Post</button>
@@ -84,6 +85,7 @@ export default function Home() {
               createdAt={post.createdAt}
               userId={post.userId}
               onDelete={handleDeletedPost}
+              comments={post.Comments}
             />
           ))}
       </ul>
