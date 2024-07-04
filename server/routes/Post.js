@@ -1,6 +1,6 @@
 const express = require("express")
 const router = express.Router()
-const {Posts} = require("../models")
+const {Posts, Users, Comments} = require("../models")
 const {validateAccessToken} = require("../middleware/authorization")
 
 // create post
@@ -35,9 +35,18 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
     const id = req.params.id
     try {
-        const response = await Posts.findOne({where: {
-            id: id
-        }})
+        const response = await Posts.findOne({
+            where: {id: id},
+            include: [
+                {
+                    model: Comments,
+                    include: [
+                        {model: Users, attributes: ["username"]}
+                    ],
+                    order: [["createdAt", "DESC"]]
+                }
+            ]
+        })
         res.json(response)
     } catch (error) {
         res.status(500).json({error: "Failed To Fetch Post"})
