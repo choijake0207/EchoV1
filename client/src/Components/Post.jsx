@@ -5,7 +5,7 @@ import { useAuthorize } from '../Context/AuthContext'
 import { deletePost } from '../Api/DELETE'
 import {HeartStraight, BookmarkSimple, ChatCircle} from "phosphor-react"
 
-export default function Post({id, username, text, createdAt, userId, onDelete, comments, isSingleView}) {
+export default function Post({id, username, text, createdAt, userId, onDelete, comments}) {
   const navigate = useNavigate()
   const {authorizeState} = useAuthorize()
 
