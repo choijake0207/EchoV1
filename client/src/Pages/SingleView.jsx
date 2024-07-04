@@ -36,6 +36,7 @@ export default function SingleView() {
          createdAt={singlePost.createdAt}
          userId = {singlePost.userId}
          comments = {singlePost.Comments}
+         isHomeView={false}
         />
       )}
       <section className="comments-section">
@@ -47,19 +48,20 @@ export default function SingleView() {
           />
           <button type="submit">Post</button>
         </form>
-        <ul className="comment-feed">
-          {singlePost.Comments.length > 0 ? (
-            singlePost.Comments.map((comment) => (
-              <li className="comment">
-                <h4>{singlePost.Comments.username}</h4>
-                <p>{singlePost.Comments.text}</p>
-              </li>
-            ))
-          ) : (
-            <p>No Comments Yet</p>
-          )}
-        </ul>
-
+        {singlePost && (
+          <ul className="comment-feed">
+            {singlePost.Comments.length > 0 ? (
+              singlePost.Comments.map(comment => (
+                <li className="comment">
+                  <h4>{comment.username}</h4>
+                  <p>{comment.text}</p>
+                </li>
+              ))
+            ) : (
+              <p>No Comments Yet</p>
+            )}
+          </ul>
+        )}
       </section>
      
 
