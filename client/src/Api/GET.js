@@ -31,11 +31,11 @@ export const fetchSinglePost = async (id) => {
     }
 }
 
-export const fetchComments = async (id) => {
-    try {
-        const response = await axios.get(`http://localhost:3001/comment/${id}`)
-        return response.data
-    } catch (error) {
-        throw error
-    }
-}
+// export const fetchComments = async (id) => {
+//     try {
+//         const response = await axios.get(`http://localhost:3001/comment/${id}`)
+//         return response.data
+//     } catch (error) {
+//         throw error
+//     }
+// }
