@@ -13,6 +13,8 @@ const followRouter = require("./routes/Follow")
 app.use("/follow", followRouter)
 const postRouter = require("./routes/Post")
 app.use("/post", postRouter)
+const commentRouter = require("./routes/Comment")
+app.use("/comment", commentRouter)
 
 
 db.sequelize.sync().then(()=> {
