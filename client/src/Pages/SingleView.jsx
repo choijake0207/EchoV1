@@ -7,6 +7,7 @@ export default function SingleView() {
   const {id} = useParams()
   const [singlePost, setSinglePost] = useState(null)
   const navigate = useNavigate()
+  const [newComment, setNewComment] = useState("")
   useEffect(() => {
     const fetchPost = async () => {
       try {
@@ -37,6 +38,29 @@ export default function SingleView() {
          comments = {singlePost.Comments}
         />
       )}
+      <section className="comments-section">
+        <form className="create-comment-form">
+          <textarea
+            placeholder="Add a Comment"
+            onChange={() => setNewComment(e.target.value)}
+            value={newComment}
+          />
+          <button type="submit">Post</button>
+        </form>
+        <ul className="comment-feed">
+          {singlePost.Comments.length > 0 ? (
+            singlePost.Comments.map((comment) => (
+              <li className="comment">
+                <h4>{singlePost.Comments.username}</h4>
+                <p>{singlePost.Comments.text}</p>
+              </li>
+            ))
+          ) : (
+            <p>No Comments Yet</p>
+          )}
+        </ul>
+
+      </section>
      
 
     </div>
