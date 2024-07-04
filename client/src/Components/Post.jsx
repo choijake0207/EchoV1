@@ -5,7 +5,7 @@ import { useAuthorize } from '../Context/AuthContext'
 import { deletePost } from '../Api/DELETE'
 import {HeartStraight, BookmarkSimple, ChatCircle} from "phosphor-react"
 
-export default function Post({id, username, text, createdAt, userId, onDelete, comments}) {
+export default function Post({id, username, text, createdAt, userId, onDelete, comments, isHomeView}) {
   const navigate = useNavigate()
   const {authorizeState} = useAuthorize()
 
@@ -41,14 +41,13 @@ export default function Post({id, username, text, createdAt, userId, onDelete, c
         </div>
         <div className="post-details">
             <div className="post-likes">
-              <button type="button"><HeartStraight/></button>
+              <button type="button"><HeartStraight/>0</button>
             </div>
             <div className="post-comments">
-              <button type="button"><ChatCircle/></button>
-              <p>{comments.length}</p>
+              <button type="button"><ChatCircle/><p>{comments.length}</p></button>
             </div>
             <div className="post-save">
-              <button type="button"><BookmarkSimple/></button>
+              <button type="button"><BookmarkSimple/>0</button>
             </div>
             
         </div>
