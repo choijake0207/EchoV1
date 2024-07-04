@@ -45,7 +45,7 @@ export default function Post({id, username, text, createdAt, userId, onDelete, c
             </div>
             <div className="post-comments">
               <button type="button"><ChatCircle/></button>
-
+              <p>{comments.length}</p>
             </div>
             <div className="post-save">
               <button type="button"><BookmarkSimple/></button>
