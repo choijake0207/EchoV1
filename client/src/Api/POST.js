@@ -29,3 +29,19 @@ export const createPost = async (postText) => {
         throw error
     }
 }
+
+export const createComment = async ({text, postId}) => {
+    try {
+        const response = await axios.post("http://localhost:3001/comment", {
+            text: text,
+            postId: postId
+        }, {
+            headers: {
+                accessToken: localStorage.getItem("accessToken")
+            }
+        })
+        return response.data
+    }  catch (error) {
+        throw error
+    }
+}
