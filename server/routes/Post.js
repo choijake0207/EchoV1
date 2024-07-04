@@ -23,7 +23,18 @@ router.post("/", validateAccessToken, async (req, res) => {
 // fetch all posts for home feed
 router.get("/", async (req, res) => {
     try {
-        const response = await Posts.findAll({order: [["createdAt", "DESC"]]})
+        const response = await Posts.findAll({
+            order: [["createdAt", "DESC"]],
+            include: [
+                {
+                    model: Comments,
+                    include: [
+                        {model: Users, attributes: ["username"]}
+                    ],
+                    order: [["createdAt", "DESC"]]
+                }
+            ]
+        })
         res.json(response)
     } catch (error) {
         res.status(500).json({error: "Failed To Fetch Posts"})
