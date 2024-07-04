@@ -2,6 +2,8 @@ import React, {useEffect, useState} from 'react'
 import { fetchSinglePost } from '../Api/GET'
 import { useParams, useNavigate } from 'react-router-dom'
 import Post from '../Components/Post'
+import { ArrowCircleLeft } from 'phosphor-react'
+import "../Styles/singleView.css"
 
 export default function SingleView() {
   const {id} = useParams()
@@ -26,7 +28,7 @@ export default function SingleView() {
   return (
     <div className="page" id="single-post-page">
       <header className="page-header">
-        <button type="button" onClick={() => navigate(-1)}>Exit</button>
+        <button type="button" onClick={() => navigate(-1)}><ArrowCircleLeft size={"30px"}/></button>
       </header>
       {singlePost && (
         <Post
