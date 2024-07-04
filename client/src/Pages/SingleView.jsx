@@ -12,6 +12,7 @@ export default function SingleView() {
       try {
         const response = await fetchSinglePost(id)
         setSinglePost(response)
+        console.log(response)
       } catch (error) {
         console.log(error.response.data.error)
       }
@@ -33,6 +34,7 @@ export default function SingleView() {
          text = {singlePost.text}
          createdAt={singlePost.createdAt}
          userId = {singlePost.userId}
+         comments = {singlePost.Comments}
         />
       )}
      
