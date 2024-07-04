@@ -44,7 +44,12 @@ export default function Post({id, username, text, createdAt, userId, onDelete, c
               <button type="button"><HeartStraight/>0</button>
             </div>
             <div className="post-comments">
-              <button type="button"><ChatCircle/><p>{comments.length}</p></button>
+              {isHomeView ? (
+                <button onClick={()=> navigate(`/post/${id}`)}><ChatCircle/>{comments.length}</button>
+              ) : (
+                <div><ChatCircle/><p>{comments.length}</p></div>
+              )}
+              
             </div>
             <div className="post-save">
               <button type="button"><BookmarkSimple/>0</button>
