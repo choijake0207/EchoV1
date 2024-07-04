@@ -5,7 +5,7 @@ import { useAuthorize } from '../Context/AuthContext'
 import { deletePost } from '../Api/DELETE'
 
 
-export default function Post({id, username, text, createdAt, userId, onDelete}) {
+export default function Post({id, username, text, createdAt, userId, onDelete, comments, isSingleView}) {
   const navigate = useNavigate()
   const {authorizeState} = useAuthorize()
 
@@ -33,11 +33,12 @@ export default function Post({id, username, text, createdAt, userId, onDelete}) 
             >Delete</button>
           )}
         </header>
-        
-        <p className="text" onClick={() => navigate(`/post/${id}`)}>
-          {text}
-        </p>
-        <p className="date">{new Date(createdAt).toLocaleString()}</p>
+        <div className="post-content">
+          <p className="text" onClick={() => navigate(`/post/${id}`)}>
+            {text}
+          </p>
+          <p className="date">{new Date(createdAt).toLocaleString()}</p>
+        </div>
     </li>
   )
 }
