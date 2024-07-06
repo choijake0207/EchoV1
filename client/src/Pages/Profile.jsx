@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useAuthorize } from '../Context/AuthContext'
 import { getUserProfile } from '../Api/GET'
 import { formatDate } from '../Utility/FormatDate'
@@ -8,12 +8,12 @@ import { followUser } from '../Api/POST'
 import EditProfile from '../Components/EditProfile'
 import FollowList from '../Components/FollowList'
 import { ArrowCircleLeft } from 'phosphor-react'
+import GenericPage from '../Components/GenericPage'
 import "../Styles/profile.css"
 
 export default function Profile() {
     const {authorizeState, updateUserProfileState} = useAuthorize()
     const { username} = useParams()
-    const navigate = useNavigate()
     const [userProfile, setUserProfile] = useState(null)
     const [editing, setEditing] = useState(false)
     const [isFollowing, setIsFollowing] = useState(false)
@@ -74,11 +74,7 @@ export default function Profile() {
  
       
   return (
-    <div className="page" id="profile-page">
-        <header className="page-header">
-            <button type="button" onClick={() => navigate(-1)}><ArrowCircleLeft/></button>
-            <h4>Profile</h4>
-        </header>
+    <GenericPage headerTitle="Profile" pageId="profile-page">
         {editing && <EditProfile
             username={userProfile.username}
             bio={(userProfile.biography)}
@@ -129,7 +125,7 @@ export default function Profile() {
 
            
 
-    </div>
+    </GenericPage>
   )
 }
 // start profile feed after posts model and routes

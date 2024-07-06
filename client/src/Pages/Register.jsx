@@ -1,7 +1,7 @@
 import React from 'react'
 import {Formik, Form, Field, ErrorMessage} from "formik"
 import * as Yup from "Yup"
-import axios from "axios"
+import GenericPage from '../Components/GenericPage'
 import { useAuthorize } from '../Context/AuthContext'
 import {useNavigate} from "react-router-dom"
 
@@ -29,7 +29,7 @@ export default function Register() {
   }
   
   return (
-    <div className="register-page">
+    <GenericPage headerTitle="Register" pageId="register-page">
       <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
         <Form className="register-form" id="user-form">
           <label>Create a Username:</label>
@@ -43,6 +43,6 @@ export default function Register() {
         </Form>
       </Formik>
 
-    </div>
+    </GenericPage>
   )
 }

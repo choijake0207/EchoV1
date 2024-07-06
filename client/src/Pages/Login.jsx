@@ -3,6 +3,7 @@ import "../Styles/alert.css"
 import axios from 'axios'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useAuthorize } from '../Context/AuthContext'
+import GenericPage from '../Components/GenericPage'
 import Alert from '../Components/Alert'
 
 
@@ -36,9 +37,8 @@ export default function Login() {
   }
 
   return (
-    <div className="login-page">
+    <GenericPage headerTitle="Login" pageId="login-page">
       {isAlertVisible && <Alert message={alertMessage} onClose={closeAlert}/> }
-      <h3>Log In</h3>
       <form className="login-form" id="user-form" onSubmit={onSubmit}>
         <input
           type="text"
@@ -56,6 +56,6 @@ export default function Login() {
       </form>
       <p>Don't Have An Account? Sign Up <NavLink to="/register">Here!</NavLink></p>
 
-    </div>
+    </GenericPage>
   )
 }

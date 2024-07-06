@@ -1,15 +1,16 @@
 import React, {useEffect, useState} from 'react'
 import { fetchSinglePost } from '../Api/GET'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import Post from '../Components/Post'
 import { ArrowCircleLeft } from 'phosphor-react'
 import { useAuthorize } from '../Context/AuthContext'
+import { createComment } from '../Api/POST'
+import GenericPage from '../Components/GenericPage'
 import "../Styles/singleView.css"
 
 export default function SingleView() {
   const {id} = useParams()
   const [singlePost, setSinglePost] = useState(null)
-  const navigate = useNavigate()
   const [newComment, setNewComment] = useState("")
   const {authorizeState} = useAuthorize()
   useEffect(() => {
@@ -25,13 +26,21 @@ export default function SingleView() {
     fetchPost()
   }, [])
 
+  const handleCommentSubmit = async (e) => {
+    e.preventDefault()
+    try {
+      const response = await createComment({newComment, id})
+      console.log(response)
+      setNewComment("")
+    } catch (error) {
+      console.log(error.response.data.error)
+    }
+  }
+
 
 
   return (
-    <div className="page" id="single-post-page">
-      <header className="page-header">
-        <button type="button" onClick={() => navigate(-1)}><ArrowCircleLeft size={"30px"}/></button>
-      </header>
+    <GenericPage pageId="single-post-page" headerTitle="Post">
       {singlePost && (
         <Post
          id = {singlePost.id}
@@ -45,7 +54,7 @@ export default function SingleView() {
       )}
       <section className="comments-section">
         {authorizeState.authStatus && (
-          <form className="create-comment-form">
+          <form className="create-comment-form" onSubmit={handleCommentSubmit}>
             <textarea
               placeholder="Add a Comment"
               onChange={(e) => setNewComment(e.target.value)}
@@ -71,6 +80,6 @@ export default function SingleView() {
       </section>
      
 
-    </div>
+    </GenericPage>
   )
 }
