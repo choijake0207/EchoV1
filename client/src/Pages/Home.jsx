@@ -45,53 +45,50 @@ export default function Home() {
 
   return (
     <div className="page" id="home-page">
-      {authorizeState.authStatus ? (
-        
-        <form className="create-post-form" onSubmit={handlePostSubmit}>
-          <textarea 
-            type="text" 
-            value={postText}
-            placeholder={`What's On Your Mind ${authorizeState.username}?`}
-            onChange={(e) => setPostText(e.target.value)}
-          ></textarea>
-          <button type="submit">Post</button>
-        </form>
+      <main>
+        {authorizeState.authStatus ? (
           
-      
-       
-      ) : (
-        <div className="greeting">
-          <h1>Welcome To Echo</h1>
-          <div className="links-container">
-            <NavLink
-             to="/login"
-             id="login-a"
-            >Login</NavLink>
-            <NavLink
-              to="/register"
-              id="register-a"
-            >Register</NavLink>
+          <form className="create-post-form" onSubmit={handlePostSubmit}>
+            <textarea 
+              type="text" 
+              value={postText}
+              placeholder={`What's On Your Mind ${authorizeState.username}?`}
+              onChange={(e) => setPostText(e.target.value)}
+            ></textarea>
+            <button type="submit">Post</button>
+          </form>
+        ) : (
+          <div className="greeting">
+            <h1>Welcome To Echo</h1>
+            <div className="links-container">
+              <NavLink
+              to="/login"
+              id="login-a"
+              >Login</NavLink>
+              <NavLink
+                to="/register"
+                id="register-a"
+              >Register</NavLink>
+            </div>
           </div>
-        </div>
-       
-      )}
-      <ul className="post-feed">
-          {postFeed.map(post => (
-            <Post
-              key={post.id}
-              id={post.id}
-              username={post.username}
-              text={post.text}
-              createdAt={post.createdAt}
-              userId={post.userId}
-              onDelete={handleDeletedPost}
-              comments={post.Comments}
-              isHomeView={true}
-            />
-          ))}
-      </ul>
-     
-      
+        
+        )}
+        <ul className="post-feed">
+            {postFeed.map(post => (
+              <Post
+                key={post.id}
+                id={post.id}
+                username={post.username}
+                text={post.text}
+                createdAt={post.createdAt}
+                userId={post.userId}
+                onDelete={handleDeletedPost}
+                comments={post.Comments}
+                isHomeView={true}
+              />
+            ))}
+        </ul>
+      </main>
     </div>
   )
 }
