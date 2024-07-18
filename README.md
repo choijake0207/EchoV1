@@ -11,6 +11,7 @@ The tools I used for this project include:
 - MySQL
 - Node.js
 
+
 ## Personal Comments and Notes
 One of the major objectives for this project was to gain experience building something other than static sites. By committing to a full-stack project, I am attempting to familiarize myself with the following concepts:
 
@@ -21,5 +22,16 @@ One of the major objectives for this project was to gain experience building som
 - Building DB models
 
 Please expect a lot of commits as I continue to learn and refactor my code!
+
+
+## Rough Roadmap
+[x] Basic User
+[x] Following/Follower 
+[x] Posts
+[x] Comments
+[] Likes
+[] Other Features:
+  [] Search
+  [] Bookmark
 
 
