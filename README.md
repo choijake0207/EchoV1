@@ -25,13 +25,13 @@ Please expect a lot of commits as I continue to learn and refactor my code!
 
 
 ## Rough Roadmap
-[x] Basic User
-[x] Following/Follower 
-[x] Posts
-[x] Comments
-[] Likes
-[] Other Features:
-  [] Search
-  [] Bookmark
+- [x] Basic User
+- [x] Following/Follower 
+- [x] Posts
+- [x] Comments
+- [ ] Likes
+- [ ] Other Features:
+  - [ ] Search
+  - [ ] Bookmark
 
 
