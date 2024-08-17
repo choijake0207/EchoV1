@@ -1,16 +1,15 @@
 import {useState, useEffect} from "react"
-import './App.css'
 import axios from "axios"
 import {Route, createBrowserRouter, createRoutesFromElements, RouterProvider} from "react-router-dom"
 // page imports
 import RootLayout from './Layouts/RootLayout'
-import Home from './Pages/Home'
-import Login from './Pages/Login'
-import Register from './Pages/Register'
-import Profile from "./Pages/Profile"
-import Settings from "./Pages/Settings"
-import Search from "./Pages/Search"
-import SingleView from "./Pages/SingleView"
+import Home from './Pages/Home/Home'
+import Login from './Pages/Login/Login'
+import Register from './Pages/Register/Register'
+import Profile from "./Pages/Profile/Profile"
+import Settings from "./Pages/Settings/Settings"
+import Search from "./Pages/Search/Search"
+import SingleView from "./Pages/SingleView/SingleView"
 // context
 import { AuthContextProvider } from './Context/AuthContext'
 import { DarkContextProvider } from "./Context/DarkContext"
