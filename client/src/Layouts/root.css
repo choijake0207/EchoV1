@@ -167,6 +167,32 @@ li {
         grid-template-columns: auto 1fr 350px;
     }
 }
+@media (max-width: 1040px) {
+    .root-layout {
+        grid-template-columns: auto 1fr;
+    }
+    .info-sidebar {
+        display: none;
+    }
+}
+@media (max-width: 700px) {
+    .root-layout {
+        grid-template-columns: 1fr;
+        grid-template-rows: 60px 1fr 60px;
+        grid-template-areas: "header" "outlet" "nav"
+    }
+    .nav-bottom {
+        display: none;
+    }
+    .root-nav {
+        justify-content: center;
+        border-top: 1px solid var(--default-border-color)
+    }
+    .nav-links {
+        display: flex;
+        flex-direction: row;
+    }
+}
 
 
 
