@@ -1,10 +1,10 @@
 import React, {useState} from 'react'
-import ChangePassword from '../Components/ChangePassword'
-import { updateUserPassword } from '../Api/PUT'
-import {useDarkMode} from '../Context/DarkContext'
-import { useAuthorize } from '../Context/AuthContext'
-import GenericPage from '../Components/GenericPage'
-import "../Styles/settings.css"
+import ChangePassword from '../../Components/Forms/ChangePassword'
+import { updateUserPassword } from '../../Api/PUT'
+import {useDarkMode} from '../../Context/DarkContext'
+import { useAuthorize } from '../../Context/AuthContext'
+import GenericPage from '../../Layouts/GenericPage'
+import "./settings.css"
 
 export default function Settings() {
     const {isDarkMode, toggleDarkMode} = useDarkMode()

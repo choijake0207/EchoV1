@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react'
-import { useAuthorize } from '../Context/AuthContext'
+import { useAuthorize } from '../../Context/AuthContext'
 import { NavLink, useNavigate } from 'react-router-dom'
-import { createPost } from '../Api/POST'
-import { fetchPosts } from '../Api/GET'
-import Post from '../Components/Post'
-import "../Styles/home.css"
+import { createPost } from '../../Api/POST'
+import { fetchPosts } from '../../Api/GET'
+import Post from '../../Components/Post/Post'
+import "./home.css"
 
 
 export default function Home() {

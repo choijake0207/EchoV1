@@ -1,15 +1,15 @@
 import React, {useState, useEffect} from 'react'
 import { useParams } from 'react-router-dom'
-import { useAuthorize } from '../Context/AuthContext'
-import { getUserProfile } from '../Api/GET'
-import { formatDate } from '../Utility/FormatDate'
-import { updateUserProfile } from '../Api/PUT'
-import { followUser } from '../Api/POST'
-import EditProfile from '../Components/EditProfile'
-import FollowList from '../Components/FollowList'
+import { useAuthorize } from '../../Context/AuthContext'
+import { getUserProfile } from '../../Api/GET'
+import { formatDate } from '../../Utility/FormatDate'
+import { updateUserProfile } from '../../Api/PUT'
+import { followUser } from '../../Api/POST'
+import EditProfile from '../../Components/Forms/EditProfile'
+import FollowList from '../../Components/PopUps/FollowList'
 import { ArrowCircleLeft } from 'phosphor-react'
-import GenericPage from '../Components/GenericPage'
-import "../Styles/profile.css"
+import GenericPage from '../../Layouts/GenericPage'
+import "./profile.css"
 
 export default function Profile() {
     const {authorizeState, updateUserProfileState} = useAuthorize()

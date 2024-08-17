@@ -1,11 +1,10 @@
 import React, {useState, useContext} from 'react'
-import "../Styles/alert.css"
+import "../../Components/Alerts/alert.css"
 import axios from 'axios'
 import { NavLink, useNavigate } from 'react-router-dom'
-import { useAuthorize } from '../Context/AuthContext'
-import GenericPage from '../Components/GenericPage'
-import Alert from '../Components/Alert'
-
+import { useAuthorize } from '../../Context/AuthContext'
+import GenericPage from '../../Layouts/GenericPage'
+import Alert from '../../Components/Alerts/Alert'
 
 
 export default function Login() {

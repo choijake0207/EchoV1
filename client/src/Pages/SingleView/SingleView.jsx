@@ -1,23 +1,25 @@
 import React, {useEffect, useState} from 'react'
-import { fetchSinglePost } from '../Api/GET'
+import { fetchSinglePost } from '../../Api/GET'
 import { useParams } from 'react-router-dom'
-import Post from '../Components/Post'
+import Post from '../../Components/Post/Post'
 import { ArrowCircleLeft } from 'phosphor-react'
-import { useAuthorize } from '../Context/AuthContext'
-import { createComment } from '../Api/POST'
-import GenericPage from '../Components/GenericPage'
-import "../Styles/singleView.css"
+import { useAuthorize } from '../../Context/AuthContext'
+import { createComment } from '../../Api/POST'
+import GenericPage from '../../Layouts/GenericPage'
+import "./singleView.css"
 
 export default function SingleView() {
   const {id} = useParams()
   const [singlePost, setSinglePost] = useState(null)
   const [newComment, setNewComment] = useState("")
+  const [commentList, setCommentList] = useState([])
   const {authorizeState} = useAuthorize()
   useEffect(() => {
     const fetchPost = async () => {
       try {
         const response = await fetchSinglePost(id)
         setSinglePost(response)
+        setCommentList(response.Comments)
         console.log(response)
       } catch (error) {
         console.log(error.response.data.error)
@@ -65,8 +67,8 @@ export default function SingleView() {
         )}
         {singlePost && (
           <ul className="comment-feed">
-            {singlePost.Comments.length > 0 ? (
-              singlePost.Comments.map(comment => (
+            {commentList.length > 0 ? (
+              commentList.map(comment => (
                 <li className="comment">
                   <h4>{comment.username}</h4>
                   <p>{comment.text}</p>

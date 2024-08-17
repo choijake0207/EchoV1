@@ -1,8 +1,8 @@
 import React from 'react'
 import {Formik, Form, Field, ErrorMessage} from "formik"
 import * as Yup from "Yup"
-import GenericPage from '../Components/GenericPage'
-import { useAuthorize } from '../Context/AuthContext'
+import GenericPage from '../../Layouts/GenericPage'
+import { useAuthorize } from '../../Context/AuthContext'
 import {useNavigate} from "react-router-dom"
 
 export default function Register() {

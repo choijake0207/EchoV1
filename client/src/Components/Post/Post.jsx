@@ -1,9 +1,9 @@
 import React from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
-import "../Styles/post.css"
-import { useAuthorize } from '../Context/AuthContext'
-import { deletePost } from '../Api/DELETE'
-import {HeartStraight, BookmarkSimple, ChatCircle} from "phosphor-react"
+import "./post.css"
+import { useAuthorize } from '../../Context/AuthContext'
+import { deletePost } from '../../Api/DELETE'
+import {HeartStraight, BookmarkSimple, ChatCircle, UserCircle} from "phosphor-react"
 
 export default function Post({id, username, text, createdAt, userId, onDelete, comments, isHomeView}) {
   const navigate = useNavigate()
@@ -26,11 +26,17 @@ export default function Post({id, username, text, createdAt, userId, onDelete, c
   return (
     <li className="post">
         <header>
-          <NavLink className="username" to={`/profile/${username}`}>{username}</NavLink>
+          <NavLink className="username" to={`/profile/${username}`}>
+            <UserCircle/>
+            {username}
+          </NavLink>
           {userId === authorizeState.id && (
             <button
               onClick={handleDelete}
-            >Delete</button>
+              className="delete-post-btn"
+            >
+              Delete
+            </button>
           )}
         </header>
         <div className="post-content">
@@ -41,18 +47,26 @@ export default function Post({id, username, text, createdAt, userId, onDelete, c
         </div>
         <div className="post-details">
             <div className="post-likes">
-              <button type="button"><HeartStraight/>0</button>
+              <button type="button"><HeartStraight/>
+                <p>0</p>
+              </button>
             </div>
             <div className="post-comments">
               {isHomeView ? (
-                <button onClick={()=> navigate(`/post/${id}`)}><ChatCircle/>{comments.length}</button>
+                <button onClick={()=> navigate(`/post/${id}`)}>
+                  <ChatCircle/>
+                  <p>{comments.length}</p>
+                </button>
               ) : (
-                <div><ChatCircle/><p>{comments.length}</p></div>
+                <div>
+                  <ChatCircle/>
+                  <p>{comments.length}</p>
+                </div>
               )}
               
             </div>
             <div className="post-save">
-              <button type="button"><BookmarkSimple/>0</button>
+              <button type="button"><BookmarkSimple size={"20px"}/></button>
             </div>
             
         </div>

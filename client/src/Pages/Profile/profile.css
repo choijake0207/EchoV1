@@ -1,0 +1,45 @@
+
+
+
+
+
+
+
+
+
+
+
+.follow {
+
+    background: blue;
+    color: white;
+}
+.unfollow {
+    background: grey;
+    color: white;
+}
+
+.profile-no-bio {
+    font-style: italic;
+}
+.profile-date {
+    color: grey;
+    font-style: italic;
+}
+
+.follow-display {
+    display: flex;
+    gap: 10px;
+}
+
+.follow-list {
+    z-index: 50;
+    border: 2px solid red;
+    position: fixed;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

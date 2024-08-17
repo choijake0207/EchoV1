@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect, useRef } from 'react'
 import {NavLink, Outlet, useNavigate} from "react-router-dom"
 import { useAuthorize } from '../Context/AuthContext'
-import "../Styles/root.css"
+import "./root.css"
 import {House, MagnifyingGlass, User, SignOut, Gear, Bell, ChatCircle, UserCircle, BookmarkSimple  } from "phosphor-react"
 
 export default function RootLayout() { 
@@ -26,7 +26,7 @@ export default function RootLayout() {
     <div className="root-layout">
       <aside className="root-sidebar">
         <div className="sidebar-top">
-            <h1 className="logo">ECHO</h1>
+            <h1 className="logo">Echo</h1>
         </div>
         <nav className="sidebar-middle">
           <NavLink to="/"><House/> Home</NavLink>
@@ -55,7 +55,7 @@ export default function RootLayout() {
        
      
       </aside>
-      <main><Outlet/></main>
+      <main className="outlet"><Outlet/></main>
       <aside className="info-sidebar">
         <div className="info-content"></div>
 

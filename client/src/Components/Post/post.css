@@ -1,0 +1,39 @@
+.post {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.post header {
+    display: flex;
+}
+.post a{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: bolder;
+}
+.delete-post-btn {
+    margin-left: auto;
+}
+.post-content {
+    word-wrap: break-word;
+}
+.post-details {
+    display: flex;
+    justify-content: flex-start;
+    gap: 30px;
+    border-top: .1px solid rgba(255, 255, 255, 0.271);
+    border-radius: 0px;
+    padding-top: 5px;
+    align-items: center;
+}
+.post-save {
+    margin-left: auto;
+}
+
+.post-details > * > * {
+    display: flex;
+    font-size: 17px;
+    align-items: center;
+    gap: 10px;
+}

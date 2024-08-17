@@ -1,0 +1,31 @@
+.comments-section {
+    min-height: 200px;
+}
+.create-comment-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.create-comment-form textarea {
+    resize: none;
+    width: 98%;
+    background: none;;
+    border: none;
+    padding: 7px;
+
+}
+.create-comment-form textarea:focus {
+    outline: none;
+}
+.create-comment-form button {
+    border: 1px solid green;
+    align-self: flex-end;
+}
+
+.dark-mode .create-comment-form textarea {
+    color: white;
+    background: rgb(15, 16, 24);
+    
+}
