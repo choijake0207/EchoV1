@@ -24,25 +24,25 @@ export default function RootLayout() {
   console.log(authorizeState)
   return (
     <div className="root-layout">
-      <aside className="root-sidebar">
-        <div className="sidebar-top">
-            <h1 className="logo">Echo</h1>
-        </div>
-        <nav className="sidebar-middle">
+      <header className="root-header">
+        <h1 className="logo">Echo</h1>
+      </header>
+      <aside className="root-nav">
+        <nav className="nav-links">
           <NavLink to="/"><House/> Home</NavLink>
           <NavLink to="/search"><MagnifyingGlass/>Search</NavLink>
           {authorizeState.authStatus && (
             <>
-              <NavLink><Bell/>Notifications</NavLink>
-              <NavLink><ChatCircle/>Chat</NavLink>
+              <NavLink to="/notifications"><Bell/>Notifications</NavLink>
+              <NavLink to="/chat"><ChatCircle/>Chat</NavLink>
               <NavLink to={`/profile/${authorizeState.username}`}><User/>Profile</NavLink>
-              <NavLink><BookmarkSimple/>Saved</NavLink>
+              <NavLink to="/bookmark"><BookmarkSimple/>Saved</NavLink>
             </>
           )}
           <NavLink to="/settings"><Gear/>Settings</NavLink>
         </nav>
         {authorizeState.authStatus && (
-          <div className="sidebar-bottom">
+          <div className="nav-bottom">
             <button onClick={toggleProfileMenu}><UserCircle size={"30px"}/>{authorizeState.username}</button>
             {isProfileMenuOpen && (
               <div className="profile-menu" onClick={toggleProfileMenu}> 
