@@ -4,24 +4,23 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import { createPost } from '../../Api/POST'
 import { fetchPosts } from '../../Api/GET'
 import Post from '../../Components/Post/Post'
+import CreatePost from '../../Components/Forms/CreatePost'
 import "./home.css"
 
 
 export default function Home() {
   const {authorizeState} = useAuthorize()
-  const [postText, setPostText] = useState("")
   const [postFeed, setPostFeed] = useState([])
   const navigate = useNavigate()
+  const [isFormVisible, setIsFormVisible] = useState(false)
 
-  const handlePostSubmit = async (e) => {
-    e.preventDefault()
+  const submitPost = async (postText) => {
     try {
       const response = await createPost(postText)
       console.log(response)
-      setPostText("")
       navigate(`/post/${response.postId}`)
     } catch (error) {
-      console.log(error.response.data.error)
+      console.log(error)
     }
   }
 
@@ -44,51 +43,49 @@ export default function Home() {
   
 
   return (
-    <div className="page" id="home-page">
-      <main>
-        {authorizeState.authStatus ? (
-          
-          <form className="create-post-form" onSubmit={handlePostSubmit}>
-            <textarea 
-              type="text" 
-              value={postText}
-              placeholder={`What's On Your Mind ${authorizeState.username}?`}
-              onChange={(e) => setPostText(e.target.value)}
-            ></textarea>
-            <button type="submit">Post</button>
-          </form>
-        ) : (
-          <div className="greeting">
-            <h1>Welcome To Echo</h1>
-            <div className="links-container">
-              <NavLink
-              to="/login"
-              id="login-a"
-              >Login</NavLink>
-              <NavLink
-                to="/register"
-                id="register-a"
-              >Register</NavLink>
+    <>
+      {isFormVisible && <CreatePost submitPost={submitPost} toggleFormVisibility={() => setIsFormVisible(false)}/>}
+      <div className="page" id="home-page">
+        <main>
+          {authorizeState.authStatus ? (
+            <div className="create-modal" >
+              <p onClick={() => setIsFormVisible(true)}> 
+                What's on your mind {authorizeState.username}?
+              </p>
             </div>
-          </div>
-        
-        )}
-        <ul className="post-feed">
-            {postFeed.map(post => (
-              <Post
-                key={post.id}
-                id={post.id}
-                username={post.username}
-                text={post.text}
-                createdAt={post.createdAt}
-                userId={post.userId}
-                onDelete={handleDeletedPost}
-                comments={post.Comments}
-                isHomeView={true}
-              />
-            ))}
-        </ul>
-      </main>
-    </div>
+          ) : (
+            <div className="greeting">
+              <h1>Welcome To Echo</h1>
+              <div className="links-container">
+                <NavLink
+                to="/login"
+                id="login-a"
+                >Login</NavLink>
+                <NavLink
+                  to="/register"
+                  id="register-a"
+                >Register</NavLink>
+              </div>
+            </div>
+          
+          )}
+          <ul className="post-feed">
+              {postFeed.map(post => (
+                <Post
+                  key={post.id}
+                  id={post.id}
+                  username={post.username}
+                  text={post.text}
+                  createdAt={post.createdAt}
+                  userId={post.userId}
+                  onDelete={handleDeletedPost}
+                  comments={post.Comments}
+                  isHomeView={true}
+                />
+              ))}
+          </ul>
+        </main>
+      </div>
+    </>
   )
 }
