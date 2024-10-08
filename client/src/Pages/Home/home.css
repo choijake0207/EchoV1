@@ -4,13 +4,18 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 100px;
+    padding: var(--default-padding);
+    border-radius: var(--default-border-radius);
+    gap: 20px;
+    color: var(--post-text-color);
 }
+.greeting h1 {
+    font-weight: 300;
+}
+
 .links-container {
     display: flex;
-    flex-direction: column;
     gap: 20px;
-    margin-top: 30px;
 }
 .links-container a {
     display: flex;
@@ -20,20 +25,36 @@
     height: 40px;
     font-weight: bolder;
     color: white;
+    border-radius: var(--default-border-radius)
 }
 #login-a {
-    background: rgb(62, 206, 62);
+    background: var(--logo-color);
+    color: white;
 }
 #register-a{
-    background:rgb(62, 62, 246);
+    background: var(--secondary-color);
+    color: white;
+}
+#login-a:hover, #register-a:hover {
+    transform: scale(1.05);
+    transition: .2s;
 }
 
+
 /* ===== HOME ===== */
+#home-page main {
+    background: var(--background);
+}
+
 .create-post-form {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 10px;
+    background: var(--foreground);
+    border-radius: var(--default-border-radius);
+    border: 1px solid var(--default-border-color);
+
 }
 .create-post-form button {
     font-size: 15px;
@@ -58,21 +79,10 @@
 
 .post-feed {
     padding:0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 .post-feed > * {
     margin-bottom: 10px;
-}
-
-/* DARK MODE STYLES */
-
-.dark-mode .post-feed {
-    background: rgb(11, 12, 19);
-}
-.dark-mode .post {
-    background: rgb(22, 24, 36);
-}
-.dark-mode .create-post-form textarea {
-    color: white;
-    background: rgb(15, 16, 24);
-    
 }
