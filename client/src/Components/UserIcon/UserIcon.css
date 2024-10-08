@@ -1,0 +1,10 @@
+.user-icon {
+    border-radius: 50%;
+    height: 2em;
+    width: 2em;
+    background: vaR(--logo-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
