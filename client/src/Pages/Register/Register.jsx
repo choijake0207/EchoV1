@@ -5,6 +5,7 @@ import GenericPage from '../../Layouts/GenericPage'
 import { useAuthorize } from '../../Context/AuthContext'
 import {useNavigate} from "react-router-dom"
 import "./register.css"
+import { NavLink } from 'react-router-dom'
  
 export default function Register() {
   const {register} = useAuthorize()
@@ -30,19 +31,23 @@ export default function Register() {
   }
   
   return (
-    <div className="page" id="register-page">
-      <header className="register-header">
+    <div id="register-page">
+      <header className="user-form-header">
         <h1 className="logo">echo</h1>
       </header>
       <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
-        <Form className="register-form" id="user-form">
-          <label>Create a Username:</label>
-          <ErrorMessage name="username" component="span"/>
-          <Field name="username" className="register-input"/>
-          <label>Create a Password:</label>
-          <ErrorMessage name="password" component="span"/>
-          <Field type="password" name="password" className="register-input"/>
+        <Form  className="user-form">
+          <h1 className="logreg-message">Welcome To Echo</h1>
+          <label>Create a Username
+            <ErrorMessage name="username" component="span"/>
+            <Field name="username" className="register-input" placeholder="Enter Username"/>
+          </label>
+          <label>Create a Password
+            <ErrorMessage name="password" component="span"/>
+            <Field type="password" name="password" className="register-input" placeholder="Enter Password"/>
+          </label>
           <button type="submit">Create Account</button>
+          <p>Already Have An Account? Login <NavLink to="/login">Here!</NavLink></p>
 
         </Form>
       </Formik>
