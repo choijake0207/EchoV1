@@ -18,15 +18,19 @@ import { DarkContextProvider } from "./Context/DarkContext"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<RootLayout/>}>
-      <Route index element={<Home/>}/>
+    <>
+      <Route path="/" element={<RootLayout/>}>
+        <Route index element={<Home/>}/>
+      
+        <Route path="/profile/:username" element={<Profile/>}/>
+        <Route path="/settings" element={<Settings/>}/>
+        <Route path="/search" element={<Search/>}/>
+        <Route path="/post/:id" element={<SingleView/>}/>
+      </Route>
       <Route path="/login" element={<Login/>}/>
       <Route path="/register" element={<Register/>}/>
-      <Route path="/profile/:username" element={<Profile/>}/>
-      <Route path="/settings" element={<Settings/>}/>
-      <Route path="/search" element={<Search/>}/>
-      <Route path="/post/:id" element={<SingleView/>}/>
-    </Route>
+      
+    </>
   )
 )
 
