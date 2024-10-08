@@ -1,36 +1,48 @@
 .post {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    background: var(--foreground);
+    border: 1px solid var(--default-border-color);
+    border-radius: var(--default-border-radius);
+    color: var(--post-text-color);
+} 
+.post > * {
+    padding: 10px;
 }
-.post header {
-    display: flex;
+
+.post-header {
+    display: flex
 }
-.post a{
+.username{
     display: flex;
-    align-items: center;
     gap: 5px;
-    font-weight: bolder;
+    font-size: .9em;
+    color: var(--post-text-color);
+    font-weight: bold;
 }
 .delete-post-btn {
     margin-left: auto;
 }
 .post-content {
     word-wrap: break-word;
+    font-size: 1em;
 }
 .post-details {
     display: flex;
     justify-content: flex-start;
     gap: 30px;
-    border-top: .1px solid rgba(255, 255, 255, 0.271);
-    border-radius: 0px;
-    padding-top: 5px;
+    border-top: 1px solid var(--default-border-color);
+    color: var(--nav-font-color);
     align-items: center;
+    border-top: 1px solid rgba(0,0,0,.1);
+}
+.post-details p, .post-details svg {
+    color: var(--nav-font-color);
+    font-weight: 500;
 }
 .post-save {
     margin-left: auto;
 }
-
 .post-details > * > * {
     display: flex;
     font-size: 17px;
