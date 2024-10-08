@@ -45,38 +45,10 @@
 #home-page main {
     background: var(--background);
 }
-
-.create-post-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
+.create-modal {
     background: var(--foreground);
-    border-radius: var(--default-border-radius);
-    border: 1px solid var(--default-border-color);
-
+    padding: var(--default-padding)
 }
-.create-post-form button {
-    font-size: 15px;
-    border: 1px solid green;
-    align-self: flex-end;
-}
-.create-post-form textarea {
-    height: 50px;
-    width: 98%;
-    background: none;
-    resize: none;  
-    transition: .3s;
-    border: none;
-    padding: 7px;
-    font-size: 20px;
-
-}
-.create-post-form textarea:focus {
-    outline: none;
-    scale: 1.01;
-}
-
 .post-feed {
     padding:0;
     display: flex;
@@ -85,4 +57,58 @@
 }
 .post-feed > * {
     margin-bottom: 10px;
+}
+
+/* ==== Form ==== */
+.create-post-overlay {
+    height: 100vh;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.create-post-form {
+    animation: slideUp .2s ease forwards;
+    position: relative;
+    background: var(--foreground);
+    width: 400px;
+    border-radius: var(--default-border-radius);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.create-post-form  textarea{
+    margin-top: 20px;
+    resize: none;
+    border: none;
+    background: var(--background);
+    outline: none;
+    font-family: satoshi variable;
+}
+.create-post-btns button[type="submit"] {
+    background: vaR(--logo-color);
+    color: white;
+    width: 50px;
+}
+.exit-create-btn {
+    position: absolute;
+    top: 5;
+    left: 5;
+}
+
+@keyframes slideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(500%)
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(-150%);
+    }
 }
