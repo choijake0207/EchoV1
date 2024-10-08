@@ -5,8 +5,9 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import { useAuthorize } from '../../Context/AuthContext'
 import GenericPage from '../../Layouts/GenericPage'
 import Alert from '../../Components/Alerts/Alert'
+import "./login.css"
 
-
+ 
 export default function Login() {
 
   const [username, setUsername] = useState("")
@@ -36,7 +37,10 @@ export default function Login() {
   }
 
   return (
-    <GenericPage headerTitle="Login" pageId="login-page">
+    <div className="page" id="login-page">
+      <header className="login-header">
+        <h1 className="logo">echo</h1>
+      </header>
       {isAlertVisible && <Alert message={alertMessage} onClose={closeAlert}/> }
       <form className="login-form" id="user-form" onSubmit={onSubmit}>
         <input
@@ -55,6 +59,6 @@ export default function Login() {
       </form>
       <p>Don't Have An Account? Sign Up <NavLink to="/register">Here!</NavLink></p>
 
-    </GenericPage>
+    </div>
   )
 }

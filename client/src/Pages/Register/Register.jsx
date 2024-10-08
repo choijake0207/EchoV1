@@ -4,7 +4,8 @@ import * as Yup from "Yup"
 import GenericPage from '../../Layouts/GenericPage'
 import { useAuthorize } from '../../Context/AuthContext'
 import {useNavigate} from "react-router-dom"
-
+import "./register.css"
+ 
 export default function Register() {
   const {register} = useAuthorize()
   const navigate = useNavigate()
@@ -29,7 +30,10 @@ export default function Register() {
   }
   
   return (
-    <GenericPage headerTitle="Register" pageId="register-page">
+    <div className="page" id="register-page">
+      <header className="register-header">
+        <h1 className="logo">echo</h1>
+      </header>
       <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
         <Form className="register-form" id="user-form">
           <label>Create a Username:</label>
@@ -43,6 +47,6 @@ export default function Register() {
         </Form>
       </Formik>
 
-    </GenericPage>
+    </div>
   )
 }
