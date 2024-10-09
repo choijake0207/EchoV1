@@ -2,7 +2,8 @@ import React, { useContext, useState, useEffect, useRef } from 'react'
 import {NavLink, Outlet, useNavigate} from "react-router-dom"
 import { useAuthorize } from '../Context/AuthContext'
 import "./root.css"
-import {House, MagnifyingGlass, User, SignOut, Gear, Bell, ChatCircle, UserCircle, BookmarkSimple  } from "phosphor-react"
+import {House, MagnifyingGlass, User, SignOut, Gear, Bell, ChatCircle, UserCircle, BookmarkSimple, CellSignalFull  } from "phosphor-react"
+import UserIcon from '../Components/UserIcon/UserIcon'
 
 export default function RootLayout() { 
 
@@ -25,10 +26,10 @@ export default function RootLayout() {
   return (
     <div className="root-layout">
       <header className="root-header">
-        <h1 className="logo">echo</h1>
+        <h1 className="logo"><CellSignalFull/>echo</h1>
         {authorizeState.authStatus && (
-          <div className="nav-bottom">
-            <button onClick={toggleProfileMenu}><UserCircle size={"30px"}/><span className="nav-text">{authorizeState.username}</span></button>
+          <div className="nav-username">
+            <button onClick={toggleProfileMenu}><UserIcon username={authorizeState.username}/><span className="nav-text">{authorizeState.username}</span></button>
             {isProfileMenuOpen && (
               <div className="profile-menu" onClick={toggleProfileMenu}> 
                 <button onClick={handleLogOut}>Log Out</button>
@@ -38,9 +39,11 @@ export default function RootLayout() {
        
         )}
       </header>
+
+
       <aside className="root-nav">
         <nav className="nav-links">
-          <NavLink to="/"><House/><span className="nav-text">Home</span></NavLink>
+          <NavLink to="/"><House className="house-svg"/><span className="nav-text">Home</span></NavLink>
           <NavLink to="/search"><MagnifyingGlass/><span className="nav-text">Search</span></NavLink>
           {authorizeState.authStatus && (
             <>
@@ -51,16 +54,19 @@ export default function RootLayout() {
           )}
           <NavLink to="/settings"><Gear/><span className="nav-text">Settings</span></NavLink>
         </nav>
-        
-       
-     
       </aside>
+
+
       <main className="outlet"><Outlet/></main>
+
+
+      
       <aside className="info-sidebar">
         <div className="info-content"></div>
-
       </aside>
-      
+    
+
+
     </div>
   )
 }
