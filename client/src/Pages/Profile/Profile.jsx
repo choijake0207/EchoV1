@@ -109,10 +109,16 @@ export default function Profile() {
 
                         <p className="followers"
                           onClick={() => setFollowListType("followers")}
-                        >{userProfile.follower.length} followers</p>
+                        >
+                            <span className="follow-count">{userProfile.follower.length}</span> followers
+                        </p>
+
+                        
                         <p className="following"
                             onClick={() => setFollowListType("following")}
-                        >{userProfile.following.length} following</p>
+                        >
+                            <span className="follow-count">{userProfile.following.length}</span> following
+                        </p>
                     </div>
             </section>
         }   
