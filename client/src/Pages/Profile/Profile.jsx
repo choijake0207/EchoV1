@@ -24,7 +24,7 @@ export default function Profile() {
 
     useEffect(() => {
         const userProfileRequest = async () => {
-            if (authorizeState.authStatus) {
+            // if (authorizeState.authStatus) {
                 try {
                     const data = await getUserProfile(username)
                     setUserProfile(data)
@@ -33,11 +33,11 @@ export default function Profile() {
                 } catch (error) {
                     console.log(error.response.data.error)
                 }
-            }
+            // }
         } 
         userProfileRequest()
         
-    }, [username, authorizeState]) // need dependency 
+    }, [username]) // need dependency 
 
     const handleProfileUpdate = async (newUsername, newBiography) => {
         try {
@@ -70,7 +70,6 @@ export default function Profile() {
         }
     }
 
-  
  
       
   return (
