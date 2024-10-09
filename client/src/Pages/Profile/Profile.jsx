@@ -13,29 +13,31 @@ import "./profile.css"
 import UserIcon from '../../Components/UserIcon/UserIcon'
 
 export default function Profile() {
-    const {authorizeState, updateUserProfileState} = useAuthorize()
+    const {authorizeState, updateUserProfileState, isAuthLoading} = useAuthorize()
     const { username} = useParams()
     const [userProfile, setUserProfile] = useState(null)
     const [editing, setEditing] = useState(false)
     const [isFollowing, setIsFollowing] = useState(false)
     const [followListType, setFollowListType] = useState("")
     const isMyProfile = authorizeState.username === username
+    console.log(authorizeState)
 
     useEffect(() => {
         const userProfileRequest = async () => {
-            try {
-                const data = await getUserProfile(username)
-                setUserProfile(data)
-                // checks to see if logged in user is already following current profile user
-                setIsFollowing(data.follower?.some(follower => follower.id === authorizeState.id)) 
-                console.log(authorizeState)
-            } catch (error) {
-                console.log(error.response.data.error)
+            if (authorizeState.authStatus) {
+                try {
+                    const data = await getUserProfile(username)
+                    setUserProfile(data)
+                    // checks to see if logged in user is already following current profile user
+                    setIsFollowing(data.follower?.some(follower => follower.id === authorizeState.id)) 
+                } catch (error) {
+                    console.log(error.response.data.error)
+                }
             }
         } 
         userProfileRequest()
         
-    }, [username]) // need dependency 
+    }, [username, authorizeState]) // need dependency 
 
     const handleProfileUpdate = async (newUsername, newBiography) => {
         try {
@@ -113,7 +115,7 @@ export default function Profile() {
                             <span className="follow-count">{userProfile.follower.length}</span> followers
                         </p>
 
-                        
+
                         <p className="following"
                             onClick={() => setFollowListType("following")}
                         >
