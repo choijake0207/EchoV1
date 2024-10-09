@@ -15,7 +15,7 @@ export default function GenericPage({children, headerTitle, pageId}) {
             </button>
             <h4>{headerTitle}</h4>
         </header>
-        <main>{children}</main>
+        {children}
     </div>
   )
 }
