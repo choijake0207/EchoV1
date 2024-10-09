@@ -1,9 +1,11 @@
-import React, { useContext, useState, useEffect, useRef } from 'react'
+import React, { useState} from 'react'
 import {NavLink, Outlet, useNavigate} from "react-router-dom"
 import { useAuthorize } from '../Context/AuthContext'
 import "./root.css"
-import {House, MagnifyingGlass, User, SignOut, Gear, Bell, ChatCircle, UserCircle, BookmarkSimple, CellSignalFull  } from "phosphor-react"
+import {House, MagnifyingGlass, User, Gear, Bell, BookmarkSimple, CellSignalFull  } from "phosphor-react"
 import UserIcon from '../Components/UserIcon/UserIcon'
+import InfoCreator from '../Components/Sidebar/InfoCreator'
+import InfoContent from '../Components/Sidebar/InfoContent'
 
 export default function RootLayout() { 
 
@@ -21,15 +23,16 @@ export default function RootLayout() {
 
   }
  
- 
-  console.log(authorizeState)
   return (
     <div className="root-layout">
       <header className="root-header">
         <h1 className="logo"><CellSignalFull/>echo</h1>
         {authorizeState.authStatus && (
           <div className="nav-username">
-            <button onClick={toggleProfileMenu}><UserIcon username={authorizeState.username}/><span className="nav-text">{authorizeState.username}</span></button>
+            <button onClick={toggleProfileMenu}>
+              <UserIcon username={authorizeState.username}/>
+              <span className="nav-text">{authorizeState.username}</span>
+            </button>
             {isProfileMenuOpen && (
               <div className="profile-menu" onClick={toggleProfileMenu}> 
                 <button onClick={handleLogOut}>Log Out</button>
@@ -62,7 +65,8 @@ export default function RootLayout() {
 
       
       <aside className="info-sidebar">
-        <div className="info-content"></div>
+        <InfoContent/>
+        <InfoCreator/>
       </aside>
     
 
