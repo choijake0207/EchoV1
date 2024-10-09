@@ -46,7 +46,6 @@ export default function Home() {
     <>
       {isFormVisible && <CreatePost submitPost={submitPost} toggleFormVisibility={() => setIsFormVisible(false)}/>}
       <div className="page" id="home-page">
-        <main>
           {authorizeState.authStatus ? (
             <div className="create-modal" >
               <p onClick={() => setIsFormVisible(true)}> 
@@ -84,7 +83,7 @@ export default function Home() {
                 />
               ))}
           </ul>
-        </main>
+
       </div>
     </>
   )
