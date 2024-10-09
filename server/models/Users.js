@@ -39,6 +39,9 @@ module.exports = (sequelize, DataTypes) => {
         Users.hasMany(models.Posts, {
             foreignKey: "userId",
         })
+        Users.hasMany(models.Comments, {
+            foreignKey: "userId"
+        })
         Users.hasMany(models.Likes, {
             foreignKey: "userId"
         })
