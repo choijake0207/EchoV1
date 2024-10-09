@@ -107,6 +107,10 @@ router.get("/profile/:username", async (req, res) => {
                             attributes: ["id", "text", "username"]
                         }
                     ]
+                }, 
+                {
+                    model: Comments,
+                    attributes: ["createdAt", "username", "text", "userId", "postId", "id"]
                 }
             ]
         })
