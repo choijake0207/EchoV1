@@ -159,6 +159,14 @@ export default function Profile() {
                     )
                 })
                 }
+                {userProfile && (
+                    (profileHistoryType === "Posts" && userProfile.Posts.length === 0) ||
+                    (profileHistoryType === "Comments" && userProfile.Comments.length === 0)
+                ) &&
+                    <div className="empty-profile-history">
+                        <h5>@{username} hasn't {profileHistoryType === "Posts" ? "posted" : "commented"} anything yet</h5>
+                    </div>
+                }
             </ul>
         </section>
     </GenericPage>
