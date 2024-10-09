@@ -10,6 +10,7 @@ import FollowList from '../../Components/PopUps/FollowList'
 import { ArrowCircleLeft } from 'phosphor-react'
 import GenericPage from '../../Layouts/GenericPage'
 import "./profile.css"
+import UserIcon from '../../Components/UserIcon/UserIcon'
 
 export default function Profile() {
     const {authorizeState, updateUserProfileState} = useAuthorize()
@@ -21,21 +22,18 @@ export default function Profile() {
     const isMyProfile = authorizeState.username === username
 
     useEffect(() => {
-      
-            const userProfileRequest = async () => {
-                try {
-                    const data = await getUserProfile(username)
-                    setUserProfile(data)
-                    // checks to see if logged in user is already following current profile user
-                    setIsFollowing(data.follower?.some(follower => follower.id === authorizeState.id)) 
-                    console.log(authorizeState)
-                   
-                
-                } catch (error) {
-                    console.log(error.response.data.error)
-                }
-            } 
-            userProfileRequest()
+        const userProfileRequest = async () => {
+            try {
+                const data = await getUserProfile(username)
+                setUserProfile(data)
+                // checks to see if logged in user is already following current profile user
+                setIsFollowing(data.follower?.some(follower => follower.id === authorizeState.id)) 
+                console.log(authorizeState)
+            } catch (error) {
+                console.log(error.response.data.error)
+            }
+        } 
+        userProfileRequest()
         
     }, [username]) // need dependency 
 
@@ -91,8 +89,15 @@ export default function Profile() {
         )}
         {userProfile && 
             <section className="profile-info">
-                <div className="profile-details">
-                    <h1 className="profile-username">{userProfile.username}</h1>
+                    <div className="profile-header-img">
+
+                    </div>
+
+                    <h1 className="profile-username">
+                        <UserIcon username={username}/>
+                        {userProfile.username}
+                    </h1>
+
                     {isMyProfile ? 
                         (<button className="profile-edit-btn" onClick={()=>setEditing(true)}>Edit Profile</button>) 
                         : (<button onClick={handleFollow} className={isFollowing ? "unfollow" : "follow"}>{isFollowing ? "Following" : "Follow"}</button>)
@@ -103,8 +108,11 @@ export default function Profile() {
                     ) : (
                         <p className="profile-no-bio">No Bio</p>
                     )}
+
                     <p className="profile-date">Joined {formatDate(userProfile.createdAt)}</p>
+
                     <div className="follow-display">
+
                         <p className="followers"
                           onClick={() => setFollowListType("followers")}
                         >{userProfile.follower.length} followers</p>
@@ -112,10 +120,6 @@ export default function Profile() {
                             onClick={() => setFollowListType("following")}
                         >{userProfile.following.length} following</p>
                     </div>
-                
-                </div>
-                
-                
             </section>
         }   
         <section className="profile-feed"> 
