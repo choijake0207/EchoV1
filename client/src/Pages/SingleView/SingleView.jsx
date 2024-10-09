@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react'
 import { fetchSinglePost } from '../../Api/GET'
 import { useParams } from 'react-router-dom'
-import Post from '../../Components/Post/Post'
-import { ArrowCircleLeft } from 'phosphor-react'
 import { useAuthorize } from '../../Context/AuthContext'
 import { createComment } from '../../Api/POST'
 import GenericPage from '../../Layouts/GenericPage'
+import Post from '../../Components/Post/Post'
+import Comment from '../../Components/Comment/Comment'
 import "./singleView.css"
 
 export default function SingleView() {
@@ -69,10 +69,11 @@ export default function SingleView() {
           <ul className="comment-feed">
             {commentList.length > 0 ? (
               commentList.map(comment => (
-                <li className="comment">
-                  <h4>{comment.username}</h4>
-                  <p>{comment.text}</p>
-                </li>
+                <Comment
+                  key={comment.id}
+                  username={comment.username}
+                  text={comment.text}
+                />
               ))
             ) : (
               <p>No Comments Yet</p>
