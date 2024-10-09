@@ -5,7 +5,8 @@ import { authorizeUser as authorizeUserAPI, login as loginAPI, register as regis
 const authorizeContext = createContext("")
 
 export const AuthContextProvider = ({children}) => {
-    const [authorizeState, setAuthorizeState] = useState({username: "", id: 0, authStatus: false})
+    const [authorizeState, setAuthorizeState] = useState({username: "", id: null, authStatus: false})
+    const [isAuthLoading, setIsAuthLoading] = useState(true)
     
     // auth check
     useEffect(() => { // add either interval check or localStorage event listener to detect token tampering
@@ -16,6 +17,8 @@ export const AuthContextProvider = ({children}) => {
           } catch (error) {
             console.log(error)
             setAuthorizeState({...authorizeState, authStatus: false})
+          } finally {
+            setIsAuthLoading(false)
           }
         }
         authorizeUser()
@@ -25,7 +28,7 @@ export const AuthContextProvider = ({children}) => {
         try {
             const response = await loginAPI(username, password)
             localStorage.setItem("accessToken", response.token)
-            setAuthorizeState({username: username, id: response.id, authStatus: true}) // optimistic state update for now => pessimistically render later + loading screen
+            setAuthorizeState({username: username, id: response.id, authStatus: true}) 
             
         } catch (error) {
             throw error;
@@ -56,8 +59,8 @@ export const AuthContextProvider = ({children}) => {
     }
 
     return (
-        <authorizeContext.Provider value={{authorizeState, login, register, logOut, updateUserProfileState}}>
-            {children}
+        <authorizeContext.Provider value={{authorizeState, login, register, logOut, updateUserProfileState, isAuthLoading}}>
+            {!isAuthLoading && children}
         </authorizeContext.Provider>
     )
 }
