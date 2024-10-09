@@ -8,9 +8,10 @@ import { followUser } from '../../Api/POST'
 import EditProfile from '../../Components/Forms/EditProfile'
 import FollowList from '../../Components/PopUps/FollowList'
 import GenericPage from '../../Layouts/GenericPage'
-import "./profile.css"
 import UserIcon from '../../Components/UserIcon/UserIcon'
 import Post from '../../Components/Post/Post'
+import Comment from '../../Components/Comment/Comment'
+import "./profile.css"
 
 export default function Profile() {
     const {authorizeState, updateUserProfileState, isAuthLoading} = useAuthorize()
@@ -152,10 +153,11 @@ export default function Profile() {
                 })}
                 {userProfile && profileHistoryType === "Comments" && userProfile.Comments.map(comment => {
                     return (
-                        <li className="comment">
-                            <h5>{comment.username}</h5>
-                            <p>{comment.text}</p>
-                        </li>
+                        <Comment
+                            key={comment.id}
+                            text={comment.text}
+                            username={comment.username}
+                        />
                     )
                 })
                 }
