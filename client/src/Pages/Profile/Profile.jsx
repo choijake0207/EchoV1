@@ -7,10 +7,10 @@ import { updateUserProfile } from '../../Api/PUT'
 import { followUser } from '../../Api/POST'
 import EditProfile from '../../Components/Forms/EditProfile'
 import FollowList from '../../Components/PopUps/FollowList'
-import { ArrowCircleLeft } from 'phosphor-react'
 import GenericPage from '../../Layouts/GenericPage'
 import "./profile.css"
 import UserIcon from '../../Components/UserIcon/UserIcon'
+import Post from '../../Components/Post/Post'
 
 export default function Profile() {
     const {authorizeState, updateUserProfileState, isAuthLoading} = useAuthorize()
@@ -19,8 +19,8 @@ export default function Profile() {
     const [editing, setEditing] = useState(false)
     const [isFollowing, setIsFollowing] = useState(false)
     const [followListType, setFollowListType] = useState("")
+    const [profileHistoryType, setProfileHistoryType] = useState("Posts")
     const isMyProfile = authorizeState.username === username
-    console.log(authorizeState)
 
     useEffect(() => {
         const userProfileRequest = async () => {
@@ -28,6 +28,7 @@ export default function Profile() {
                 try {
                     const data = await getUserProfile(username)
                     setUserProfile(data)
+                    console.log(data)
                     // checks to see if logged in user is already following current profile user
                     setIsFollowing(data.follower?.some(follower => follower.id === authorizeState.id)) 
                 } catch (error) {
@@ -74,62 +75,83 @@ export default function Profile() {
       
   return (
     <GenericPage headerTitle="Profile" pageId="profile-page">
-        {editing && <EditProfile
+        {editing && 
+            <EditProfile
             username={userProfile.username}
-            bio={(userProfile.biography)}
-            onClose={() => setEditing(false)}
-            onSave={handleProfileUpdate}
-        
-        />}
-        {followListType && (
+                bio={(userProfile.biography)}
+                onClose={() => setEditing(false)}
+                onSave={handleProfileUpdate}
+            />
+        }
+        {followListType && 
             <FollowList
                 list={followListType === "followers" ? userProfile.follower : userProfile.following}
                 type={followListType}
                 onClose={()=>setFollowListType("")}
             />
-        )}
+        }
         {userProfile && 
             <section className="profile-info">
-                    <h1 className="profile-username">
-                        <UserIcon username={username}/>
-                        {userProfile.username}
-                    </h1>
+                <h1 className="profile-username">
+                    <UserIcon username={username}/>
+                    {userProfile.username}
+                </h1>
 
-                    {isMyProfile ? 
-                        (<button className="edit-btn profile-btn" onClick={()=>setEditing(true)}>Edit Profile</button>) 
-                        : (<button onClick={handleFollow} className={isFollowing ? "unfollow profile-btn" : "follow profile-btn"}>{isFollowing ? "Following" : "Follow"}</button>)
-                    }
-                    
-                    {userProfile.biography && (
-                        <p className="profile-bio">{userProfile.biography}</p>
-                    )}
+                {isMyProfile ? 
+                    (<button className="edit-btn profile-btn" onClick={()=>setEditing(true)}>Edit Profile</button>) 
+                    : (<button onClick={handleFollow} className={isFollowing ? "unfollow profile-btn" : "follow profile-btn"}>{isFollowing ? "Following" : "Follow"}</button>)
+                }
+                
+                {userProfile.biography && (
+                    <p className="profile-bio">{userProfile.biography}</p>
+                )}
 
-                    <p className="profile-date">Joined {formatDate(userProfile.createdAt)}</p>
+                <p className="profile-date">Joined {formatDate(userProfile.createdAt)}</p>
 
-                    <div className="follow-display">
+                <div className="follow-display">
+                    <p className="followers"
+                        onClick={() => setFollowListType("followers")}
+                    >
+                        <span className="follow-count">{userProfile.follower.length}</span> followers
+                    </p>
 
-                        <p className="followers"
-                          onClick={() => setFollowListType("followers")}
-                        >
-                            <span className="follow-count">{userProfile.follower.length}</span> followers
-                        </p>
-
-
-                        <p className="following"
-                            onClick={() => setFollowListType("following")}
-                        >
-                            <span className="follow-count">{userProfile.following.length}</span> following
-                        </p>
-                    </div>
+                    <p className="following"
+                        onClick={() => setFollowListType("following")}
+                    >
+                        <span className="follow-count">{userProfile.following.length}</span> following
+                    </p>
+                </div>
             </section>
         }   
-        <section className="profile-feed"> 
-            
+        <section className="profile-history"> 
+            <div className="feed-options">
+                <button 
+                    onClick={() => setProfileHistoryType("Posts")}
+                    className={profileHistoryType === "Posts" && "active"}
+                > Posts </button>
+                <button 
+                    onClick={() => setProfileHistoryType("Comments")}
+                    className={profileHistoryType === "Comments" && "active"}
+                > Comments</button>
+            </div>
 
+            <ul className="profile-feed">
+                {userProfile && userProfile.Posts.map(post => {
+                    return (
+                        <Post
+                            key={post.id}
+                            id={post.id} 
+                            username={post.username}
+                            text={post.text}
+                            comments={post.Comments}
+                            isHomeView={true}
+                            createdAt={post.createdAt}
+                            userId={post.userId}
+                        />
+                    )
+                })}
+            </ul>
         </section>
-
-           
-
     </GenericPage>
   )
 }
