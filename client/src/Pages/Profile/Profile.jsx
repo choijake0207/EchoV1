@@ -136,7 +136,7 @@ export default function Profile() {
             </div>
 
             <ul className="profile-feed">
-                {userProfile && userProfile.Posts.map(post => {
+                {userProfile && profileHistoryType === "Posts" && userProfile.Posts.map(post => {
                     return (
                         <Post
                             key={post.id}
@@ -150,6 +150,15 @@ export default function Profile() {
                         />
                     )
                 })}
+                {userProfile && profileHistoryType === "Comments" && userProfile.Comments.map(comment => {
+                    return (
+                        <li className="comment">
+                            <h5>{comment.username}</h5>
+                            <p>{comment.text}</p>
+                        </li>
+                    )
+                })
+                }
             </ul>
         </section>
     </GenericPage>
