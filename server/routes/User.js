@@ -1,7 +1,7 @@
 const express = require("express") // imports express module
 const router = express.Router() // creates new "user" router object
 const {Users} = require("../models")
-const {Posts} = require("../")
+const {Posts} = require("../models")
 const {Comments} =  require("../models")
 const bcrypt = require("bcrypt")
 const {sign} = require("jsonwebtoken") // destructure and extract sign method from jwt
@@ -100,7 +100,7 @@ router.get("/profile/:username", async (req, res) => {
                 },
                 {
                     model: Posts,
-                    attributes: ["id", "username", "text"],
+                    attributes: ["id", "username", "text", "userId", "createdAt"],
                     include: [
                         {
                             model: Comments,
