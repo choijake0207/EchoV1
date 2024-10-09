@@ -1,22 +1,45 @@
+/* ==== Follow Modal ==== */
 
+/* ==== Edit Modal ==== */
 
+/* ==== Profile Details ==== */
+.profile-info {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.profile-username {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+}
+.profile-username .user-icon {
+    border: 1px solid var(--default-border-color);
+    width: 3em;
+    height: 3em;
+}
 
-
-
-
-
-
-
-
-
+.profile-btn {
+    width: 170px;
+    padding: 5px;
+    border-radius: var(--default-border-radius);
+    font-weight: 500;
+}
 .follow {
-
-    background: blue;
+    background: var(--logo-color);
     color: white;
 }
 .unfollow {
-    background: grey;
-    color: white;
+    background: var(--background);
+    color: var(--post-text-color);
+    border: 1px solid var(--default-border-color);
+}
+.edit-btn {
+    background: var(--background);
+    color: var(--post-text-color);
+    border: 1px solid var(--default-border-color);
 }
 
 .profile-no-bio {
@@ -31,6 +54,13 @@
     display: flex;
     gap: 10px;
 }
+.followers, .following {
+    color:grey;
+}
+.follow-count {
+    font-weight: bold;
+    color: var(--post-text-color);
+}
 
 .follow-list {
     z-index: 50;
@@ -43,3 +73,5 @@
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+/* ==== Profile Feed === */
