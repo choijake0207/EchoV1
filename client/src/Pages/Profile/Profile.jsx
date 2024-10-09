@@ -89,24 +89,18 @@ export default function Profile() {
         )}
         {userProfile && 
             <section className="profile-info">
-                    <div className="profile-header-img">
-
-                    </div>
-
                     <h1 className="profile-username">
                         <UserIcon username={username}/>
                         {userProfile.username}
                     </h1>
 
                     {isMyProfile ? 
-                        (<button className="profile-edit-btn" onClick={()=>setEditing(true)}>Edit Profile</button>) 
-                        : (<button onClick={handleFollow} className={isFollowing ? "unfollow" : "follow"}>{isFollowing ? "Following" : "Follow"}</button>)
+                        (<button className="edit-btn profile-btn" onClick={()=>setEditing(true)}>Edit Profile</button>) 
+                        : (<button onClick={handleFollow} className={isFollowing ? "unfollow profile-btn" : "follow profile-btn"}>{isFollowing ? "Following" : "Follow"}</button>)
                     }
                     
-                    {userProfile.biography ? (
+                    {userProfile.biography && (
                         <p className="profile-bio">{userProfile.biography}</p>
-                    ) : (
-                        <p className="profile-no-bio">No Bio</p>
                     )}
 
                     <p className="profile-date">Joined {formatDate(userProfile.createdAt)}</p>
