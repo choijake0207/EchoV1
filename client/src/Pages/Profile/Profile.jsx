@@ -13,6 +13,7 @@ import Post from '../../Components/Post/Post'
 import Comment from '../../Components/Comment/Comment'
 import "./profile.css"
 
+
 export default function Profile() {
     const {authorizeState, updateUserProfileState, isAuthLoading} = useAuthorize()
     const { username} = useParams()
@@ -22,6 +23,9 @@ export default function Profile() {
     const [followListType, setFollowListType] = useState("")
     const [profileHistoryType, setProfileHistoryType] = useState("Posts")
     const isMyProfile = authorizeState.username === username
+    const [userColor, setUserColor] = useState("")
+ 
+
 
     useEffect(() => {
         const userProfileRequest = async () => {
@@ -72,7 +76,12 @@ export default function Profile() {
         }
     }
 
- 
+    const handleColorChange = (color) => {
+        setUserColor(color)
+        console.log(userColor)
+    }
+
+   
       
   return (
     <GenericPage headerTitle="Profile" pageId="profile-page">
@@ -93,8 +102,9 @@ export default function Profile() {
         }
         {userProfile && 
             <section className="profile-info">
+                <div className="profile-banner" style={{background: userColor}}></div>
                 <h1 className="profile-username">
-                    <UserIcon username={username}/>
+                    <UserIcon username={username} handleColor={(handleColorChange)}/>
                     {userProfile.username}
                 </h1>
 
