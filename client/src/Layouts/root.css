@@ -1,30 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Allerta+Stencil&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Allerta+Stencil&family=Playpen+Sans:wght@100..800&display=swap');
 
-/* ===== ROOT LAYOUT ===== */
+
+
+/* ==== CSS VARIABLES ==== */
 :root {
-    --background: rgb(238, 238, 238);
-    --foreground: white;
-    --logo-color: rgb(237, 87, 180);
-    --nav-font-color: rgba(0, 0, 0, 0.499);
-    --default-border-radius: 5px;
-    --default-padding: 25px;
- 
+    --background: rgb(243, 243, 243);
+    --foreground: rgb(253, 253, 253);
+    --secondary-color: rgb(228, 138, 193);
+    --logo-color: rgb(32, 112, 251);
+    --nav-font-color: rgba(0, 0, 0, 0.5);
+    --post-text-color: rgba(0, 0, 0, 0.7);
+    --default-border-radius: 7px;
+    --default-border-color: rgb(157, 157, 157);
+    --default-external-padding: 15px;
+    --default-internal-padding: 25px;
 }
+/* ==== GLOBAL ELEMENT STYLES ==== */
 body {
     margin:  0;
     padding: 0;
     font-family: satoshi variable;
     background: var(--background);  
+    overflow: hidden;
 }
 a {
     text-decoration: none;
 }
+a:visited {
+    color: inherit
+}
 button {
     font-family: satoshi variable;
+    border: none;
+    background: none;
+    cursor: pointer;
 }
+li {
+    list-style-type: none;
+}
+p {
+    margin: 0;
+}
+/* ==== ROOT LAYOUT ==== */
 .root-layout {
     display: grid;
     grid-template-areas: "header header header" "nav outlet sidebar";
-    grid-template-columns: 250px 1fr 350px;
+    grid-template-columns: 250px 1fr 370px;
     grid-template-rows: 60px 1fr;
     height: 100vh;
 }
@@ -34,16 +57,23 @@ button {
     color: var(--logo-color);
     display: flex;
     align-items: center;
-    padding-left: var(--default-padding);
+    justify-content: space-between;
+    padding-left: var(--default-internal-padding);
+    padding-right: var(--default-internal-padding);
     background-color: var(--foreground)
+}
+.logo {
+    font-family: "Satoshi Variable";
+    display: flex;
+    align-items: center;
 }
 .root-nav {
     grid-area: nav;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    padding: var(--default-padding);
-    background-color: var(--foreground)
+    padding: var(--default-internal-padding);
+    background-color: var(--foreground);
 }
 .root-nav a {
     display: flex;
@@ -51,13 +81,12 @@ button {
     gap: 10px;
     padding: 5px;
     border-radius: var(--default-border-radius);
-    transition: .1s;
+    transition: .2s;
     font-size: .9em;
+    font-weight: 500;
 }
 .root-nav > .nav-links > a.active {
     color: var(--logo-color);
-    background:var(--highlighter);
-    font-weight: 500;
 }
 .root-nav a:visited, .root-nav a {
     color: var(--nav-font-color)
@@ -69,13 +98,20 @@ button {
     flex: 1;
     font-size: 1.5em;
 }
-.nav-bottom {
+.nav-username {
     display: flex;
     align-items: center;
-    height: 100px;
     position: relative;
+    font-size: .7em;
 }
-.nav-bottom button {
+.nav-username .nav-text {
+    font-weight: bolder
+}
+.nav-username .user-icon {
+    width: 1.7em;
+    height: 1.7em;
+}
+.nav-username button {
     font-size: 1.5em;
     display: flex;
     align-items: center;
@@ -94,69 +130,100 @@ button {
     font-size: 15px;
     padding: 5px;
 }
-
 .outlet {
     grid-area: outlet;
     overflow-y: auto;
-    padding: var(--default-padding);
     display: flex;
     justify-content: center;
 }
+/* ==== SIDEBAR ==== */
 .info-sidebar {
     grid-area: sidebar;
     display: flex;
-    justify-content: center;
-    padding: var(--default-padding);
-    border-left: 1px solid var(--default-border-color);
+    flex-direction: column;
+    padding-top: vaR(--default-external-padding);
+    gap: var(--default-external-padding);
 }
 .info-content {
     background: var(--foreground);
-    width: 100%;
-    height: 60%;
+    width: 80%;
+    height: 100px;
     border-radius: vaR(--default-border-radius);
-    border: 1px solid var(--default-border-color)
 }
-
-/* ===== GLOBAL COMPONENTS ===== */
-
-button {
-    border: none;
-    background: none;
-    cursor: pointer;
-    color: white;
+.info-creator {
+    width: 80%;
+    height: fit-content;
+    background: var(--foreground);
+    border-radius: vaR(--default-border-radius);
+    padding: var(--default-internal-padding);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
-
-li {
-    list-style-type: none;
+.info-creator h4 {
+    color: var(--secondary-color);
+    margin: 0;
+}
+.creator-links {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 20px;
+}
+.creator-links > * {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.creator-links a {
+    color: var(--post-text-color);
+    font-weight: 500;
+    font-size: .9em;
+}
+.creator-icon {
+    width: 1em;
+    height: 1em;
 }
 
 /* ===== GENERIC PAGE STYLES ===== */
 .page {
-    width: 900px;
+    width: 100%;
+    max-width: 800px;
     min-width:300px;
+    height: fit-content;
+    padding: var(--default-external-padding);
 }
 .page > * {
     margin-bottom: 15px;
     background: var(--foreground);
     border-radius: var(--default-border-radius);
-    border: 1px solid var(--default-border-color)
+    padding: var(--default-internal-padding);
 }
-
-
-
 .page-header {
+    background: none;
     display: flex;
     font-size: 20px;  
     align-items: center;   
-    color: white;
+
+    background: var(--foreground);
+    padding: 5px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+
+    color: var(--post-text-color);
+}
+.page-header h4 {
+    margin: 0;
 }
 .page-header button {
     display: flex;
+    color: var(--post-text-color);
 }
 
 
 @media (max-width: 1225px) {
-    span {
+    .nav-text {
         display: none;
     }
     .root-nav{
