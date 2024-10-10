@@ -1,20 +1,23 @@
-.comments-section {
-    min-height: 200px;
-}
+
 .create-comment-form {
     display: flex;
     flex-direction: column;
-    align-items: center;
     gap: 10px;
 }
-
+.comment-form-top {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
 .create-comment-form textarea {
     resize: none;
-    width: 98%;
-    background: none;;
-    border: none;
-    padding: 7px;
-
+    background: var(--background);
+    border: 1px solid var(--default-border-color);
+    padding: 10px;
+    border-radius: var(--default-border-radius);
+    font-family: Satoshi Variable;
+    font-size: 1em;
+    width: 90%;
 }
 .create-comment-form textarea:focus {
     outline: none;
@@ -24,8 +27,8 @@
     align-self: flex-end;
 }
 
-.dark-mode .create-comment-form textarea {
-    color: white;
-    background: rgb(15, 16, 24);
-    
+.comment-feed {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
