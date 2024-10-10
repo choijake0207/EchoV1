@@ -2,11 +2,13 @@ import React, { useState} from 'react'
 import {NavLink, Outlet, useNavigate} from "react-router-dom"
 import { useAuthorize } from '../Context/AuthContext'
 import "./root.css"
+import "./darkMode.css"
 import {House, MagnifyingGlass, User, Gear, Bell, BookmarkSimple, CellSignalFull  } from "phosphor-react"
 import UserIcon from '../Components/UserIcon/UserIcon'
 import InfoCreator from '../Components/Sidebar/InfoCreator'
 import InfoContent from '../Components/Sidebar/InfoContent'
 import InfoLinks from '../Components/Sidebar/InfoLinks'
+import HeaderProfileMenu from '../Components/PopUps/HeaderProfileMenu'
 
 export default function RootLayout() { 
 
@@ -29,15 +31,13 @@ export default function RootLayout() {
       <header className="root-header">
         <h1 className="logo"><CellSignalFull/>echo</h1>
         {authorizeState.authStatus && (
-          <div className="nav-username">
+          <div className="header-username">
             <button onClick={toggleProfileMenu}>
               <UserIcon username={authorizeState.username}/>
               <p >{authorizeState.username}</p>
             </button>
             {isProfileMenuOpen && (
-              <div className="profile-menu" onClick={toggleProfileMenu}> 
-                <button onClick={handleLogOut}>Log Out</button>
-              </div>
+              <HeaderProfileMenu handleLogOut={handleLogOut}/>
             )}
           </div>
        
