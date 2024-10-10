@@ -7,6 +7,7 @@ import GenericPage from '../../Layouts/GenericPage'
 import Post from '../../Components/Post/Post'
 import Comment from '../../Components/Comment/Comment'
 import "./singleView.css"
+import UserIcon from '../../Components/UserIcon/UserIcon'
 
 export default function SingleView() {
   const {id} = useParams()
@@ -54,33 +55,39 @@ export default function SingleView() {
          isHomeView={false}
         />
       )}
-      <section className="comments-section">
-        {authorizeState.authStatus && (
-          <form className="create-comment-form" onSubmit={handleCommentSubmit}>
+
+      {singlePost && (
+        <ul className="comment-feed">
+          {commentList.length > 0 ? (
+            commentList.map(comment => (
+              <Comment
+                key={comment.id}
+                username={comment.username}
+                text={comment.text}
+              />
+            ))
+          ) : (
+            <p>No Comments Yet</p>
+          )}
+        </ul>
+      )}
+      {authorizeState.authStatus && (
+        <form className="create-comment-form" onSubmit={handleCommentSubmit}>
+          <div className="comment-form-top">
+            <UserIcon username={authorizeState.username}/>
             <textarea
               placeholder="Add a Comment"
               onChange={(e) => setNewComment(e.target.value)}
               value={newComment}
             />
-            <button type="submit">Post</button>
-          </form>
-        )}
-        {singlePost && (
-          <ul className="comment-feed">
-            {commentList.length > 0 ? (
-              commentList.map(comment => (
-                <Comment
-                  key={comment.id}
-                  username={comment.username}
-                  text={comment.text}
-                />
-              ))
-            ) : (
-              <p>No Comments Yet</p>
-            )}
-          </ul>
-        )}
-      </section>
+          </div>
+          <button type="submit">Post</button>
+        </form>
+      )}
+
+
+     
+
      
 
     </GenericPage>
