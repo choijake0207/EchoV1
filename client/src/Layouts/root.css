@@ -8,13 +8,21 @@
 :root {
     --background: rgb(239, 242, 244);
     --foreground: rgb(253, 253, 253);
+    --dark-background: rgb(18,18,18);
+    --dark-foreground: rgb(30, 29, 33);
     --secondary-color: rgb(228, 138, 193);
-    --logo-color: rgb(32, 112, 251);
+    --logo-color: rgb(0, 144, 222);
+    --default-red: rgb(224, 30, 90);
+    --default-green: rgb(46, 182, 125);
+    --default-yellow: rgb(236, 178, 46);
+    --default-purple: #7C3085
     --nav-font-color: rgba(0, 0, 0, 0.5);
     --post-text-color: rgba(0, 0, 0, 0.7);
-    --default-border-radius: 7px;
+    --dark-post-text-color: rgb(221, 221, 221);
+    --default-border-radius: 5px;
     --default-border-color: rgb(157, 157, 157);
     --default-soft-border: rgb(235, 235, 235);
+    --dark-soft-border: rgb(43, 43, 43);
     --default-external-padding: 15px;
     --default-internal-padding: 20px;
 }
@@ -26,6 +34,7 @@ body {
     background: var(--background);  
     overflow: hidden;
 }
+
 a {
     text-decoration: none;
 }

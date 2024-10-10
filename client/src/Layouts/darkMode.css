@@ -1,0 +1,29 @@
+/* Dark Background */
+.dark-mode, .dark-mode #home-page .post-feed {
+    background: var(--dark-background);
+}
+/* Dark Foreground */
+.dark-mode .root-header, 
+.dark-mode .root-nav, 
+.dark-mode .tool-sidebar,
+.dark-mode .post,
+.dark-mode .info-sidebar > *,
+.dark-mode .page > * {
+    background: var(--dark-foreground);
+}
+/* Dark Font, Borders, etc */
+.dark-mode .root-header {
+    border-bottom: 2px solid var(--dark-soft-border);
+}
+.dark-mode .root-nav {
+    border-right: 2px solid var(--dark-soft-border)
+}
+.dark-mode .tool-sidebar {
+    border-left: 2px solid var(--dark-soft-border)
+}
+.dark-mode .user-icon {
+    border: 1px solid var(--dark-soft-border)
+}
+.dark-mode .root-nav a, .dark-mode .post {
+    color: var(--dark-post-text-color);
+}
