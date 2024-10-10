@@ -32,7 +32,7 @@ export default function RootLayout() {
           <div className="nav-username">
             <button onClick={toggleProfileMenu}>
               <UserIcon username={authorizeState.username}/>
-              <span className="nav-text">{authorizeState.username}</span>
+              <p >{authorizeState.username}</p>
             </button>
             {isProfileMenuOpen && (
               <div className="profile-menu" onClick={toggleProfileMenu}> 
@@ -69,6 +69,10 @@ export default function RootLayout() {
         <InfoContent/>
         <InfoCreator/>
         <InfoLinks/>
+      </aside>
+
+      <aside className="tool-sidebar">
+
       </aside>
     
 

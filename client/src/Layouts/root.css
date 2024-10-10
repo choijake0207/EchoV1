@@ -6,7 +6,7 @@
 
 /* ==== CSS VARIABLES ==== */
 :root {
-    --background: rgb(243, 243, 243);
+    --background: rgb(239, 242, 244);
     --foreground: rgb(253, 253, 253);
     --secondary-color: rgb(228, 138, 193);
     --logo-color: rgb(32, 112, 251);
@@ -14,8 +14,9 @@
     --post-text-color: rgba(0, 0, 0, 0.7);
     --default-border-radius: 7px;
     --default-border-color: rgb(157, 157, 157);
+    --default-soft-border: rgb(235, 235, 235);
     --default-external-padding: 15px;
-    --default-internal-padding: 25px;
+    --default-internal-padding: 20px;
 }
 /* ==== GLOBAL ELEMENT STYLES ==== */
 body {
@@ -46,14 +47,14 @@ p {
 /* ==== ROOT LAYOUT ==== */
 .root-layout {
     display: grid;
-    grid-template-areas: "header header header" "nav outlet sidebar";
-    grid-template-columns: 250px 1fr 370px;
+    grid-template-areas: "header header header header" "nav outlet sidebar toolbar";
+    grid-template-columns: 230px 1fr 300px 230px;
     grid-template-rows: 60px 1fr;
     height: 100vh;
 }
 .root-header {
     grid-area: header;
-    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 2px solid var(--default-soft-border);
     color: var(--logo-color);
     display: flex;
     align-items: center;
@@ -67,13 +68,12 @@ p {
     display: flex;
     align-items: center;
 }
+/* ==== Nav Bar Aside ==== */
 .root-nav {
     grid-area: nav;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
     padding: var(--default-internal-padding);
     background-color: var(--foreground);
+    border-right: 2px solid var(--default-soft-border);
 }
 .root-nav a {
     display: flex;
@@ -82,19 +82,27 @@ p {
     padding: 5px;
     border-radius: var(--default-border-radius);
     transition: .2s;
-    font-size: .9em;
+    font-size: .85em;
     font-weight: 500;
+}
+.root-nav a:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+.root-nav > .nav-links > a > svg {
+    width: 30px;
+    height: 30px;
 }
 .root-nav > .nav-links > a.active {
     color: var(--logo-color);
+    font-weight: 600;
 }
 .root-nav a:visited, .root-nav a {
-    color: var(--nav-font-color)
+    color: var(--post-text-color)
 }
 .nav-links {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 30px;
     flex: 1;
     font-size: 1.5em;
 }
@@ -102,14 +110,14 @@ p {
     display: flex;
     align-items: center;
     position: relative;
+}
+.nav-username p {
+    font-weight: 500;
     font-size: .7em;
 }
-.nav-username .nav-text {
-    font-weight: bolder
-}
 .nav-username .user-icon {
-    width: 1.7em;
-    height: 1.7em;
+    width: 1.5em;
+    height: 1.5em;
 }
 .nav-username button {
     font-size: 1.5em;
@@ -136,22 +144,27 @@ p {
     display: flex;
     justify-content: center;
 }
-/* ==== SIDEBAR ==== */
+/* ==== INFO SIDEBAR ==== */
+.info-sidebar h4 {
+    color: var(--post-text-color);
+    margin: 0;
+}
 .info-sidebar {
     grid-area: sidebar;
     display: flex;
     flex-direction: column;
     padding-top: vaR(--default-external-padding);
+    padding-right: vaR(--default-external-padding);
     gap: var(--default-external-padding);
 }
 .info-content {
     background: var(--foreground);
-    width: 80%;
     height: 100px;
     border-radius: vaR(--default-border-radius);
+    padding: var(--default-internal-padding);
+    box-sizing: border-box;
 }
 .info-creator {
-    width: 80%;
     height: fit-content;
     background: var(--foreground);
     border-radius: vaR(--default-border-radius);
@@ -161,35 +174,46 @@ p {
     flex-direction: column;
     gap: 15px;
 }
-.info-creator h4 {
-    color: var(--secondary-color);
-    margin: 0;
-}
-.creator-links {
+
+.info-links {
+    padding: var(--default-internal-padding);
+    background: var(--foreground);
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    gap: 20px;
+    gap: 10px;
+    height: fit-content;
+    border-radius: var(--default-border-radius);
+    box-sizing: border-box;
+
 }
-.creator-links > * {
+.info-links > * {
     display: flex;
     align-items: center;
     gap: 5px;
 }
-.creator-links a {
-    color: var(--post-text-color);
-    font-weight: 500;
+.info-links a {
+    color: var(--default-border-color);
     font-size: .9em;
 }
-.creator-icon {
+.info-links a:hover {
+    text-decoration: underline;
+}
+.info-icon {
     width: 1em;
     height: 1em;
+    filter:contrast(10%);
+}
+/* ==== Tool SideBar ==== */
+.tool-sidebar {
+    grid-area: toolbar;
+    background: var(--foreground);
+    border-left: 2px solid var(--default-soft-border);
 }
 
 /* ===== GENERIC PAGE STYLES ===== */
 .page {
     width: 100%;
-    max-width: 800px;
+    max-width: 650px;
     min-width:300px;
     height: fit-content;
     padding: var(--default-external-padding);
@@ -203,18 +227,15 @@ p {
 .page-header {
     background: none;
     display: flex;
-    font-size: 20px;  
-    align-items: center;   
-
+    font-size: 1.2em;  
+    align-items: center; 
     background: var(--foreground);
-    padding: 5px;
-    padding-top: 7px;
-    padding-bottom: 7px;
-
+    padding: 10px;
     color: var(--post-text-color);
 }
 .page-header h4 {
     margin: 0;
+    font-weight: 600;  
 }
 .page-header button {
     display: flex;
@@ -223,30 +244,32 @@ p {
 
 
 @media (max-width: 1225px) {
-    .nav-text {
-        display: none;
-    }
+
     .root-nav{
         align-items: center;
     }
+    .info-sidebar {
+        display: none;
+    }
     .root-layout {
-        grid-template-columns: auto 1fr 350px;
+        grid-template-columns: auto 1fr 0px 230px;
     }
 }
 @media (max-width: 1040px) {
-    .root-layout {
-        grid-template-columns: auto 1fr;
+    .nav-text {
+        display: none
     }
     .info-sidebar {
         display: none;
     }
 }
-@media (max-width: 700px) {
+@media (max-width: 800px) {
     .root-layout {
         grid-template-columns: 1fr;
         grid-template-rows: 60px 1fr 60px;
         grid-template-areas: "header" "outlet" "nav"
     }
+
     .nav-bottom {
         display: none;
     }
