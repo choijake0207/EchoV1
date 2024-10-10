@@ -9,20 +9,7 @@ export default function InfoCreator() {
         Echo is a full stack application built with React.js, Express, Node.js, and MySQL.
         More features to be added soon!
       </p>
-      <div className="creator-links">
-        <div className="creator-about">
-            <Info className="creator-icon" weight="fill"/>
-            <NavLink>About</NavLink>
-        </div>
-        <div className="creator-gh">
-            <img
-                className='creator-icon'
-                src='/github-logo-fill.svg'
-            />
-            <a href="https://github.com/choijake0207/EchoV1">Github</a>
-        </div>
-
-      </div>
+     
     </section>
   )
 }

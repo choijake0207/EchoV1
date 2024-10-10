@@ -6,6 +6,7 @@ import {House, MagnifyingGlass, User, Gear, Bell, BookmarkSimple, CellSignalFull
 import UserIcon from '../Components/UserIcon/UserIcon'
 import InfoCreator from '../Components/Sidebar/InfoCreator'
 import InfoContent from '../Components/Sidebar/InfoContent'
+import InfoLinks from '../Components/Sidebar/InfoLinks'
 
 export default function RootLayout() { 
 
@@ -67,6 +68,7 @@ export default function RootLayout() {
       <aside className="info-sidebar">
         <InfoContent/>
         <InfoCreator/>
+        <InfoLinks/>
       </aside>
     
 
