@@ -12,9 +12,16 @@ export default function Login() {
 
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
+  const [alert, setAlert] = useState(null)
   const {login} = useAuthorize()
   const navigate = useNavigate()
 
+  const triggerAlert = (type, message) => {
+    setAlert({
+      message,
+      type
+    })
+  }
 
   const onSubmit = async (e) => {
     e.preventDefault()
@@ -25,7 +32,8 @@ export default function Login() {
       navigate("/")
 
     } catch (error) {
-      console.log(error)
+      triggerAlert("Error", error.response.data.error)
+      console.log(error.response.data.error)
     }
   }
 
@@ -33,6 +41,7 @@ export default function Login() {
 
   return (
     <div  id="login-page">
+      {alert && <Alert type={alert.type} message={alert.message} onClose={() => setAlert(null)}/>}
       <header className="user-form-header">
         <h1 className="logo">echo</h1>
       </header>
@@ -44,6 +53,7 @@ export default function Login() {
           <input
             type="text"
             placeholder="Enter Username"
+            required
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
@@ -53,6 +63,7 @@ export default function Login() {
           <input
             type="password"
             placeholder="Enter Password"
+            required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
