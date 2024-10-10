@@ -1,11 +1,39 @@
 .custom-alert-box {
-    position: fixed;
-    top: 1;
-    right: 0;
+    position: absolute;
+    top: 50%;
+    right: 10px;
     z-index: 1;
     background: red;
     color: white;
-    padding: 20px;
-    display: flex;
+    padding: 10px;
+    padding-left: 40px;
+    padding-right: 40px;
 
+    display: flex;
+    animation: alert-slide-in .2s ease forwards;
+    border-radius: var(--default-border-radius);
+}
+.alert-hide {
+    animation: alert-slide-out .1s ease forwards
+}
+#alert-Error {
+    background: var(--default-red);
+}
+
+
+@keyframes alert-slide-in {
+    0% {
+        transform: translateX(110%)
+    }
+    100% {
+        transform: translateX(0)
+    }
+}
+@keyframes alert-slide-out {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(110%)
+    }
 }
