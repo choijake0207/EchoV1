@@ -31,11 +31,14 @@ export const fetchSinglePost = async (id) => {
     }
 }
 
-// export const fetchComments = async (id) => {
-//     try {
-//         const response = await axios.get(`http://localhost:3001/comment/${id}`)
-//         return response.data
-//     } catch (error) {
-//         throw error
-//     }
-// }
+// News API
+export const fetchNews = async () => {
+    try {
+        const response = await axios.get("https://newsapi.org/v2/top-headlines?country=us&apiKey=01ce040548c3439688b75813bd12c836")
+        return response.data
+    } catch (error) {
+        throw error
+    }
+}
+
+
