@@ -18,7 +18,7 @@ export default function RootLayout() {
 
 
   const toggleProfileMenu = () => {
-    setIsProfileMenuOpen(!isProfileMenuOpen)
+    setIsProfileMenuOpen(prev => !prev)
   }
   const handleLogOut = () => {
     logOut()
@@ -28,6 +28,8 @@ export default function RootLayout() {
  
   return (
     <div className="root-layout">
+
+
       <header className="root-header">
         <h1 className="logo"><CellSignalFull/>echo</h1>
         {authorizeState.authStatus && (
@@ -37,10 +39,13 @@ export default function RootLayout() {
               <p >{authorizeState.username}</p>
             </button>
             {isProfileMenuOpen && (
-              <HeaderProfileMenu handleLogOut={handleLogOut}/>
+              <HeaderProfileMenu 
+                handleLogOut={handleLogOut} 
+                toggleProfileMenu={toggleProfileMenu}
+                username={authorizeState.username}
+              />
             )}
           </div>
-       
         )}
       </header>
 
@@ -60,16 +65,16 @@ export default function RootLayout() {
         </nav>
       </aside>
 
+      <div className="scrollable-wrapper">
+        <main className="outlet"><Outlet/></main>
 
-      <main className="outlet"><Outlet/></main>
-
-
-      
-      <aside className="info-sidebar">
-        <InfoContent/>
-        <InfoCreator/>
-        <InfoLinks/>
-      </aside>
+        <section className="info-sidebar">
+          <InfoCreator/>
+          <InfoContent/>
+          <InfoLinks/>
+        </section>
+      </div>
+        
 
       <aside className="tool-sidebar">
 
