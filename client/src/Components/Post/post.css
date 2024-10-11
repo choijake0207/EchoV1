@@ -2,21 +2,24 @@
     display: flex;
     flex-direction: column;
     background: var(--foreground);
-    border: 1px solid var(--default-border-color);
     border-radius: var(--default-border-radius);
     color: var(--post-text-color);
+    padding: var(--default-internal-padding);
 } 
-.post > * {
-    padding: 10px;
+ 
+.post-header {
+    display: flex;
+}
+.post-header h4 {
+    margin: 0;
+    font-size: 1.15em;
 }
 
-.post-header {
-    display: flex
-}
 .username{
     display: flex;
-    gap: 5px;
-    font-size: .9em;
+    align-items: center;
+    gap: 10px;
+    font-size: 1em;
     color: var(--post-text-color);
     font-weight: bold;
 }
@@ -24,17 +27,31 @@
     margin-left: auto;
 }
 .post-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    border: 1px solid red;
+}
+
+.text {
+    border: 1px solid red;
+    overflow-wrap: break-word;
+    white-space: normal;
     word-wrap: break-word;
+}
+.post-content .date {
     font-size: 1em;
+    font-weight: 500;
+    color: var(--default-border-color)
 }
 .post-details {
     display: flex;
     justify-content: flex-start;
-    gap: 30px;
+    gap: 10px;
     border-top: 1px solid var(--default-border-color);
     color: var(--nav-font-color);
     align-items: center;
-    border-top: 1px solid rgba(0,0,0,.1);
+    padding-top: 10px;
 }
 .post-details p, .post-details svg {
     color: var(--nav-font-color);
@@ -45,7 +62,7 @@
 }
 .post-details > * > * {
     display: flex;
-    font-size: 17px;
+    font-size: .9em;
     align-items: center;
     gap: 10px;
 }
