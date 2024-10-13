@@ -10,13 +10,17 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        profilePictureUrl: {
+        profilePictureURl: {
             type: DataTypes.STRING,
             allowNull: true,
         },
         biography: {
             type: DataTypes.STRING,
             allowNull: true,
+        },
+        profileBannerURL: {
+            type: DataTypes.STRING,
+            allowNull: false,
         }
 
 
@@ -43,6 +47,9 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey: "userId"
         })
         Users.hasMany(models.Likes, {
+            foreignKey: "userId"
+        })
+        Users.hasMany(models.SavedPosts, {
             foreignKey: "userId"
         })
     }
