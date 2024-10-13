@@ -15,7 +15,7 @@
     --default-red: rgb(225, 51, 89);
     --default-green: rgb(46, 182, 125);
     --default-yellow: rgb(236, 178, 46);
-    --default-purple: #7C3085
+    --default-purple: "#7C3085"
     --nav-font-color: rgba(0, 0, 0, 0.5);
     --post-text-color: rgba(0, 0, 0, 0.7);
     --dark-post-text-color: rgb(221, 221, 221);
@@ -148,7 +148,6 @@ p {
     border-radius: var(--default-border-radius);
     transition: .2s;
     font-size: .8em;
-    width: fit-content;
     font-weight: 500;
 }
 .root-nav a:hover {
@@ -168,7 +167,7 @@ p {
 .nav-links {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 20px;
     flex: 1;
     font-size: 1.5em;
 }
@@ -176,13 +175,12 @@ p {
 /* ==== SCROLL WRAP ==== */
 .scrollable-wrapper {
     grid-area: scrollWrap;
-    height: 100vh;
+    height: 92vh;
     display: grid;
     overflow-y: auto;
     overflow-x: hidden;
     grid-template-areas: "outlet sidebar";
     grid-template-columns: minmax(0, 1fr) 300px;
-    border: 1px solid blue;
 }
 .outlet {
     display: flex;
@@ -190,14 +188,19 @@ p {
     padding: 0;
     grid-area: outlet;
 }
-.outlet::-webkit-scrollbar{
+.scrollable-wrapper::-webkit-scrollbar{
     display: none;
 }
 /* ==== INFO SIDEBAR ==== */
 .info-sidebar h4 {
     color: var(--post-text-color);
     margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
+
+
 .info-sidebar {
     grid-area: sidebar;
     display: flex;
@@ -275,9 +278,21 @@ p {
 /* ==== Tool SideBar ==== */
 .tool-sidebar {
     grid-area: toolbar;
-    background: var(--foreground);
+    /* background: radial-gradient(white, grey); */
     border-left: 2px solid var(--default-soft-border);
+    position: relative;
+    z-index: 0;
 }
+/* .glass-wrap {
+    background: rgba(255, 255, 255, 0.4);
+    position: absolute;
+    top: 0;
+    left : 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+
+} */
 
 /* ===== GENERIC PAGE STYLES ===== */
 .page {
@@ -286,7 +301,6 @@ p {
     min-width:400px;
     height: fit-content;
     padding: var(--default-external-padding);
-    border: 1px solid red;
 }
 .page > * {
     margin-bottom: 15px;
@@ -317,6 +331,20 @@ p {
     .root-layout {
         grid-template-columns: 2fr 1000px 2fr;
     }
+    .info-sidebar {
+        padding-top: vaR(--default-internal-padding);
+        padding-right: var(--default-internal-padding);
+        gap: vaR(--default-internal-padding)
+    }
+    .root-nav {
+        display: flex;
+        justify-content: flex-end;
+    }
+    .nav-links {
+        max-width: 208px;
+    }
+   
+
 }
 @media (max-width: 1300px) {
     .nav-text {
