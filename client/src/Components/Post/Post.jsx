@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import "./post.css"
 import { useAuthorize } from '../../Context/AuthContext'
@@ -37,6 +37,19 @@ function PostContent ({id, createdAt, text, navigate}) {
 }
 
 function PostDetails ({isHomeView, id, comments, navigate, savePost, isSaved}) {
+  const [saveStatus, setSaveStatus] = useState(isSaved)
+
+  const optimisticSave = async () => {
+    const optimisticStatus = !saveStatus
+    setSaveStatus(optimisticStatus)
+    try {
+      await savePost()
+    } catch (error) {
+      console.log(error.response.data.error)
+      setSaveStatus(!optimisticStatus)
+    }
+  }
+
   return (
     <div className="post-details">
       <div className="post-likes">
@@ -51,8 +64,8 @@ function PostDetails ({isHomeView, id, comments, navigate, savePost, isSaved}) {
         </button>
       </div>
       <div className="post-save">
-        <button type="button" onClick={savePost}>
-          <BookmarkSimple size={"20px"} weight={isSaved ? "fill" :  null}/>
+        <button type="button" onClick={optimisticSave}>
+          <BookmarkSimple size={"20px"} weight={saveStatus ? "fill" :  null}/>
         </button>
       </div>
     </div>
