@@ -1,6 +1,6 @@
 const express = require("express")
 const router = express.Router()
-const {Posts, Users, Comments} = require("../models")
+const {Posts, Users, Comments, SavedPosts} = require("../models")
 const {validateAccessToken} = require("../middleware/authorization")
 
 // create post
@@ -83,6 +83,30 @@ router.delete("/:id", validateAccessToken, async (req, res) => {
     }
 })
 
+// saving a post
+router.post("/save", validateAccessToken, async (req, res) => {
+    const postId = req.body
+    const userId = req.user.id
+    try {
+        const post = await Posts.findOne({where: {id: postId}})
+        if (!post) {
+            return res.status(404).json({error: "Post Not Found"})
+        }
+        const alreadySaved = await SavedPosts.findOne({where: {userId, postId}})
+        if (alreadySaved) {
+            await alreadySaved.destroy()
+            return res.status(200).json({message: "Post Unsaved Succesfully"})
+        }
+        await SavedPosts.create({
+            userId,
+            postId
+        })
+        return res.status(200).json({message: "Post Saved Succesfully"})
+    } catch (error) {
+        res.status(500).json({error: "Failed To Toggle Save"})
+    }
+
+})
 
 
 module.exports = router
