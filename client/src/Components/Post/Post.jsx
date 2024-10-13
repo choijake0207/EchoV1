@@ -36,7 +36,7 @@ function PostContent ({id, createdAt, text, navigate}) {
   )
 }
 
-function PostDetails ({isHomeView, id, comments, navigate, savePost}) {
+function PostDetails ({isHomeView, id, comments, navigate, savePost, isSaved}) {
   return (
     <div className="post-details">
       <div className="post-likes">
@@ -52,17 +52,16 @@ function PostDetails ({isHomeView, id, comments, navigate, savePost}) {
       </div>
       <div className="post-save">
         <button type="button" onClick={savePost}>
-          <BookmarkSimple size={"20px"} weight="bold"/>
+          <BookmarkSimple size={"20px"} weight={isSaved ? "fill" :  null}/>
         </button>
       </div>
     </div>
   )
 }
 
-export default function Post({id, username, text, createdAt, userId, onDelete, comments, isHomeView}) {
+export default function Post({id, username, text, createdAt, userId, onDelete, comments, isHomeView, isSaved}) {
   const navigate = useNavigate()
   const {authorizeState} = useAuthorize()
-  console.log(id)
   const handleDelete = async () => {
     try {
       await deletePost(id)
@@ -102,6 +101,7 @@ export default function Post({id, username, text, createdAt, userId, onDelete, c
           comments={comments}
           navigate={navigate}
           savePost={handleSave}
+          isSaved={isSaved}
         />
     </li>
   )
