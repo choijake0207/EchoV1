@@ -10,18 +10,26 @@ export default function CreatePost({submitPost, toggleFormVisibility}) {
         submitPost(postText)
         toggleFormVisibility()
     }
+    const maxChar = 300
    
 
   return (
     <div className="create-post-overlay">
         <form className="create-post-form" onSubmit={handlePostSubmit}>
-            <button onClick={toggleFormVisibility} type="button"><X/></button>
+            <button onClick={toggleFormVisibility} type="button" className="exit-create-btn"><X/></button>
             <textarea 
                 type="text" 
                 value={postText}
                 onChange={(e) => setPostText(e.target.value)}
-            ></textarea>
-            <button type="submit">Post</button>
+                maxLength={300}
+                required
+            />
+            <p className="char-count">
+                    {postText.length} / {maxChar}
+                </p>
+            <div className="create-post-btns">
+                <button type="submit">Post</button>
+            </div>
         </form>
     </div>
   )
