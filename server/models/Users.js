@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         profileBannerURL: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
         }
 
 
