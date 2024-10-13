@@ -78,7 +78,6 @@ export default function Profile() {
 
     const handleColorChange = (color) => {
         setUserColor(color)
-        console.log(userColor)
     }
 
    
@@ -158,6 +157,7 @@ export default function Profile() {
                             isHomeView={true}
                             createdAt={post.createdAt}
                             userId={post.userId}
+                            isSaved={post.SavedPosts.some(obj => obj.userId === authorizeState.id)}
                         />
                     )
                 })}

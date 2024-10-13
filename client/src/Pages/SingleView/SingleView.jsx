@@ -40,6 +40,7 @@ export default function SingleView() {
     }
   }
 
+  const isSaved = singlePost && singlePost.SavedPosts.some(obj => obj.userId === authorizeState.id)
 
 
   return (
@@ -53,6 +54,7 @@ export default function SingleView() {
          userId = {singlePost.userId}
          comments = {singlePost.Comments}
          isHomeView={false}
+         isSaved={isSaved}
         />
       )}
 
@@ -73,14 +75,14 @@ export default function SingleView() {
       )}
       {authorizeState.authStatus && (
         <form className="create-comment-form" onSubmit={handleCommentSubmit}>
-          <div className="comment-form-top">
+
             <UserIcon username={authorizeState.username}/>
             <textarea
               placeholder="Add a Comment"
               onChange={(e) => setNewComment(e.target.value)}
               value={newComment}
             />
-          </div>
+
           <button type="submit">Post</button>
         </form>
       )}

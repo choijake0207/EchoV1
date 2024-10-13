@@ -6,6 +6,7 @@ import { fetchPosts } from '../../Api/GET'
 import Post from '../../Components/Post/Post'
 import CreatePost from '../../Components/Forms/CreatePost'
 import "./home.css"
+import { PaperPlaneRight } from 'phosphor-react'
 
 
 export default function Home() {
@@ -31,7 +32,7 @@ export default function Home() {
         setPostFeed(response)
         console.log(response)
       } catch (error) {
-        console.log(error.response.data.error)
+        console.log(error)
       }
     }
     handleFetchPosts()
@@ -51,6 +52,7 @@ export default function Home() {
               <p onClick={() => setIsFormVisible(true)}> 
                 What's on your mind {authorizeState.username}?
               </p>
+              <PaperPlaneRight size="1.5em"/>
             </div>
           ) : (
             <div className="greeting">
@@ -66,7 +68,6 @@ export default function Home() {
                 >Register</NavLink>
               </div>
             </div>
-          
           )}
           <ul className="post-feed">
               {postFeed.map(post => (
@@ -80,6 +81,7 @@ export default function Home() {
                   onDelete={handleDeletedPost}
                   comments={post.Comments}
                   isHomeView={true}
+                  isSaved={post.SavedPosts.some(obj => obj.userId === authorizeState.id)}
                 />
               ))}
           </ul>
