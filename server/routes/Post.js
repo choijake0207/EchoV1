@@ -32,6 +32,10 @@ router.get("/", async (req, res) => {
                         {model: Users, attributes: ["username"]}
                     ],
                     order: [["createdAt", "DESC"]]
+                },
+                {
+                    model: SavedPosts,
+                    attributes: ["userId"]
                 }
             ]
         })
@@ -55,6 +59,10 @@ router.get("/:id", async (req, res) => {
                         {model: Users, attributes: ["username"]}
                     ],
                     order: [["createdAt", "DESC"]]
+                },
+                {
+                    model: SavedPosts,
+                    attributes: ["userId"]
                 }
             ]
         })
@@ -85,7 +93,7 @@ router.delete("/:id", validateAccessToken, async (req, res) => {
 
 // saving a post
 router.post("/save", validateAccessToken, async (req, res) => {
-    const postId = req.body
+    const {postId} = req.body
     const userId = req.user.id
     try {
         const post = await Posts.findOne({where: {id: postId}})
