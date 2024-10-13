@@ -3,15 +3,17 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import "./post.css"
 import { useAuthorize } from '../../Context/AuthContext'
 import { deletePost } from '../../Api/DELETE'
-import {HeartStraight, BookmarkSimple, ChatCircle, UserCircle} from "phosphor-react"
+import { savePost } from '../../Api/POST'
+import {HeartStraight, BookmarkSimple, ChatCircle} from "phosphor-react"
+import UserIcon from '../UserIcon/UserIcon'
 
 
 function PostHeader ({username, auth, handleDelete, userId}) {
   return (
-    <header>
+    <header className="post-header">
       <NavLink className="username" to={`/profile/${username}`}>
-        <UserCircle/>
-        {username}
+        <UserIcon username={username}/>
+        <h4>{username}</h4>
       </NavLink>
       {userId === auth.id && (
         <button
@@ -28,31 +30,29 @@ function PostHeader ({username, auth, handleDelete, userId}) {
 function PostContent ({id, createdAt, text, navigate}) {
   return (
     <div className="post-content">
-      <p className="text" onClick={() => navigate(`/post/${id}`)}>
-        {text}
-      </p>
+      <p className="text" onClick={() => navigate(`/post/${id}`)}>{text}</p>
       <p className="date">{new Date(createdAt).toLocaleString()}</p>
     </div>
   )
 }
 
-function PostDetails ({isHomeView, id, comments, navigate}) {
+function PostDetails ({isHomeView, id, comments, navigate, savePost}) {
   return (
     <div className="post-details">
       <div className="post-likes">
-        <button type="button"><HeartStraight/>
+        <button type="button"><HeartStraight weight="bold"/>
           <p>0</p>
         </button>
       </div>
       <div className="post-comments">
         <button onClick={isHomeView ? () => navigate(`/post/${id}`) : null}>
-          <ChatCircle />
+          <ChatCircle weight="bold"/>
           <p>{comments.length}</p>
         </button>
       </div>
       <div className="post-save">
-        <button type="button">
-          <BookmarkSimple size={"20px"}/>
+        <button type="button" onClick={savePost}>
+          <BookmarkSimple size={"20px"} weight="bold"/>
         </button>
       </div>
     </div>
@@ -62,7 +62,7 @@ function PostDetails ({isHomeView, id, comments, navigate}) {
 export default function Post({id, username, text, createdAt, userId, onDelete, comments, isHomeView}) {
   const navigate = useNavigate()
   const {authorizeState} = useAuthorize()
-
+  console.log(id)
   const handleDelete = async () => {
     try {
       await deletePost(id)
@@ -70,6 +70,13 @@ export default function Post({id, username, text, createdAt, userId, onDelete, c
         onDelete(id)
       }
       navigate("/")
+    } catch (error) {
+      console.log(error.response.data.error)
+    }
+  }
+  const handleSave = async () => {
+    try {
+      await savePost(id)
     } catch (error) {
       console.log(error.response.data.error)
     }
@@ -94,6 +101,7 @@ export default function Post({id, username, text, createdAt, userId, onDelete, c
           id={id}
           comments={comments}
           navigate={navigate}
+          savePost={handleSave}
         />
     </li>
   )
