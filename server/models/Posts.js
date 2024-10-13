@@ -7,6 +7,10 @@ module.exports = (sequelize, DataTypes) => {
         username: {
             type: DataTypes.STRING,
             allowNull: false
+        },
+        mediaURL: {
+            type: DataTypes.STRING,
+            allowNull: true
         }
     })
 
@@ -19,6 +23,9 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey: "postId"
         })
         Posts.hasMany(models.Likes, {
+            foreignKey: "postId"
+        })
+        Posts.hasMany(models.SavedPosts, {
             foreignKey: "postId"
         })
     }
