@@ -1,5 +1,10 @@
 /* Dark Background */
-.dark-mode, .dark-mode #home-page .post-feed {
+.dark-mode, 
+.dark-mode #home-page .post-feed,
+.dark-mode .profile-feed,
+.dark-mode .profile-history,
+.dark-mode .create-post-form textarea ,
+.dark-mode .create-comment-form textarea{
     background: var(--dark-background);
 }
 /* Dark Foreground */
@@ -8,10 +13,45 @@
 .dark-mode .tool-sidebar,
 .dark-mode .post,
 .dark-mode .info-sidebar > *,
-.dark-mode .page > * {
+.dark-mode .header-profile-menu,
+.dark-mode .profile-info,
+.dark-mode .feed-options button,
+.dark-mode .page-header,
+.dark-mode .user-form,
+.dark-mode .user-form-header,
+.dark-mode .create-modal,
+.dark-mode #settings-page > *,
+.dark-mode .create-post-form,
+.dark-mode .create-comment-form,
+.dark-mode .comment-feed {
     background: var(--dark-foreground);
 }
-/* Dark Font, Borders, etc */
+
+/* Dark Font */
+.dark-mode .root-nav a, 
+.dark-mode .post, 
+.dark-mode .header-profile-menu *,
+.dark-mode .page-header h4,
+.dark-mode .page-header button,
+.dark-mode .info-sidebar h4,
+.dark-mode .creator-summary,
+.dark-mode .create-modal,
+.dark-mode .news-feed a,
+.dark-mode .post-details svg,
+.dark-mode .post-details p,
+.dark-mode .header-username p,
+.dark-mode .create-post-form textarea,
+.dark-mode .create-comment-form textarea {
+    color: var(--dark-post-text-color);
+}
+/* Dark Hover */
+.dark-mode .root-nav a:hover,
+.dark-mode .header-profile-menu a:hover,
+.dark-mode .header-profile-menu button:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Dark Border*/
 .dark-mode .root-header {
     border-bottom: 2px solid var(--dark-soft-border);
 }
@@ -21,9 +61,15 @@
 .dark-mode .tool-sidebar {
     border-left: 2px solid var(--dark-soft-border)
 }
-.dark-mode .user-icon {
+.dark-mode .user-icon, .dark-mode .create-comment-form textarea {
     border: 1px solid var(--dark-soft-border)
 }
-.dark-mode .root-nav a, .dark-mode .post {
-    color: var(--dark-post-text-color);
+.dark-mode .profile-username .user-icon {
+    border: 3px solid var(--dark-foreground)
 }
+
+/* MISC */
+
+
+
+
