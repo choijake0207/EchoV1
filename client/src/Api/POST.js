@@ -30,11 +30,11 @@ export const createPost = async (postText) => {
     }
 }
 
-export const createComment = async ({text, postId}) => {
+export const createComment = async ({newComment, id}) => {
     try {
         const response = await axios.post("http://localhost:3001/comment", {
-            text: text,
-            postId: postId
+            text: newComment,
+            postId: id
         }, {
             headers: {
                 accessToken: localStorage.getItem("accessToken")
@@ -42,6 +42,21 @@ export const createComment = async ({text, postId}) => {
         })
         return response.data
     }  catch (error) {
+        throw error
+    }
+}
+
+export const savePost = async (postId) => {
+    try {
+        const response = await axios.post("http://localhost:3001/post/save" , {
+            postId
+        }, {
+            headers: {
+                accessToken: localStorage.getItem("accessToken")
+            }
+        })
+        return response.data
+    } catch (error) {
         throw error
     }
 }
