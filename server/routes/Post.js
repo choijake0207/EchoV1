@@ -3,6 +3,41 @@ const router = express.Router()
 const {Posts, Users, Comments, SavedPosts} = require("../models")
 const {validateAccessToken} = require("../middleware/authorization")
 
+// fetch all saved posts
+router.get("/saved-posts", validateAccessToken, async (req, res) => {
+    const userId = req.user.id
+    try { 
+        const savedPosts = await SavedPosts.findAll({where: {userId: userId}, attributes: ["postId"]})
+        console.log(savedPosts)
+        if (!savedPosts || savedPosts.length === 0) {
+            return res.status(404).json({error: "No Saved Posts"})
+        }
+        const savedIds = savedPosts.map(post => post.postId)
+        const response = await Posts.findAll({
+            where: {id: savedIds},
+            include: [
+                {
+                    model: Comments,
+                    include: [{model: Users, attributes: ["username"]}]
+                },
+                {
+                    model: SavedPosts,
+                    attributes: ["userId"]
+                },
+                {
+                    model: Users,
+                    attributes: ["username"]
+                }
+            ]
+        })
+        if (!response || response.length === 0) {
+            res.status(404).json({error: "No Saved Posts"})
+        }
+        res.json(response)
+    } catch (error) {
+        res.status(500).json({error: "Failed To Fetch Saved Posts"})
+    }
+})
 // create post
 router.post("/", validateAccessToken, async (req, res) => {
     const {text} = req.body
@@ -17,6 +52,31 @@ router.post("/", validateAccessToken, async (req, res) => {
         res.json({message:"Post Created Succesfully", postId: response.id})
     } catch (error) {
         res.status(500).json({error: "Failed To Create Post"})
+    }
+})
+// fetch post by id for single view
+router.get("/:id", async (req, res) => {
+    const id = req.params.id
+    try {
+        const response = await Posts.findOne({
+            where: {id: id},
+            include: [
+                {
+                    model: Comments,
+                    include: [
+                        {model: Users, attributes: ["username"]}
+                    ],
+                    order: [["createdAt", "DESC"]]
+                },
+                {
+                    model: SavedPosts,
+                    attributes: ["userId"]
+                }
+            ]
+        })
+        res.json(response)
+    } catch (error) {
+        res.status(500).json({error: "Failed To Fetch Post"})
     }
 })
 
@@ -46,31 +106,6 @@ router.get("/", async (req, res) => {
 
 })
 
-// fetch post by id for single view
-router.get("/:id", async (req, res) => {
-    const id = req.params.id
-    try {
-        const response = await Posts.findOne({
-            where: {id: id},
-            include: [
-                {
-                    model: Comments,
-                    include: [
-                        {model: Users, attributes: ["username"]}
-                    ],
-                    order: [["createdAt", "DESC"]]
-                },
-                {
-                    model: SavedPosts,
-                    attributes: ["userId"]
-                }
-            ]
-        })
-        res.json(response)
-    } catch (error) {
-        res.status(500).json({error: "Failed To Fetch Post"})
-    }
-})
 
 // delete post
 router.delete("/:id", validateAccessToken, async (req, res) => {
@@ -116,33 +151,6 @@ router.post("/save", validateAccessToken, async (req, res) => {
 
 })
 
-// fetch all saved posts
-router.get("/saved-posts", validateAccessToken, async (req, res) => {
-    const userId = req.user.id
-    try {
-        const savedPosts = await SavedPosts.findAll({where: {userId}, attributes: ["postId"]})
-        const savedIds = savedPosts.map(post => post.postId)
-        const posts = await Posts.findAll({
-            where: {id: savedIds},
-            include: [
-                {
-                    model: Comments,
-                    include: [{model: Users, attributes: ["username"]}]
-                },
-                {
-                    model: SavedPosts,
-                    attributes: ["userId"]
-                },
-                {
-                    model: Users,
-                    attributes: ["username"]
-                }
-            ]
-        })
-        res.json(posts)
-    } catch (error) {
-        res.status(500).json({error: "Failed To Fetch Saved Posts"})
-    }
-})
+
 
 module.exports = router
