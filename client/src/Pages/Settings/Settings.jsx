@@ -6,12 +6,14 @@ import { useAuthorize } from '../../Context/AuthContext'
 import GenericPage from '../../Layouts/GenericPage'
 import { CaretRight } from 'phosphor-react'
 import { deleteAccount } from '../../Api/DELETE'
+import WarningModal from '../../Components/PopUps/WarningModal'
 import "./settings.css"
 
 export default function Settings() {
     const {isDarkMode, toggleDarkMode} = useDarkMode()
     const [passwordForm, setPasswordForm] = useState(false)
     const {authorizeState} = useAuthorize()
+    const [warningModal, setWarningModal] = useState(false)
     
     const togglePasswordForm = () => {
         setPasswordForm(true)
@@ -40,18 +42,27 @@ export default function Settings() {
         headerTitle="Settings"
         pageId="settings-page"
     >
-        {passwordForm && <ChangePassword
-            onClose={() => setPasswordForm(false)}
-            onSave={handlePasswordUpdate}
-        
-        />}
+        {passwordForm && 
+            <ChangePassword
+                onClose={() => setPasswordForm(false)}
+                onSave={handlePasswordUpdate}
+            />
+        }
+        {warningModal && 
+           <WarningModal 
+                message={"Confirm Account Deletion"} 
+                action={"Delete Account"}
+                dispatch={handleDeleteAccount}
+                onClose={() => setWarningModal(false)}
+            />
+        }
         {authorizeState.authStatus && (
             <section className="account-settings">
                 <h3>Account</h3>
                 <div className="account-options">
                     <button type="button">Edit Profile <CaretRight/></button>
                     <button type="button" onClick={togglePasswordForm}>Change Password <CaretRight/></button>
-                    <button type="button" onClic={handleDeleteAccount}>Delete Account <CaretRight/></button>
+                    <button type="button" onClick={() => setWarningModal(true)}>Delete Account <CaretRight/></button>
                 </div>
             </section>
         )}
