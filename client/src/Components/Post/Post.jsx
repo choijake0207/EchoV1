@@ -6,14 +6,21 @@ import { deletePost } from '../../Api/DELETE'
 import { savePost } from '../../Api/POST'
 import {HeartStraight, BookmarkSimple, ChatCircle} from "phosphor-react"
 import UserIcon from '../UserIcon/UserIcon'
+import { formatDate } from '../../Utility/FormatDate'
 
 
-function PostHeader ({username, auth, handleDelete, userId}) {
+function PostHeader ({username, auth, handleDelete, userId, createdAt}) {
+    const formattedDate = formatDate(createdAt)
   return (
     <header className="post-header">
+      
       <NavLink className="username" to={`/profile/${username}`}>
         <UserIcon username={username}/>
-        <h4>{username}</h4>
+        <div className="username-date">
+          <p>{username}</p>
+          <p className="date">{formattedDate}</p>
+        </div>
+        
       </NavLink>
       {userId === auth.id && (
         <button
@@ -28,10 +35,11 @@ function PostHeader ({username, auth, handleDelete, userId}) {
 }
 
 function PostContent ({id, createdAt, text, navigate}) {
+
   return (
     <div className="post-content">
       <p className="text" onClick={() => navigate(`/post/${id}`)}>{text}</p>
-      <p className="date">{new Date(createdAt).toLocaleString()}</p>
+   
     </div>
   )
 }
@@ -101,10 +109,11 @@ export default function Post({id, username, text, createdAt, userId, onDelete, c
           auth={authorizeState} 
           handleDelete={handleDelete} 
           userId={userId}
+          createdAt={createdAt} 
+
         />
         <PostContent 
           id={id} 
-          createdAt={createdAt} 
           text={text}
           navigate={navigate}
         />
