@@ -1,8 +1,35 @@
 
 
+#settings-page h3 {
+    margin: 0;
+}
 
+/* Account */
+.account-settings {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.account-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+}
+.account-options button {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    padding: 10px;
+    border-radius: var(--default-border-radius);
+}
+.account-options button:hover {
+    background: rgba(0, 0, 0, 0.05);
 
+}
 
+/* General */
 
 
 
@@ -12,11 +39,16 @@
 
 
 /* dark mode toggle */
+.dark-mode-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
 .switch {
     position: relative;
     display: inline-block;;
-    width: 35px;
-    height: 18px;
+    width: 30px;
+    height: 15px;
 }
 
 .switch input {
@@ -38,16 +70,16 @@
 .slider:before {
     position: absolute;
     content:"";
-    height: 15px;
-    width: 15px;
+    height: 13px;
+    width: 13px;
     left: 4px;
-    bottom: 1.5px;
+    bottom: 1.1px;
     background-color: white;
     transition: .4s;
     border-radius:50%;
 }
 input:checked + .slider  {
-    background-color:blue;
+    background-color:var(--logo-color);
 }
 input:checked + .slider:before {
     transform: translateX(12px)
