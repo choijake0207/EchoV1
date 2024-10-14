@@ -10,6 +10,7 @@ import Profile from "./Pages/Profile/Profile"
 import Settings from "./Pages/Settings/Settings"
 import Search from "./Pages/Search/Search"
 import SingleView from "./Pages/SingleView/SingleView"
+import Saved from "./Pages/Saved/Saved"
 // context
 import { AuthContextProvider } from './Context/AuthContext'
 import { DarkContextProvider } from "./Context/DarkContext"
@@ -26,6 +27,7 @@ const router = createBrowserRouter(
         <Route path="/settings" element={<Settings/>}/>
         <Route path="/search" element={<Search/>}/>
         <Route path="/post/:id" element={<SingleView/>}/>
+        <Route path="/saved" element={<Saved/>}/>
       </Route>
       <Route path="/login" element={<Login/>}/>
       <Route path="/register" element={<Register/>}/>
