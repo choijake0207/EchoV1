@@ -1,0 +1,7 @@
+.saved-posts {
+    background: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--default-external-padding);
+    padding:0;
+}
