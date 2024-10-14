@@ -4,15 +4,25 @@ import "./post.css"
 import { useAuthorize } from '../../Context/AuthContext'
 import { deletePost } from '../../Api/DELETE'
 import { savePost } from '../../Api/POST'
-import {HeartStraight, BookmarkSimple, ChatCircle} from "phosphor-react"
+import {HeartStraight, BookmarkSimple, ChatCircle, DotsThree} from "phosphor-react"
 import UserIcon from '../UserIcon/UserIcon'
 import { formatDate } from '../../Utility/FormatDate'
+import PostModalMenu from '../PopUps/PostModalMenu'
 
 
 function PostHeader ({username, auth, handleDelete, userId, createdAt}) {
     const formattedDate = formatDate(createdAt)
+    const [showPostModal, setShowPostModal] = useState(false)
   return (
     <header className="post-header">
+      {showPostModal && 
+        <PostModalMenu
+          onClose={() => setShowPostModal(false)}
+          handleDelete={handleDelete}
+          auth={auth}
+          userId={userId}
+        />
+      }
       
       <NavLink className="username" to={`/profile/${username}`}>
         <UserIcon username={username}/>
@@ -22,14 +32,19 @@ function PostHeader ({username, auth, handleDelete, userId, createdAt}) {
         </div>
         
       </NavLink>
-      {userId === auth.id && (
+      <button className="post-modal-btn" onClick={() => setShowPostModal(true)}> 
+        <DotsThree/>
+      </button>
+      {/* {userId === auth.id ? (
         <button
           onClick={handleDelete}
           className="delete-post-btn"
         >
-          Delete
+          <DotsThree/>
         </button>
-      )}
+      ) : 
+        <DotsThree/>
+      } */}
     </header>
   )
 }
@@ -39,7 +54,6 @@ function PostContent ({id, createdAt, text, navigate}) {
   return (
     <div className="post-content">
       <p className="text" onClick={() => navigate(`/post/${id}`)}>{text}</p>
-   
     </div>
   )
 }
