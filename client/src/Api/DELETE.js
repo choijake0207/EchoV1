@@ -12,3 +12,15 @@ export const deletePost = async (id) => {
         throw error
     }
 }
+export const deleteAccount = async () => {
+    try {
+        const response = await axios.delete("http://localhost:3001/user/delete-account", {
+            headers: {
+                accessToken: localStorage.getItem("accessToken")
+            }
+        })
+        return response.data
+    } catch (error) {
+        throw error
+    }
+}
