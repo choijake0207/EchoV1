@@ -33,10 +33,27 @@ export const fetchSinglePost = async (id) => {
 
 export const fetchSavedPosts = async () => {
     try {
-        const response = await axios.get("http://localhost:3001/saved-posts")
+        const response = await axios.get("http://localhost:3001/post/saved-posts", {
+            headers: {
+                accessToken: localStorage.getItem("accessToken")
+            }
+        })
         return response.data
     } catch (error) {
         throw error
+    }
+}
+// fetch friends
+export const fetchFriends = async() => {
+    try {
+        const response = await axios.get("http://localhost:3001/post/saved-posts", {
+            headers: {
+                accessToken: localStorage.getItem("accessToken")
+            }
+        })
+        return response.data
+    } catch (error) {
+        throw (error)
     }
 }
 
