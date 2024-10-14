@@ -7,7 +7,7 @@ const {Comments} =  require("../models")
 const bcrypt = require("bcrypt")
 const {sign} = require("jsonwebtoken") // destructure and extract sign method from jwt
 const {validateAccessToken} = require("../middleware/authorization")
-const Follows = require("../models/Follows")
+const {Follows} = require("../models")
 
 // registration route and handler (maybe add password salting)
 router.post("/register", async (req, res) => {
@@ -63,6 +63,28 @@ router.post("/login", async (req, res) => {
     } catch (error) {
         res.status(500).json({error: "An Error Occured Processing Your Request"})
 
+    }
+})
+
+// delete account
+router.delete("/delete-account", validateAccessToken, async (req, res) => {
+    const userId = req.user.id
+    try {
+        const user = await Users.findOne({
+            where: {
+                id: userId
+            }
+        })
+        if (!user) {
+            return res.status(404).json({error: "User Not Found"})
+        }
+        await Posts.destroy({where: {userId}})
+        await Comments.destroy({where: {userId}})
+        await Likes.destroy({where: {userId}})
+        await Users.destroy({where: {id: userId}})
+        return res.status(200).json({message: "Account Deleted Succesfully"})
+    } catch (error) {
+        res.status(500).json({error: "An Error Occured Deleting Your Account"})
     }
 })
 
@@ -200,7 +222,10 @@ router.get("/fetch-friends", validateAccessToken, async (req, res) => {
         })
         const followerIds = userFollowers.map(follower => follower.followerId)
         const followingIds = userFollowing.map(following => following.followingId)
-        const overlapIds = followingIds.filter(id => followerIds.include(id))
+        const overlapIds = followingIds.filter(id => followerIds.includes(id))
+        if (overlapIds.length === 0) {
+            return res.status(404).json({error: "No Friends Found"})
+        }
         const friends = await Users.findAll({
             where: {
                 id: overlapIds
