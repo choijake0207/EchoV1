@@ -7,6 +7,7 @@ const {Comments} =  require("../models")
 const bcrypt = require("bcrypt")
 const {sign} = require("jsonwebtoken") // destructure and extract sign method from jwt
 const {validateAccessToken} = require("../middleware/authorization")
+const Follows = require("../models/Follows")
 
 // registration route and handler (maybe add password salting)
 router.post("/register", async (req, res) => {
@@ -179,6 +180,36 @@ router.put("/changepassword", validateAccessToken, async (req, res) => {
         res.status(200).json("Password Changed Succesfully")
     } catch (error) {
         res.status(500).json({error: "Failed To Change Password"})
+    }
+})
+
+router.get("/fetch-friends", validateAccessToken, async (req, res) => {
+    const userId = req.user.id
+    try {
+        const userFollowers = await Follows.findAll({
+            where: {
+                followingId: userId
+            },
+            attributes: ["followerId"]
+        })
+        const userFollowing = await Follows.findAll({
+            where: {
+                followerId: userId
+            },
+            attributes: ["followingId"]
+        })
+        const followerIds = userFollowers.map(follower => follower.followerId)
+        const followingIds = userFollowing.map(following => following.followingId)
+        const overlapIds = followingIds.filter(id => followerIds.include(id))
+        const friends = await Users.findAll({
+            where: {
+                id: overlapIds
+            },
+            attributes: ["id", "username"]
+        })
+        res.json(friends)
+    } catch (error) {
+        res.status(500).json({error: "Failed To Fetch Friends"})
     }
 })
 
