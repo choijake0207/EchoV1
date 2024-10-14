@@ -116,5 +116,33 @@ router.post("/save", validateAccessToken, async (req, res) => {
 
 })
 
+// fetch all saved posts
+router.get("/saved-posts", validateAccessToken, async (req, res) => {
+    const userId = req.user.id
+    try {
+        const savedPosts = await SavedPosts.findAll({where: {userId}, attributes: ["postId"]})
+        const savedIds = savedPosts.map(post => post.postId)
+        const posts = await Posts.findAll({
+            where: {id: savedIds},
+            include: [
+                {
+                    model: Comments,
+                    include: [{model: Users, attributes: ["username"]}]
+                },
+                {
+                    model: SavedPosts,
+                    attributes: ["userId"]
+                },
+                {
+                    model: Users,
+                    attributes: ["username"]
+                }
+            ]
+        })
+        res.json(posts)
+    } catch (error) {
+        res.status(500).json({error: "Failed To Fetch Saved Posts"})
+    }
+})
 
 module.exports = router
