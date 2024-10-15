@@ -58,7 +58,7 @@ function PostContent ({id, createdAt, text, navigate}) {
   )
 }
 
-function PostDetails ({isHomeView, id, comments, navigate, savePost, isSaved}) {
+function PostDetails ({isHomeView, id, comments, navigate, savePost, isSaved, auth}) {
   const [saveStatus, setSaveStatus] = useState(isSaved)
 
   const optimisticSave = async () => {
@@ -86,7 +86,7 @@ function PostDetails ({isHomeView, id, comments, navigate, savePost, isSaved}) {
         </button>
       </div>
       <div className="post-save">
-        <button type="button" onClick={optimisticSave}>
+        <button type="button" onClick={auth.authStatus ? optimisticSave : null}>
           <BookmarkSimple size={"20px"} weight={saveStatus ? "fill" :  null}/>
         </button>
       </div>
@@ -138,6 +138,7 @@ export default function Post({id, username, text, createdAt, userId, onDelete, c
           navigate={navigate}
           savePost={handleSave}
           isSaved={isSaved}
+          auth={authorizeState}
         />
     </li>
   )
