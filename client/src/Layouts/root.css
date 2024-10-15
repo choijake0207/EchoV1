@@ -9,13 +9,13 @@
     --background: rgb(239, 242, 244);
     --foreground: rgb(253, 253, 253);
     --dark-background: rgb(18,18,18);
-    --dark-foreground: rgb(30, 29, 33);
+    --dark-foreground: rgb(27, 27, 29);
     --secondary-color: rgb(228, 138, 193);
     --logo-color: rgb(0, 144, 222);
     --default-red: rgb(225, 51, 89);
     --default-green: rgb(46, 182, 125);
     --default-yellow: rgb(236, 178, 46);
-    --default-purple: "#7C3085"
+    --default-purple: rgb(124, 48, 133);
     --nav-font-color: rgba(0, 0, 0, 0.5);
     --post-text-color: rgba(0, 0, 0, 0.7);
     --dark-post-text-color: rgb(221, 221, 221);
@@ -82,6 +82,12 @@ p {
     display: flex;
     align-items: center;
 }
+.header-dark-toggle {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 1em;
+}
 .header-username {
     display: flex;
     align-items: center;
@@ -118,7 +124,6 @@ p {
 .profile-menu-links {
     display: flex;
     flex-direction: column;
-    border-bottom: 2px solid var(--default-soft-border)
 }
 .profile-menu-links a {
     display: flex;
@@ -178,8 +183,8 @@ p {
 /* ==== SCROLL WRAP ==== */
 .scrollable-wrapper {
     grid-area: scrollWrap;
-    height: 92vh;
     display: grid;
+    padding-bottom: 50vh;
     overflow-y: auto;
     overflow-x: hidden;
     grid-template-areas: "outlet sidebar";
@@ -212,6 +217,9 @@ p {
     padding-right: vaR(--default-external-padding);
     gap: var(--default-external-padding);
 }
+.info-sidebar > * {
+    border: 1px solid var(--default-soft-border)
+}
 /* News Widget */
 .info-content {
     top: 0;
@@ -230,10 +238,11 @@ p {
 .news-article a {
     color: var(--post-text-color);
     font-size: .9em;
-    font-weight: bold;
+    font-weight: 600;
 }
 .news-article a:hover {
     text-decoration: underline;
+    color: var(--logo-color);
 }
 .news-article p {
     font-size: .8em;
@@ -249,6 +258,10 @@ p {
     display: flex;
     flex-direction: column;
     gap: 15px;
+}
+.creator-summary {
+    color: grey;
+    font-size: .9em;
 }
 /* Links Box */
 .info-links {
@@ -286,17 +299,29 @@ p {
     border-left: 2px solid var(--default-soft-border);
     position: relative;
     z-index: 0;
+    background: var(--foreground)
 }
-/* .glass-wrap {
-    background: rgba(255, 255, 255, 0.4);
-    position: absolute;
-    top: 0;
-    left : 0;
-    height: 100%;
-    width: 100%;
-    z-index: 1;
+.friends-tool h4 {
+    margin: 0;
+    color: grey;
+}
+.friends-tool header {
+    padding: var(--default-internal-padding);
+    border-bottom: 2px solid var(--default-soft-border);
+}  
+.friends-list {
+    padding: var(--default-internal-padding);
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.friend-icon {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
 
-} */
 
 /* ===== GENERIC PAGE STYLES ===== */
 .page {
@@ -322,7 +347,7 @@ p {
 }
 .page-header h4 {
     margin: 0;
-    font-weight: 600;  
+    font-weight: 500;  
 }
 .page-header button {
     display: flex;
