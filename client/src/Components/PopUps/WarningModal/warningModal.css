@@ -1,0 +1,56 @@
+/* Modals */
+.warning-modal-overlay {
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.modal-banner {
+    border: 1px solid red;
+    padding: var(--default-internal-padding);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.Delete .modal-banner {
+    background: var(--default-red)
+}
+.warning-modal {
+    background: var(--foreground);
+    width: 300px;
+    border-radius: var(--default-border-radius);
+    animation: slideUp .2s ease forwards;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+} 
+.warning-modal p {
+    color: var(--foreground);
+    font-weight: bolder;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.warning-modal  svg {
+    width: 3em;
+    height: 3em;
+    color: var(--foreground);
+}
+.confirmation-container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: var(--default-internal-padding);
+}
+
+.confirmation-container button:nth-of-type(2) {
+    border-radius: var(--default-border-radius);
+    padding: 5px;
+    background: var(--default-red);
+    color: white;
+    font-weight: 500;
+}
