@@ -1,4 +1,5 @@
 import React from 'react'
+import "./warningModal.css"
 
 export default function WarningModal({message, action, dispatch, onClose}) {
   return (
