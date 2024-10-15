@@ -4,13 +4,14 @@
 .dark-mode .profile-feed,
 .dark-mode .profile-history,
 .dark-mode .create-post-form textarea ,
-.dark-mode .create-comment-form textarea{
+.dark-mode .create-comment-form textarea,
+.dark-mode .user-form input,
+.dark-mode .tool-sidebar{
     background: var(--dark-background);
 }
 /* Dark Foreground */
 .dark-mode .root-header, 
 .dark-mode .root-nav, 
-.dark-mode .tool-sidebar,
 .dark-mode .post,
 .dark-mode .info-sidebar > *,
 .dark-mode .header-profile-menu,
@@ -20,10 +21,16 @@
 .dark-mode .user-form,
 .dark-mode .user-form-header,
 .dark-mode .create-modal,
-.dark-mode #settings-page > *,
+.dark-mode .account-settings,
+.dark-mode .general-settings,
 .dark-mode .create-post-form,
 .dark-mode .create-comment-form,
-.dark-mode .comment-feed {
+.dark-mode .comment-feed,
+.dark-mode .greeting,
+.dark-mode .search-form,
+.dark-mode .search-results,
+.dark-mode .post-modal-menu,
+.dark-mode .warning-modal {
     background: var(--dark-foreground);
 }
 
@@ -34,25 +41,47 @@
 .dark-mode .page-header h4,
 .dark-mode .page-header button,
 .dark-mode .info-sidebar h4,
-.dark-mode .creator-summary,
 .dark-mode .create-modal,
 .dark-mode .news-feed a,
 .dark-mode .post-details svg,
 .dark-mode .post-details p,
 .dark-mode .header-username p,
 .dark-mode .create-post-form textarea,
-.dark-mode .create-comment-form textarea {
+.dark-mode .create-comment-form textarea,
+.dark-mode .profile-username,
+.dark-mode .follow-count,
+.dark-mode .empty-profile-history,
+.dark-mode .post-header .username,
+.dark-mode .greeting,
+.dark-mode .user-form input,
+.dark-mode .user-form label,
+.dark-mode .user-form .logreg-message,
+.dark-mode #settings-page > *,
+.dark-mode .post-modal-btn,
+.dark-mode .friend-icon,
+.dark-mode .confirmation-container button
+{
     color: var(--dark-post-text-color);
+}
+.dark-mode .user-form p, 
+.dark-mode .friends-tool h4,
+.dark-mode .account-options button
+ {
+    color: vaR(--default-border-color)
 }
 /* Dark Hover */
 .dark-mode .root-nav a:hover,
 .dark-mode .header-profile-menu a:hover,
-.dark-mode .header-profile-menu button:hover {
+.dark-mode .header-profile-menu button:hover,
+.dark-mode .post-modal-menu > *:hover,
+.dark-mode .account-options button:hover {
     background: rgba(255, 255, 255, 0.05);
 }
 
 /* Dark Border*/
-.dark-mode .root-header {
+.dark-mode .root-header,
+.dark-mode .user-form-header,
+.dark-mode .friends-tool header {
     border-bottom: 2px solid var(--dark-soft-border);
 }
 .dark-mode .root-nav {
@@ -61,12 +90,26 @@
 .dark-mode .tool-sidebar {
     border-left: 2px solid var(--dark-soft-border)
 }
-.dark-mode .user-icon, .dark-mode .create-comment-form textarea {
+.dark-mode .post-details {
+    border-top: 1px solid var(--dark-soft-border)
+}
+.dark-mode .user-icon, 
+.dark-mode .create-comment-form textarea,
+.dark-mode .create-modal,
+.dark-mode .user-form,
+.dark-mode .user-form input,
+.dark-mode .info-sidebar > *,
+.dark-mode .header-profile-menu,
+.dark-mode .post-modal-menu {
     border: 1px solid var(--dark-soft-border)
 }
 .dark-mode .profile-username .user-icon {
     border: 3px solid var(--dark-foreground)
 }
+.dark-mode .user-form input:focus {
+    outline: 1px solid var(--logo-color)
+}
+
 
 /* MISC */
 
