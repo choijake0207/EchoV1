@@ -3,6 +3,8 @@ import GenericPage from "../../Layouts/GenericPage"
 import { fetchSavedPosts } from '../../Api/GET'
 import Post from '../../Components/Post/Post'
 import { useAuthorize } from '../../Context/AuthContext'
+import { Note, NoteBlank } from 'phosphor-react'
+import "./saved.css"
 
 export default function Saved() {
     const [savedPosts, setSavedPosts] = useState([])
@@ -28,7 +30,7 @@ export default function Saved() {
   return (
     <GenericPage headerTitle="Saved Posts" pageId="saved-page">
         <ul className="saved-posts">
-            {savedPosts && savedPosts.map(post => {
+            {savedPosts && savedPosts.length !== 0 && savedPosts.map(post => {
                 return (
                     <Post
                         key={post.id}
@@ -43,6 +45,12 @@ export default function Saved() {
                     />
                 )
             })}
+            {savedPosts && savedPosts.length === 0 && 
+                <div className="empty-saved-posts">
+                    <NoteBlank size="3em"/>
+                    <p>You Have No Saved Posts</p>
+                </div>
+            }
         </ul>
 
     </GenericPage>
