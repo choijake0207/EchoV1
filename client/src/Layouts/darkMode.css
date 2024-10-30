@@ -65,7 +65,8 @@
 }
 .dark-mode .user-form p, 
 .dark-mode .friends-tool h4,
-.dark-mode .account-options button
+.dark-mode .account-options button,
+.dark-mode .header-dark-toggle 
  {
     color: vaR(--default-border-color)
 }
@@ -74,7 +75,8 @@
 .dark-mode .header-profile-menu a:hover,
 .dark-mode .header-profile-menu button:hover,
 .dark-mode .post-modal-menu > *:hover,
-.dark-mode .account-options button:hover {
+.dark-mode .account-options button:hover,
+.dark-mode .nav-links a.active {
     background: rgba(255, 255, 255, 0.05);
 }
 
@@ -112,6 +114,9 @@
 
 
 /* MISC */
+.dark-mode .header-dark-toggle svg {
+    color: yellow;
+}
 
 
 
