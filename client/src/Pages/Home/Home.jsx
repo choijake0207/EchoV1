@@ -12,6 +12,7 @@ import { PaperPlaneRight } from 'phosphor-react'
 export default function Home() {
   const {authorizeState} = useAuthorize()
   const [postFeed, setPostFeed] = useState([])
+  const [feedType, setFeedType] = useState("Latest")
   const navigate = useNavigate()
   const [isFormVisible, setIsFormVisible] = useState(false)
 
@@ -48,12 +49,28 @@ export default function Home() {
       {isFormVisible && <CreatePost submitPost={submitPost} toggleFormVisibility={() => setIsFormVisible(false)}/>}
       <div className="page" id="home-page">
           {authorizeState.authStatus ? (
-            <div className="create-modal" >
-              <p onClick={() => setIsFormVisible(true)}> 
-                What's on your mind {authorizeState.username}?
-              </p>
-              <PaperPlaneRight size="1.5em"/>
-            </div>
+            <>
+              <div className="home-filter-bar">
+                <button 
+                  onClick={() => setFeedType("Latest")}
+                  className={feedType === "Latest" && "active-feed"}
+                >
+                    Latest
+                </button>
+                <button 
+                  onClick={() => setFeedType("Following")}
+                  className={feedType === "Following" && "active-feed"}
+                >
+                  Following
+                </button>
+              </div>
+              <div className="create-modal" onClick={() => setIsFormVisible(true)}>
+                <p > 
+                  What's on your mind {authorizeState.username}?
+                </p>
+                <PaperPlaneRight size="1.75em"/>
+              </div>
+            </>
           ) : (
             <div className="greeting">
               <h1>Welcome To Echo</h1>
