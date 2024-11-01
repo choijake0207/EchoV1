@@ -1,14 +1,15 @@
+
 /*  ===== GREETING PAGE ===== */
 .greeting {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: var(--default-padding);
+    padding: var(--default-internal-padding);
     border-radius: var(--default-border-radius);
     gap: 20px;
     color: var(--post-text-color);
-}
+} 
 .greeting h1 {
     font-weight: 300;
 }
@@ -32,7 +33,7 @@
     color: white;
 }
 #register-a{
-    background: var(--secondary-color);
+    background: var(--default-green);
     color: white;
 }
 #login-a:hover, #register-a:hover {
@@ -42,22 +43,58 @@
 
 
 /* ===== HOME ===== */
-#home-page main {
-    background: var(--background);
+.home-filter-bar {
+    display: flex;
+    padding: 0;
+    justify-content: space-between;
+}
+.home-filter-bar button {
+    padding: 15px;
+    width: 100%;
+    border-bottom: 3px solid var(--foreground);
+    transition: .2s ease;
+    font-weight: bold;
+    font-size: 1em;
+    color: var(--post-text-color);
+}
+.home-filter-bar .active-feed {
+    border-bottom: 3px solid var(--logo-color);
 }
 .create-modal {
     background: var(--foreground);
-    padding: var(--default-padding)
+    padding: var(--default-internal-padding);
+    margin:0;
+    margin-bottom: var(--default-external-padding);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 2px solid var(--default-soft-border)
+}
+
+.create-modal svg {
+    color: var(--logo-color);
+    background: rgba(0, 144, 222, 0.1);
+    padding: 5px;
+    border-radius: var(--default-border-radius);
+    border: 2px solid var(--logo-color);
+    cursor: pointer;
+}
+.create-modal:hover {
+    cursor: pointer;
+    filter:brightness(90%)
+}
+.create-modal:hover svg {
+    filter: brightness(120%);
 }
 .post-feed {
     padding:0;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: var(--default-external-padding);
+    margin: 0;
+    background: var(--background);
 }
-.post-feed > * {
-    margin-bottom: 10px;
-}
+
 
 /* ==== Form ==== */
 .create-post-overlay {
@@ -78,16 +115,25 @@
     background: var(--foreground);
     width: 400px;
     border-radius: var(--default-border-radius);
-    padding: 10px;
+    padding: 15px;
     display: flex;
     flex-direction: column;
     gap: 10px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+}
+.char-count {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    font-size: .8em;
+    color: var(--default-border-color);
 }
 .create-post-form  textarea{
     margin-top: 20px;
     resize: none;
     border: none;
     background: var(--background);
+    padding: 10px;
     outline: none;
     font-family: satoshi variable;
 }
