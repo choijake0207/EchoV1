@@ -1,8 +1,10 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { Trash, UserCircle, BookmarkSimple } from 'phosphor-react'
+import { savePost } from '../../Api/POST'
 
-export default function PostModalMenu({onClose, handleDelete, auth, userId, username}) {
+export default function PostModalMenu({onClose, handleDelete, auth, userId, username, savePost}) {
+  
 
   const modalRef = useRef(null)
   useEffect(() => {
@@ -19,7 +21,9 @@ export default function PostModalMenu({onClose, handleDelete, auth, userId, user
         <NavLink to={`/profile/${username}`}>
           <UserCircle/>View {username}'s Profile
         </NavLink>
-        <button><BookmarkSimple/>Save Post</button>
+        <button onClick={savePost}>
+          <BookmarkSimple/>Save Post
+        </button>
         {auth.id === userId && 
           <button onClick={handleDelete}><Trash/>Delete Post</button>
         }
