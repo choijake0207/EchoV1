@@ -30,7 +30,8 @@
 .dark-mode .search-form,
 .dark-mode .search-results,
 .dark-mode .post-modal-menu,
-.dark-mode .warning-modal {
+.dark-mode .warning-modal,
+.dark-mode .home-filter-bar {
     background: var(--dark-foreground);
 }
 
@@ -59,7 +60,8 @@
 .dark-mode #settings-page > *,
 .dark-mode .post-modal-btn,
 .dark-mode .friend-icon,
-.dark-mode .confirmation-container button
+.dark-mode .confirmation-container button,
+.dark-mode .home-filter-bar button
 {
     color: var(--dark-post-text-color);
 }
@@ -86,6 +88,13 @@
 .dark-mode .friends-tool header {
     border-bottom: 2px solid var(--dark-soft-border);
 }
+.dark-mode .home-filter-bar button {
+    border-bottom: 3px solid var(--dark-foreground);
+}
+.dark-mode .home-filter-bar .active-feed {
+    border-bottom: 3px solid var(--logo-color);
+}
+
 .dark-mode .root-nav {
     border-right: 2px solid var(--dark-soft-border)
 }
