@@ -1,9 +1,9 @@
 const express = require("express")
 const router = express.Router()
-const {Posts, Users, Comments, SavedPosts} = require("../models")
+const {Posts, Users, Comments, SavedPosts, Follows} = require("../models")
 const {validateAccessToken} = require("../middleware/authorization")
 
-// fetch all saved posts
+// fetch all saved posts // NEED TO MOVE BEOFRE FETCH BY :ID => dynamic route will block this one
 router.get("/saved-posts", validateAccessToken, async (req, res) => {
     const userId = req.user.id
     try { 
@@ -15,6 +15,7 @@ router.get("/saved-posts", validateAccessToken, async (req, res) => {
         const savedIds = savedPosts.map(post => post.postId)
         const response = await Posts.findAll({
             where: {id: savedIds},
+            order: [["createdAt", "DESC"]],
             include: [
                 {
                     model: Comments,
@@ -104,6 +105,40 @@ router.get("/", async (req, res) => {
         res.status(500).json({error: "Failed To Fetch Posts"})
     }
 
+})
+
+// fetch all posts by following users
+router.get("/following-posts", async (req, res) => {
+    const userId = req.user.id
+    try {
+        const followingUsers = await Follows.findAll({
+            where: {
+                followerId: userId
+            },
+            attributes: ["followingId"]
+        })
+        const followingIds = followingUsers.map(user => user.followingId)
+        const response = await Posts.findAll({
+            where: {userId: followingIds},
+            order: [["createdAt", "DESC"]],
+            include: [
+                {
+                    model: Comments,
+                    include: [
+                        {model: Users, attributes: ["username"]}
+                    ],
+                    order: [["createdAt", "DESC"]]
+                },
+                {
+                    model: SavedPosts,
+                    attributes: ["userId"]
+                }
+            ]
+        })
+        res.json(response)
+    } catch (error) {
+        res.status(500).json({error: "Failed To Fetch Following Posts"})
+    }
 })
 
 
