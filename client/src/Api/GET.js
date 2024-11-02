@@ -40,13 +40,13 @@ export const fetchSavedPosts = async () => {
         })
         return response.data
     } catch (error) {
-        throw error
+        throw (error)
     }
 }
 // fetch friends
 export const fetchFriends = async() => {
     try {
-        const response = await axios.get("http://localhost:3001/post/saved-posts", {
+        const response = await axios.get("http://localhost:3001/user/fetch-friends", {
             headers: {
                 accessToken: localStorage.getItem("accessToken")
             }
@@ -64,6 +64,19 @@ export const fetchNews = async () => {
         return response.data
     } catch (error) {
         throw error
+    }
+}
+
+export const fetchPostsByFollowing = async () => {
+    try {
+        const response = await axios.get("http://localhost:3001/posts/following-posts", {
+            headers: {
+                accessToken: localStorage.getItem("accessToken")
+            }
+        })
+        return response.data
+    } catch (error) {
+        throw (error)
     }
 }
 
