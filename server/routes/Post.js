@@ -108,7 +108,7 @@ router.get("/", async (req, res) => {
 })
 
 // fetch all posts by following users
-router.get("/following-posts", async (req, res) => {
+router.get("/following-posts", validateAccessToken, async (req, res) => {
     const userId = req.user.id
     try {
         const followingUsers = await Follows.findAll({
