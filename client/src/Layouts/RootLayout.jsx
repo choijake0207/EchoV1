@@ -33,6 +33,7 @@ export default function RootLayout() {
   return (
     <div className="root-layout">
       <ScrollRestoration/>
+
       <header className="root-header">
         <h1 className="logo"><DiamondsFour/>echo</h1>
         {authorizeState.authStatus ? (
@@ -73,26 +74,22 @@ export default function RootLayout() {
           <NavLink to="/settings"><Gear/><span className="nav-text">Settings</span></NavLink>
         </nav>
       </aside>
+   
+      <main className="outlet">
+        <Outlet/>
+      </main>
 
-      <div className="scrollable-wrapper">
-        <main className="outlet">
-          <Outlet/>
-          
-        </main>
+      <section className="info-sidebar">
+        <InfoCreator/>
+        <InfoContent/>
+        <InfoLinks/>
+      </section>
 
-        <section className="info-sidebar">
-          <InfoCreator/>
-          <InfoContent/>
-          <InfoLinks/>
-        </section>
-      </div>
-        
+      
 
       <aside className="tool-sidebar">
         <FriendsTool
-        
         />
-
       </aside>
 
     </div>

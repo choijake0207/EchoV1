@@ -1,16 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Allerta+Stencil&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Allerta+Stencil&family=Playpen+Sans:wght@100..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+HR+Lijeva:wght@100..400&display=swap');
 
 
 
 /* ==== CSS VARIABLES ==== */
 :root {
-    --background: rgb(239, 242, 244);
+    --background: rgb(229, 235, 238);
     --foreground: rgb(253, 253, 253);
     --dark-background: rgb(18,18,18);
     --dark-foreground: rgb(27, 27, 29);
-    --secondary-color: rgb(228, 138, 193);
     --logo-color: rgb(0, 144, 222);
     --default-red: rgb(225, 51, 89);
     --default-green: rgb(46, 182, 125);
@@ -59,8 +59,8 @@ p {
 /* ==== ROOT LAYOUT ==== */
 .root-layout {
     display: grid;
-    grid-template-areas: "header header header" "nav scrollWrap toolbar";
-    grid-template-columns: 1fr 4fr 1fr;
+    grid-template-areas: "header header header header" "nav outlet infobar toolbar";
+    grid-template-columns: 1fr 4fr 1fr 1.5fr;
     grid-template-rows: 60px 1fr;
     height: 100vh;
 }
@@ -72,21 +72,31 @@ p {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-left: var(--default-internal-padding);
-    padding-right: var(--default-internal-padding);
+    padding-left: 35px;
+    padding-right: 35px;
     background-color: var(--foreground);
     position: relative;
 }
 .logo {
-    font-family: "Satoshi Variable";
+    font-family: "Playwrite Hr Lijeva";
     display: flex;
     align-items: center;
+    gap: 5px;
+    font-size: 1.75em;
+    margin: 0;
+}
+.logo svg {
+    transform: translateY(10%);
 }
 .header-dark-toggle {
     display: flex;
     align-items: center;
     gap: 5px;
-    font-size: 1em;
+    font-size: 1.1em;
+    font-weight: 500;
+}
+.header-dark-toggle svg {
+    color: rgb(6, 6, 182);
 }
 .header-username {
     display: flex;
@@ -168,6 +178,7 @@ p {
 .root-nav > .nav-links > a.active {
     color: var(--logo-color);
     font-weight: 600;
+    background: rgba(0, 0, 0, 0.05);
 }
 .root-nav a:visited, .root-nav a {
     color: var(--post-text-color)
@@ -181,22 +192,26 @@ p {
 }
 
 /* ==== SCROLL WRAP ==== */
-.scrollable-wrapper {
+.scroll-wrap {
     grid-area: scrollWrap;
-    display: grid;
-    padding-bottom: 50vh;
+    display: flex;
     overflow-y: auto;
-    overflow-x: hidden;
-    grid-template-areas: "outlet sidebar";
-    grid-template-columns: minmax(0, 1fr) 300px;
+    border: 1px solid red;
+    align-items: flex-start;
+    padding-bottom: 20vh;
+
 }
 .outlet {
     display: flex;
     justify-content: center;
     padding: 0;
+    width: 100%;
+    border: 1px solid green;
+    overflow-y: scroll;
+    padding-bottom: 20vh;
     grid-area: outlet;
 }
-.scrollable-wrapper::-webkit-scrollbar{
+.outlet::-webkit-scrollbar{
     display: none;
 }
 /* ==== INFO SIDEBAR ==== */
@@ -208,14 +223,18 @@ p {
     gap: 5px;
 }
 
-
 .info-sidebar {
-    grid-area: sidebar;
+    position: sticky;
     display: flex;
     flex-direction: column;
     padding-top: vaR(--default-external-padding);
     padding-right: vaR(--default-external-padding);
     gap: var(--default-external-padding);
+    min-width: 300px;
+    max-width: 300px;
+    border: 1px solid green;
+    grid-area: infobar;
+    
 }
 .info-sidebar > * {
     border: 1px solid var(--default-soft-border)
@@ -404,9 +423,7 @@ p {
     .info-sidebar {
         display: none;
     }
-    .scrollable-wrapper {
-        grid-template-columns: 1fr;
-    }
+ 
 
 }
 @media (max-width: 660px) {
