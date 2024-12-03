@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { useAuthorize } from '../../Context/AuthContext'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { createPost } from '../../Api/POST'
-import { fetchPosts } from '../../Api/GET'
+import { fetchPosts, fetchPostsByFollowing } from '../../Api/GET'
 import Post from '../../Components/Post/Post'
 import CreatePost from '../../Components/Forms/CreatePost'
 import "./home.css"
@@ -29,7 +29,7 @@ export default function Home() {
   useEffect(() => {
     const handleFetchPosts = async () => {
       try {
-        const response = await fetchPosts()
+        const response = feedType === "Latest" ? await fetchPosts() : await fetchPostsByFollowing()
         setPostFeed(response)
         console.log(response)
       } catch (error) {
@@ -37,7 +37,7 @@ export default function Home() {
       }
     }
     handleFetchPosts()
-  }, [])
+  }, [feedType])
 
   const handleDeletedPost = (id) => {
     setPostFeed(postFeed.filter(post => post.id !== id))

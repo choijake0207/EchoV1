@@ -61,7 +61,8 @@
 .dark-mode .post-modal-btn,
 .dark-mode .friend-icon,
 .dark-mode .confirmation-container button,
-.dark-mode .home-filter-bar button
+.dark-mode .home-filter-bar button,
+.dark-mode .feed-options button
 {
     color: var(--dark-post-text-color);
 }

@@ -5,3 +5,12 @@
     gap: var(--default-external-padding);
     padding:0;
 }
+.empty-saved-posts {
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    color: var(--default-border-color);
+}

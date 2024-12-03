@@ -22,7 +22,7 @@ export default function InfoContent() {
           const response = await fetchNews()
           console.log("news fetch called")
           setNews(response.articles.slice(0,5))
-          localStorage.setItem("memoizedNews", JSON.stringify(response.articles.slice(0,5)))
+          localStorage.setItem("memoizedNews", JSON.stringify(response.articles.slice(0,3)))
           localStorage.setItem("memoizedTime", now.toString())
           console.log(response)
         } catch (error) {
@@ -36,11 +36,11 @@ export default function InfoContent() {
   return (
     <section className="info-content">
 
-      <h4>Trending Topics <TrendUp/></h4>
+      <h4>Trending Topics <TrendUp size="1.25em"/></h4>
       <ul className="news-feed">
-        {news.map(article => {
+        {news.map((article, index) => {
           return (
-            <li className="news-article">
+            <li className="news-article" key={index}>
               <a href={article.url}>{article.title.slice(0, article.title.indexOf("-"))}</a>
               <p>{article.source.name}</p>
             </li>

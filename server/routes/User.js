@@ -78,9 +78,7 @@ router.delete("/delete-account", validateAccessToken, async (req, res) => {
         if (!user) {
             return res.status(404).json({error: "User Not Found"})
         }
-        await Posts.destroy({where: {userId}})
-        await Comments.destroy({where: {userId}})
-        await Likes.destroy({where: {userId}})
+       
         await Users.destroy({where: {id: userId}})
         return res.status(200).json({message: "Account Deleted Succesfully"})
     } catch (error) {

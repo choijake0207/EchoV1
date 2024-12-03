@@ -46,10 +46,10 @@ export const createComment = async ({newComment, id}) => {
     }
 }
 
-export const savePost = async (postId) => {
+export const savePost = async (id) => {
     try {
         const response = await axios.post("http://localhost:3001/post/save" , {
-            postId
+            postId: id
         }, {
             headers: {
                 accessToken: localStorage.getItem("accessToken")

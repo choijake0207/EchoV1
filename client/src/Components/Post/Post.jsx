@@ -10,7 +10,7 @@ import { formatDate } from '../../Utility/FormatDate'
 import PostModalMenu from '../PopUps/PostModalMenu'
 
 
-function PostHeader ({username, auth, handleDelete, userId, createdAt}) {
+function PostHeader ({username, auth, handleDelete, userId, createdAt, savePost, isSaved}) {
     const formattedDate = formatDate(createdAt)
     const [showPostModal, setShowPostModal] = useState(false)
   return (
@@ -21,6 +21,9 @@ function PostHeader ({username, auth, handleDelete, userId, createdAt}) {
           handleDelete={handleDelete}
           auth={auth}
           userId={userId}
+          username={username}
+          savePost={savePost}
+          isSaved={isSaved}
         />
       }
       
@@ -75,19 +78,19 @@ function PostDetails ({isHomeView, id, comments, navigate, savePost, isSaved, au
   return (
     <div className="post-details">
       <div className="post-likes">
-        <button type="button"><HeartStraight weight="bold"/>
+        <button type="button"><HeartStraight/>
           <p>0</p>
         </button>
       </div>
       <div className="post-comments">
         <button onClick={isHomeView ? () => navigate(`/post/${id}`) : null}>
-          <ChatCircle weight="bold"/>
+          <ChatCircle/>
           <p>{comments.length}</p>
         </button>
       </div>
       <div className="post-save">
         <button type="button" onClick={auth.authStatus ? optimisticSave : null}>
-          <BookmarkSimple size={"20px"} weight={saveStatus ? "fill" :  null}/>
+          <BookmarkSimple weight={saveStatus ? "fill" :  null}/>
         </button>
       </div>
     </div>
@@ -124,6 +127,8 @@ export default function Post({id, username, text, createdAt, userId, onDelete, c
           handleDelete={handleDelete} 
           userId={userId}
           createdAt={createdAt} 
+          savePost={handleSave}
+          isSaved={isSaved}
 
         />
         <PostContent 

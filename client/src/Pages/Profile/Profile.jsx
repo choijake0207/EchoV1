@@ -33,7 +33,6 @@ export default function Profile() {
                 try {
                     const data = await getUserProfile(username)
                     setUserProfile(data)
-                    console.log(data)
                     // checks to see if logged in user is already following current profile user
                     setIsFollowing(data.follower?.some(follower => follower.id === authorizeState.id)) 
                 } catch (error) {
@@ -69,7 +68,6 @@ export default function Profile() {
         setIsFollowing(!isFollowing)
         try {
             const response = await followUser(userProfile.id)
-            console.log(response)
         } catch (error) {
             setIsFollowing(originalFollow) // reverts back to initial follow state 
             console.log(error.response.data.error)

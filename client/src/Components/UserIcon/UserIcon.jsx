@@ -15,7 +15,7 @@ function pickIconColor(username) {
     case 4:
       return "var(--default-red)"
     default:
-      return "grey"
+      return "var(--default-purple)"
   }
 
 }

@@ -4,9 +4,9 @@ import { updateUserPassword } from '../../Api/PUT'
 import {useDarkMode} from '../../Context/DarkContext'
 import { useAuthorize } from '../../Context/AuthContext'
 import GenericPage from '../../Layouts/GenericPage'
-import { CaretRight } from 'phosphor-react'
+import { CaretRight, XCircle } from 'phosphor-react'
 import { deleteAccount } from '../../Api/DELETE'
-import WarningModal from '../../Components/PopUps/WarningModal'
+import WarningModal from '../../Components/PopUps/WarningModal/WarningModal'
 import "./settings.css"
 
 export default function Settings() {
@@ -35,7 +35,7 @@ export default function Settings() {
         } catch (error) {
             console.log(error.response.data.error)
         }
-    }
+    } 
 
   return (
     <GenericPage 
@@ -50,8 +50,8 @@ export default function Settings() {
         }
         {warningModal && 
            <WarningModal 
-                message={"Confirm Account Deletion"} 
-                action={"Delete Account"}
+                message={<><XCircle/> Confirm Account Deletion</>} 
+                action={"Delete"}
                 dispatch={handleDeleteAccount}
                 onClose={() => setWarningModal(false)}
             />

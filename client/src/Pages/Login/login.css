@@ -1,4 +1,6 @@
-
+#login-page, #register-page {
+    position: relative;
+}
 .user-form-header {
     height: 60px;
     border-bottom: 2px solid rgba(0, 0, 0, 0.1);
@@ -7,8 +9,7 @@
     display: flex;
     align-items: center;
     box-sizing: border-box;
-    padding-left: var(--default-padding);
-
+    padding-left: var(--default-internal-padding);
 }
 .user-form-header * {
     margin: 0;
@@ -20,7 +21,7 @@
 .user-form {
     background: var(--foreground);
     position: absolute;
-    top: 20%;
+    top: 200%;
     left: 50%;
     transform: translateX(-50%);
     border: 1px solid var(--default-border-color);
@@ -28,7 +29,7 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-    padding: var(--default-padding);
+    padding: var(--default-internal-padding);
     width: 350px;
 }
 .user-form input {

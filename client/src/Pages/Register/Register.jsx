@@ -4,7 +4,6 @@ import * as Yup from "Yup"
 import GenericPage from '../../Layouts/GenericPage'
 import { useAuthorize } from '../../Context/AuthContext'
 import {useNavigate} from "react-router-dom"
-import "./register.css"
 import { NavLink } from 'react-router-dom'
  
 export default function Register() {

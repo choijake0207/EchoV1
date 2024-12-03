@@ -60,7 +60,7 @@ p {
 .root-layout {
     display: grid;
     grid-template-areas: "header header header header" "nav outlet infobar toolbar";
-    grid-template-columns: 1fr 4fr 1fr 1.5fr;
+    grid-template-columns: 1.5fr 4fr auto 1.5fr;
     grid-template-rows: 60px 1fr;
     height: 100vh;
 }
@@ -192,21 +192,12 @@ p {
 }
 
 /* ==== SCROLL WRAP ==== */
-.scroll-wrap {
-    grid-area: scrollWrap;
-    display: flex;
-    overflow-y: auto;
-    border: 1px solid red;
-    align-items: flex-start;
-    padding-bottom: 20vh;
 
-}
 .outlet {
     display: flex;
     justify-content: center;
     padding: 0;
     width: 100%;
-    border: 1px solid green;
     overflow-y: scroll;
     padding-bottom: 20vh;
     grid-area: outlet;
@@ -224,15 +215,13 @@ p {
 }
 
 .info-sidebar {
-    position: sticky;
     display: flex;
     flex-direction: column;
     padding-top: vaR(--default-external-padding);
     padding-right: vaR(--default-external-padding);
     gap: var(--default-external-padding);
-    min-width: 300px;
-    max-width: 300px;
-    border: 1px solid green;
+    min-width: 275px;
+    max-width: 275px;
     grid-area: infobar;
     
 }
@@ -401,7 +390,7 @@ p {
         padding: 10px;
     }
     .root-layout {
-        grid-template-columns: auto 950px 1fr;
+        grid-template-columns: auto 950px 1fr ;
     }
 }
 @media (max-width: 1200px) {
@@ -411,11 +400,9 @@ p {
 }
 @media (max-width: 1025px) {
     .root-layout {
-        grid-template-columns: auto 1fr;
+        grid-template-columns: auto 1fr auto;
     }
-    .scrollable-wrapper {
-        grid-template-columns: minmax(0, 1fr) .45fr;
-    }
+
 }
 
 

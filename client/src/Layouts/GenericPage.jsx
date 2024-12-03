@@ -11,7 +11,7 @@ export default function GenericPage({children, headerTitle, pageId}) {
                 type="button"
                 onClick={() => navigate(-1)}
             >
-                <ArrowCircleLeft size={"30px"}/>
+                <ArrowCircleLeft size={"2em"}/>
             </button>
             <h4>{headerTitle}</h4>
         </header>

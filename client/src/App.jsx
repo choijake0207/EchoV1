@@ -14,8 +14,8 @@ import Saved from "./Pages/Saved/Saved"
 // context
 import { AuthContextProvider } from './Context/AuthContext'
 import { DarkContextProvider } from "./Context/DarkContext"
-
- 
+// tools
+import { ScrollRestoration } from "react-router-dom" 
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -31,7 +31,7 @@ const router = createBrowserRouter(
       </Route>
       <Route path="/login" element={<Login/>}/>
       <Route path="/register" element={<Register/>}/>
-      
+
     </>
   )
 )
