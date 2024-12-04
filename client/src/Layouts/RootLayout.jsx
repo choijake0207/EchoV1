@@ -5,9 +5,6 @@ import "./root.css"
 import "./darkMode.css"
 import {House, MagnifyingGlass, User, Gear, Bell, BookmarkSimple, CellSignalFull, Sun, Moon, DiamondsFour  } from "phosphor-react"
 import UserIcon from '../Components/UserIcon/UserIcon'
-import InfoCreator from '../Components/Sidebar/InfoCreator'
-import InfoContent from '../Components/Sidebar/InfoContent'
-import InfoLinks from '../Components/Sidebar/InfoLinks'
 import HeaderProfileMenu from '../Components/PopUps/HeaderProfileMenu'
 import FriendsTool from '../Components/Sidebar/FriendsTool'
 import { useDarkMode } from '../Context/DarkContext'
@@ -78,14 +75,6 @@ export default function RootLayout() {
       <main className="outlet">
         <Outlet/>
       </main>
-
-      <section className="info-sidebar">
-        <InfoCreator/>
-        <InfoContent/>
-        <InfoLinks/>
-      </section>
-
-      
 
       <aside className="tool-sidebar">
         <FriendsTool
