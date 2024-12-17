@@ -31,7 +31,8 @@
 .dark-mode .search-results,
 .dark-mode .post-modal-menu,
 .dark-mode .warning-modal,
-.dark-mode .home-filter-bar {
+.dark-mode .home-filter-bar,
+.dark-mode .friends-tool {
     background: var(--dark-foreground);
 }
 
@@ -99,9 +100,7 @@
 .dark-mode .root-nav {
     border-right: 2px solid var(--dark-soft-border)
 }
-.dark-mode .tool-sidebar {
-    border-left: 2px solid var(--dark-soft-border)
-}
+
 .dark-mode .post-details {
     border-top: 1px solid var(--dark-soft-border)
 }
